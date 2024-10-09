@@ -14,12 +14,16 @@ public class Producto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String codigo;
     private String descripcion;
     private String nombre;
     private float precio;
     private String image;
 
-    @OneToMany(mappedBy = "producto")
-    private List<Inventario> inventarios;
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    private Categoria categoria;
+
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    private List<Reporte_Sucursal> reporteSucursals;
+
 }
