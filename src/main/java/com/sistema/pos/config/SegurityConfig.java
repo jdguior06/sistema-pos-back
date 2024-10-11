@@ -37,6 +37,7 @@ public class SegurityConfig {
 //				.requestMatchers(HttpMethod.GET).permitAll()
 				.requestMatchers(HttpMethod.OPTIONS).permitAll()
 				.requestMatchers("/pos/auth/**").permitAll()
+							.requestMatchers("/pos/producto/**").permitAll()
 				.anyRequest().authenticated()
 					)
 			.sessionManagement(sessionManager -> sessionManager

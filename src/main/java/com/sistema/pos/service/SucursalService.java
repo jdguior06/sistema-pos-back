@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SucursalService {
@@ -13,19 +14,23 @@ public class SucursalService {
     @Autowired
     private SucursalRepository sucursalRepository;
 
-    public List<Sucursal> listSucursales() {
+    public List<Sucursal> findAll() {
         return sucursalRepository.findAll();
     }
 
-    public Sucursal obtenerSucursalPorId(Long id) {
-        return sucursalRepository.findById(id).orElseThrow(() -> new RuntimeException("Sucursal no encontrada"));
+    public Optional<Sucursal> findById(Long id) {
+        return sucursalRepository.findById(id);
     }
 
-    public Sucursal saveSucursal(Sucursal sucursal) {
+    public Sucursal save(Sucursal sucursal) {
         return sucursalRepository.save(sucursal);
     }
 
-    public void deleteSucursal(Long id) {
+    public boolean existsById(Long id) {
+        return sucursalRepository.existsById(id);
+    }
+
+    public void deleteById(Long id) {
         sucursalRepository.deleteById(id);
     }
 }
