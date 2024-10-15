@@ -10,23 +10,32 @@ import java.util.List;
 @Data
 @Table(name = "productos")
 public class Producto {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private  String codigo;
+    
+    @Column(length = 20)
+    private String codigo;
+    
+    @Column(length = 50)
     private String nombre;
+    
+    @Column(length = 1000)
     private String descripcion;
+    
     private double precio;
+    
     private String foto;
-
-
-
 
     @ManyToOne
     @JoinColumn(name = "id_categoria")
-    private Categoria id_categoria;
+    private Categoria categoria;
 
     @JsonIgnore
     @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL)
     private List<ProductoAlmacen> id_producto_almacen;
+    
+    private boolean activo;
+    
 }

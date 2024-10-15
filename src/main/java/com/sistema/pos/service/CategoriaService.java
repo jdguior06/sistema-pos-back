@@ -1,15 +1,19 @@
 package com.sistema.pos.service;
 
+import com.sistema.pos.dto.CategoriaDTO;
 import com.sistema.pos.entity.Categoria;
 import com.sistema.pos.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CategoriaService {
+	
     @Autowired
     private CategoriaRepository categoriaRepository;
 
@@ -17,20 +21,38 @@ public class CategoriaService {
         return categoriaRepository.findAll();
     }
 
-    public Categoria save(Categoria categoria) {
+    public Categoria save(CategoriaDTO categoriaDTO) {
+    	Categoria categoria = new Categoria();
+    	categoria.setNombre(categoriaDTO.getNombre());
+    	categoria.setDescripcion(categoriaDTO.getDescripcion());
+    	categoria.setActivo(true);
         return categoriaRepository.save(categoria);
     }
 
-    public Optional<Categoria> findById(Long idCategoria) {
-        return categoriaRepository.findById(idCategoria);
+    public Categoria findById(Long id) {
+    	Optional<Categoria> categoria = categoriaRepository.findById(id);
+		if(!categoria.isPresent()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la categoria con el id" + id
+					);
+		}
+		return categoria.get();
     }
+    
+	public Categoria modificarCategoria(Long id, CategoriaDTO categoriaDTO) {
+		Categoria categoriaAct = findById(id);
+		categoriaAct.setNombre(categoriaDTO.getNombre());
+		categoriaAct.setDescripcion(categoriaDTO.getDescripcion());
+		return categoriaRepository.save(categoriaAct);
+	}
 
-
-    public void deleteById(Long id) {
-        categoriaRepository.deleteById(id);
-    }
+	public Categoria eliminarCategoria(Long id) {
+		Categoria categoria = findById(id);
+		categoria.setActivo(false);
+		return categoriaRepository.save(categoria);
+	}
 
     public boolean existsById(Long id) {
         return categoriaRepository.existsById(id);
     }
+    
 }

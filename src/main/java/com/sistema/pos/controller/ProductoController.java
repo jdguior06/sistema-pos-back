@@ -1,23 +1,23 @@
 package com.sistema.pos.controller;
 
-import com.sistema.pos.dto.Ecommerce;
 import com.sistema.pos.dto.ProductoDTO;
-import com.sistema.pos.entity.Categoria;
 import com.sistema.pos.entity.Producto;
-import com.sistema.pos.entity.ProductoAlmacen;
-import com.sistema.pos.service.CategoriaService;
+import com.sistema.pos.response.ApiResponse;
 import com.sistema.pos.service.ProductoService;
+import com.sistema.pos.util.HttpStatusMessage;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
-
-
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/producto")
@@ -26,120 +26,165 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
 
-    @Autowired
-    private CategoriaService categoriaService;
-
     // Listar productos
-    @GetMapping("/listar")
-    public ResponseEntity<List<Producto>> listar() {
-        return ResponseEntity.ok(productoService.findAll());
-    }
+    @GetMapping
+    public ResponseEntity<ApiResponse<List<Producto>>> getAllCategorias() {
+		List<Producto> productos = productoService.findAll();
+		return new ResponseEntity<>(
+				ApiResponse.<List<Producto>>builder()
+						.statusCode(HttpStatus.OK.value())
+						.message(HttpStatusMessage.getMessage(HttpStatus.OK))
+						.data(productos)
+						.build(),
+				HttpStatus.OK
+		);
+	}
 
     // Crear producto con DTO
-    @PostMapping("/crear")
-    public ResponseEntity<Producto> crearProducto(@RequestBody ProductoDTO productoDTO) {
-        try {
-            Categoria categoria = categoriaService.findById(productoDTO.getId_categoria())
-                    .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
-
-            Producto producto = new Producto();
-            producto.setNombre(productoDTO.getNombre());
-            producto.setPrecio(productoDTO.getPrecio());
-            producto.setDescripcion(productoDTO.getDescripcion());
-            producto.setId_categoria(categoria);
-            producto.setFoto(productoDTO.getFoto());  // URL de la imagen
-
-            Producto productoGuardado = productoService.save(producto);
-            return ResponseEntity.ok(productoGuardado);
-
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
+    @PostMapping
+    public ResponseEntity<ApiResponse<Producto>> guardarProducto(@Valid @RequestBody ProductoDTO productoDTO, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			List<String> errors = bindingResult.getAllErrors().stream()
+					.map(DefaultMessageSourceResolvable::getDefaultMessage)
+					.collect(Collectors.toList());
+			return new ResponseEntity<>(
+					ApiResponse.<Producto>builder()
+							.errors(errors)
+							.build(),
+					HttpStatus.BAD_REQUEST
+			);
+		}
+		try {
+			Producto producto = productoService.save(productoDTO);
+			return new ResponseEntity<>(
+					ApiResponse.<Producto>builder()
+							.statusCode(HttpStatus.CREATED.value())
+							.message(HttpStatusMessage.getMessage(HttpStatus.CREATED))
+							.data(producto)
+							.build(),
+					HttpStatus.CREATED
+			);
+		} catch (ResponseStatusException e) {
+			return new ResponseEntity<>(
+					ApiResponse.<Producto>builder()
+							.statusCode(e.getStatusCode().value())
+							.message(e.getReason())
+							.build(),
+					e.getStatusCode()
+			);
+		}
+	}
 
     // Obtener un producto por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Producto> getProducto(@PathVariable Long id) {
-        try {
-            Optional<Producto> productoExistente = productoService.findById(id);
-            return productoExistente.map(ResponseEntity::ok)
-                    .orElseGet(() -> ResponseEntity.notFound().build());
-
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
+    public ResponseEntity<ApiResponse<Producto>> getProducto(@PathVariable Long id) {
+		try {
+			Producto producto = productoService.obtenerProducto(id);
+			return new ResponseEntity<>(
+					ApiResponse.<Producto>builder()
+							.statusCode(HttpStatus.OK.value())
+							.message(HttpStatusMessage.getMessage(HttpStatus.OK))
+							.data(producto)
+							.build(),
+					HttpStatus.OK
+			);
+		} catch (ResponseStatusException e) {
+			return new ResponseEntity<>(
+					ApiResponse.<Producto>builder()
+							.statusCode(e.getStatusCode().value())
+							.message(e.getReason())
+							.build(),
+					e.getStatusCode()
+			);
+		}
+	}
 
     // Obtener productos para la vista Ecommerce
-    @GetMapping("/ecommerce")
-    public ResponseEntity<List<Ecommerce>> traerTotal() {
-        try {
-            List<Producto> productos = productoService.findAll();
-            List<Ecommerce> lista = productos.stream().map(p -> {
-                Ecommerce nuevo = new Ecommerce();
-                nuevo.setDescripcion(p.getDescripcion());
-                nuevo.setNombre(p.getNombre());
-                nuevo.setId_categoria(p.getId_categoria().getId());
-                nuevo.setPrecio(p.getPrecio());
-
-                // Calcular la cantidad total
-                int cantidad = p.getId_producto_almacen().stream()
-                        .mapToInt(ProductoAlmacen::getCantidad)
-                        .sum();
-                nuevo.setCantidad(cantidad);
-
-                return nuevo;
-            }).toList();
-
-            return ResponseEntity.ok(lista);
-
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .header("Error-Message", e.getMessage())
-                    .build();
-        }
-    }
+//    @GetMapping("/ecommerce")
+//    public ResponseEntity<List<Ecommerce>> traerTotal() {
+//        try {
+//            List<Producto> productos = productoService.findAll();
+//            List<Ecommerce> lista = productos.stream().map(p -> {
+//                Ecommerce nuevo = new Ecommerce();
+//                nuevo.setDescripcion(p.getDescripcion());
+//                nuevo.setNombre(p.getNombre());
+//                nuevo.setId_categoria(p.getId_categoria().getId());
+//                nuevo.setPrecio(p.getPrecio());
+//
+//                // Calcular la cantidad total
+//                int cantidad = p.getId_producto_almacen().stream()
+//                        .mapToInt(ProductoAlmacen::getCantidad)
+//                        .sum();
+//                nuevo.setCantidad(cantidad);
+//
+//                return nuevo;
+//            }).toList();
+//
+//            return ResponseEntity.ok(lista);
+//
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .header("Error-Message", e.getMessage())
+//                    .build();
+//        }
+//    }
 
     // Actualizar producto
-    @PutMapping("/{id}")
-    public ResponseEntity<Producto> updateProducto(@PathVariable("id") Long id,
-                                                   @RequestBody ProductoDTO productoDTO) {
-        try {
-            Optional<Producto> productoExistente = productoService.findById(id);
-            if (productoExistente.isPresent()) {
-                Producto producto = productoExistente.get();
-                Categoria categoria = categoriaService.findById(productoDTO.getId_categoria())
-                        .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
-
-                producto.setNombre(productoDTO.getNombre());
-                producto.setPrecio(productoDTO.getPrecio());
-                producto.setDescripcion(productoDTO.getDescripcion());
-                producto.setId_categoria(categoria);
-                producto.setFoto(productoDTO.getFoto());  // URL de la imagen
-
-                Producto productoActualizado = productoService.save(producto);
-                return ResponseEntity.ok(productoActualizado);
-
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
+    @PatchMapping("/{id}")
+    public ResponseEntity<ApiResponse<Producto>> actualizarProducto(@PathVariable Long id, @Valid @RequestBody ProductoDTO productoDTO, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			List<String> errors = bindingResult.getAllErrors().stream()
+					.map(DefaultMessageSourceResolvable::getDefaultMessage)
+					.collect(Collectors.toList());
+			return new ResponseEntity<>(
+					ApiResponse.<Producto>builder()
+							.errors(errors)
+							.build(),
+					HttpStatus.BAD_REQUEST
+			);
+		}
+		try {
+			Producto productoActualizado = productoService.actualizarProducto(id, productoDTO);
+			return new ResponseEntity<>(
+					ApiResponse.<Producto>builder()
+							.statusCode(HttpStatus.OK.value())
+							.message(HttpStatusMessage.getMessage(HttpStatus.OK))
+							.data(productoActualizado)
+							.build(),
+					HttpStatus.OK
+			);
+		} catch (ResponseStatusException e) {
+			return new ResponseEntity<>(
+					ApiResponse.<Producto>builder()
+							.statusCode(e.getStatusCode().value())
+							.message(e.getReason())
+							.build(),
+					e.getStatusCode()
+			);
+		}
+	}
 
     // Eliminar producto
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProducto(@PathVariable Long id) {
-        try {
-            if (productoService.findById(id).isPresent()) {
-                productoService.deleteById(id);
-                return ResponseEntity.noContent().build();
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
+    @PatchMapping("/{id}/desactivar")
+    public ResponseEntity<ApiResponse<Void>> desactivarProducto(@PathVariable Long id) {
+		try {
+			productoService.eliminarProducto(id);
+			return new ResponseEntity<>(
+					ApiResponse.<Void>builder()
+							.statusCode(HttpStatus.OK.value())
+							.message("Producto desactivado correctamente")
+							.build(),
+					HttpStatus.OK
+			);
+		} catch (ResponseStatusException e) {
+			return new ResponseEntity<>(
+					ApiResponse.<Void>builder()
+							.statusCode(e.getStatusCode().value())
+							.message(e.getReason())
+							.build(),
+					e.getStatusCode()
+			);
+		}
+	}
+    
 }
