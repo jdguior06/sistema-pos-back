@@ -15,10 +15,10 @@ public class Almacen {
     private Long id;
 
     private int numero;
-    private String tipo;
+
     private String descripcion;
 
-    @ManyToOne()
+    @OneToOne()
     @JoinColumn(name = "id_sucursal")
     private Sucursal id_sucursal;
 

@@ -44,7 +44,7 @@ public class AlmacenController {
             Sucursal sucursal = sucursalService.findById(almacen.getId_sucursal()).orElseThrow();
             Almacen nuevo = new Almacen();
             nuevo.setDescripcion(almacen.getDescripcion());
-            nuevo.setTipo(almacen.getTipo());
+
             nuevo.setNumero(almacen.getNumero());
             nuevo.setId_sucursal(sucursal);
             almacenService.save(nuevo);
@@ -78,7 +78,7 @@ public class AlmacenController {
             if (almacenExistente.isPresent()) {
                 Almacen almacen = almacenExistente.get();
                 almacen.setNumero(almacenActualizado.getNumero());
-                almacen.setTipo(almacenActualizado.getTipo());
+
                 almacen.setDescripcion(almacenActualizado.getDescripcion());
                 almacen.setId_sucursal(sucursal);
 
