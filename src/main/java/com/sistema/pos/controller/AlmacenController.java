@@ -1,19 +1,28 @@
 package com.sistema.pos.controller;
 
 import com.sistema.pos.dto.AlmacenDTO;
+import com.sistema.pos.dto.ProductoDTO;
 import com.sistema.pos.entity.Almacen;
+import com.sistema.pos.entity.Producto;
 import com.sistema.pos.entity.Sucursal;
+import com.sistema.pos.response.ApiResponse;
 import com.sistema.pos.service.AlmacenService;
 import com.sistema.pos.service.SucursalService;
 
+import com.sistema.pos.util.HttpStatusMessage;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/almacen")
@@ -23,73 +32,134 @@ public class AlmacenController {
     @Autowired
     private SucursalService sucursalService;
 
-    @GetMapping(path = "/read")
-    public ResponseEntity<List<Almacen>> getAll(){
-        return ResponseEntity.ok(almacenService.findAll());
+    @GetMapping
+    public ResponseEntity<ApiResponse<List<Almacen>>> getAllAlmacen() {
+        List<   Almacen> almacenes = almacenService.findAll();
+        return new ResponseEntity<>(
+                ApiResponse.<List<Almacen>>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .message(HttpStatusMessage.getMessage(HttpStatus.OK))
+                        .data(almacenes)
+                        .build(),
+                HttpStatus.OK
+        );
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Almacen> get(@PathVariable Long id){
-        try{
-            Almacen almacen = almacenService.findById(id).orElseThrow(() -> new Exception("Rol no encontrado"));
-            return ResponseEntity.ok(almacen);
-        }catch (Exception e){
-            return ResponseEntity.notFound().build();
+    @PostMapping
+    public ResponseEntity<ApiResponse<Almacen>> guardarAlmacen(@Valid @RequestBody AlmacenDTO almacenDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.toList());
+            return new ResponseEntity<>(
+                    ApiResponse.<Almacen>builder()
+                            .errors(errors)
+                            .build(),
+                    HttpStatus.BAD_REQUEST
+            );
         }
-    }
-
-    @PostMapping(path = "/crear")
-    public ResponseEntity<Almacen> store(@RequestBody AlmacenDTO almacen){
         try {
-            Sucursal sucursal = sucursalService.findById(almacen.getId_sucursal()).orElseThrow();
-            Almacen nuevo = new Almacen();
-            nuevo.setDescripcion(almacen.getDescripcion());
-            nuevo.setTipo(almacen.getTipo());
-            nuevo.setNumero(almacen.getNumero());
-            nuevo.setId_sucursal(sucursal);
-            almacenService.save(nuevo);
-            return ResponseEntity.created(new URI("/almacen/crear/"+nuevo.getId())).body(nuevo);
-
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            Almacen almacen= almacenService.save(almacenDTO);
+            return new ResponseEntity<>(
+                    ApiResponse.<Almacen>builder()
+                            .statusCode(HttpStatus.CREATED.value())
+                            .message(HttpStatusMessage.getMessage(HttpStatus.CREATED))
+                            .data(almacen)
+                            .build(),
+                    HttpStatus.CREATED
+            );
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(
+                    ApiResponse.<Almacen>builder()
+                            .statusCode(e.getStatusCode().value())
+                            .message(e.getReason())
+                            .build(),
+                    e.getStatusCode()
+            );
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<Almacen>> getAlmacen(@PathVariable Long id) {
         try {
-            if (almacenService.existsById(id)) {
-                almacenService.deleteById(id); // Elimina el si existe
-                return ResponseEntity.ok().build(); // Respuesta 200 OK
-            } else {
-                return ResponseEntity.notFound().build(); // Respuesta 404 Not Found si no existe
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(500).build(); // Respuesta 500 si ocurre algún error inesperado
+            Almacen alma=almacenService.obtenerAlmacenId(id);
+            return new ResponseEntity<>(
+                    ApiResponse.<Almacen>builder()
+                            .statusCode(HttpStatus.OK.value())
+                            .message(HttpStatusMessage.getMessage(HttpStatus.OK))
+                            .data(alma)
+                            .build(),
+                    HttpStatus.OK
+            );
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(
+                    ApiResponse.<Almacen>builder()
+                            .statusCode(e.getStatusCode().value())
+                            .message(e.getReason())
+                            .build(),
+                    e.getStatusCode()
+            );
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Almacen> update(@PathVariable Long id, @RequestBody AlmacenDTO almacenActualizado) {
+    @PatchMapping("/{id}")
+    public ResponseEntity<ApiResponse<Almacen>> actualizarAlmacen(@PathVariable Long id, @Valid @RequestBody AlmacenDTO almacenDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.toList());
+            return new ResponseEntity<>(
+                    ApiResponse.<Almacen>builder()
+                            .errors(errors)
+                            .build(),
+                    HttpStatus.BAD_REQUEST
+            );
+        }
         try {
-            Optional<Almacen> almacenExistente = almacenService.findById(id);
-            Sucursal sucursal = sucursalService.findById(almacenActualizado.getId_sucursal()).orElseThrow();
 
-            if (almacenExistente.isPresent()) {
-                Almacen almacen = almacenExistente.get();
-                almacen.setNumero(almacenActualizado.getNumero());
-                almacen.setTipo(almacenActualizado.getTipo());
-                almacen.setDescripcion(almacenActualizado.getDescripcion());
-                almacen.setId_sucursal(sucursal);
-
-                almacenService.save(almacen);
-
-                return ResponseEntity.ok(almacen);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(500).build();
+            Almacen almacenActual = almacenService.ModificarAlmacen(id,almacenDTO);
+            return new ResponseEntity<>(
+                    ApiResponse.<Almacen>builder()
+                            .statusCode(HttpStatus.OK.value())
+                            .message(HttpStatusMessage.getMessage(HttpStatus.OK))
+                            .data(almacenActual)
+                            .build(),
+                    HttpStatus.OK
+            );
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(
+                    ApiResponse.<Almacen>builder()
+                            .statusCode(e.getStatusCode().value())
+                            .message(e.getReason())
+                            .build(),
+                    e.getStatusCode()
+            );
         }
     }
+
+
+    @PatchMapping("/{id}/desactivar")
+    public ResponseEntity<ApiResponse<Void>> desactivarAlmace(@PathVariable Long id) {
+        try {
+
+            almacenService.eliminar(id);
+            return new ResponseEntity<>(
+                    ApiResponse.<Void>builder()
+                            .statusCode(HttpStatus.OK.value())
+                            .message("Almace desactivado correctamente")
+                            .build(),
+                    HttpStatus.OK
+            );
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(
+                    ApiResponse.<Void>builder()
+                            .statusCode(e.getStatusCode().value())
+                            .message(e.getReason())
+                            .build(),
+                    e.getStatusCode()
+            );
+        }
+    }
+
+
 }

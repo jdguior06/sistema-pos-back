@@ -3,8 +3,6 @@ package com.sistema.pos.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
-
 @Entity
 @Data
 @Table(name = "producto_almacen")
@@ -14,7 +12,10 @@ public class ProductoAlmacen {
     private Long id;
 
     private int cantidad;
-
+    private float Precio_compra;
+    private float Precio_venta;
+    private float ganancia;
+    private boolean activo;
 
     @ManyToOne
     @JoinColumn(name = "id_almacen")

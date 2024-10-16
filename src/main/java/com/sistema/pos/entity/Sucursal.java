@@ -20,8 +20,10 @@ public class Sucursal implements Serializable {
     private String nombre;
     private String razonSocial;
     private String direccion;
+private  boolean activo;
+    @OneToOne(mappedBy = "sucursal")
+    private Almacen almacen;
 
-    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL)
-    private List<Reporte_Sucursal> reporteSucursals;
+
 
 }

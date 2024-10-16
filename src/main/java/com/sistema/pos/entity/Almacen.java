@@ -13,17 +13,16 @@ public class Almacen {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
     private int numero;
-    private String tipo;
     private String descripcion;
+private boolean activo;
 
-    @ManyToOne()
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_sucursal")
-    private Sucursal id_sucursal;
+    private Sucursal sucursal;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "id_almacen", cascade = CascadeType.ALL)
-    private List<ProductoAlmacen> id_producto_almacen;
+    @OneToMany(mappedBy = "almacen", cascade = CascadeType.ALL)
+    private List<ProductoAlmacen> productosAlmacen;
 
 }
