@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "productos")
-public class Producto {
+public class Producto extends Sucursal {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

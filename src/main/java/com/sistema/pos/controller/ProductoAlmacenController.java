@@ -17,16 +17,5 @@ public class ProductoAlmacenController {
     @Autowired
     private ProductoAlmacenService productoAlmacenService;
 
-    @GetMapping("/verificar/{idAlmacen}/{idProducto}")
-    public ResponseEntity<Boolean> verificarProducto(@PathVariable Long idAlmacen, @PathVariable Long idProducto) {
-        boolean existe = productoAlmacenService.existe(idAlmacen, idProducto);
-        return ResponseEntity.ok(existe);
-    }
 
-    @GetMapping("/{idAlmacen}/{idProducto}")
-    public ResponseEntity<ProductoAlmacen> traerProducto(@PathVariable Long idAlmacen, @PathVariable Long idProducto) {
-        Optional<ProductoAlmacen> producto = productoAlmacenService.obtenerProducto(idAlmacen, idProducto);
-        return producto.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
 }

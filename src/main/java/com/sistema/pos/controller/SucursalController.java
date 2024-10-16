@@ -1,17 +1,25 @@
 package com.sistema.pos.controller;
 
 
+
+import com.sistema.pos.dto.SucursalDTO;
+
 import com.sistema.pos.entity.Sucursal;
+import com.sistema.pos.response.ApiResponse;
 import com.sistema.pos.service.SucursalService;
+import com.sistema.pos.util.HttpStatusMessage;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.net.URI;
+
 import java.util.List;
-import java.util.Optional;
-
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -20,64 +28,131 @@ public class SucursalController {
     @Autowired
     private SucursalService sucursalService;
 
-    @GetMapping(path = "/read")
-    private ResponseEntity<List<Sucursal>> getAllAsistencia(){
-        return ResponseEntity.ok(sucursalService.findAll());
+    @GetMapping
+    public ResponseEntity<ApiResponse<List<Sucursal>>> getAllSucursales() {
+        List<Sucursal> sucursales = sucursalService.findAll();
+        return new ResponseEntity<>(
+                ApiResponse.<List<Sucursal>>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .message(HttpStatusMessage.getMessage(HttpStatus.OK))
+                        .data(sucursales)
+                        .build(),
+                HttpStatus.OK
+        );
     }
 
-    @GetMapping(path = "/{id}")
-    private ResponseEntity<Sucursal> getAsistencia(@PathVariable Long id){
-        try{
-            Sucursal sucursal = sucursalService.findById(id).orElseThrow(() -> new Exception("Rol no encontrado"));
-            return ResponseEntity.ok(sucursal);
-        }catch (Exception e){
-            return ResponseEntity.notFound().build();
+    @PostMapping
+    public ResponseEntity<ApiResponse<Sucursal>> guardarSucursal(@Valid @RequestBody SucursalDTO sucursalDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.toList());
+            return new ResponseEntity<>(
+                    ApiResponse.<Sucursal
+                                    >builder()
+                            .errors(errors)
+                            .build(),
+                    HttpStatus.BAD_REQUEST
+            );
         }
-    }
-
-    @PostMapping(path = "/crear")
-    private ResponseEntity<Sucursal> store(@RequestBody Sucursal sucursal){
         try {
-            Sucursal nuevo = sucursalService.save(sucursal);
-            return ResponseEntity.created(new URI("/sucursal/crear/"+nuevo.getId())).body(nuevo);
-
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            Sucursal sucursal1 = sucursalService.save(sucursalDTO);
+            return new ResponseEntity<>(
+                    ApiResponse.<Sucursal>builder()
+                            .statusCode(HttpStatus.CREATED.value())
+                            .message(HttpStatusMessage.getMessage(HttpStatus.CREATED))
+                            .data(sucursal1)
+                            .build(),
+                    HttpStatus.CREATED
+            );
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(
+                    ApiResponse.<Sucursal>builder()
+                            .statusCode(e.getStatusCode().value())
+                            .message(e.getReason())
+                            .build(),
+                    e.getStatusCode()
+            );
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<Sucursal>> getSucursal(@PathVariable Long id) {
         try {
-            if (sucursalService.existsById(id)) {
-                sucursalService.deleteById(id); // Elimina el si existe
-                return ResponseEntity.ok().build(); // Respuesta 200 OK
-            } else {
-                return ResponseEntity.notFound().build(); // Respuesta 404 Not Found si no existe
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(500).build(); // Respuesta 500 si ocurre algún error inesperado
+            Sucursal sucursal = sucursalService.findById(id);
+            return new ResponseEntity<>(
+                    ApiResponse.<Sucursal>builder()
+                            .statusCode(HttpStatus.OK.value())
+                            .message(HttpStatusMessage.getMessage(HttpStatus.OK))
+                            .data(sucursal)
+                            .build(),
+                    HttpStatus.OK
+            );
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(
+                    ApiResponse.<Sucursal>builder()
+                            .statusCode(e.getStatusCode().value())
+                            .message(e.getReason())
+                            .build(),
+                    e.getStatusCode()
+            );
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Sucursal> update(@PathVariable Long id, @RequestBody Sucursal sucursalActualizado) {
+    @PatchMapping("/{id}")
+    public ResponseEntity<ApiResponse<Sucursal>> actualizarProducto(@PathVariable Long id, @Valid @RequestBody SucursalDTO sucursalDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.toList());
+            return new ResponseEntity<>(
+                    ApiResponse.<Sucursal>builder()
+                            .errors(errors)
+                            .build(),
+                    HttpStatus.BAD_REQUEST
+            );
+        }
         try {
-            Optional<Sucursal> sucursalExistente = sucursalService.findById(id);
-
-            if (sucursalExistente.isPresent()) {
-                Sucursal sucursal = sucursalExistente.get();
-                sucursal.setNombre(sucursalActualizado.getNombre());
-                sucursal.setDireccion(sucursalActualizado.getDireccion());
-
-                sucursalService.save(sucursal);
-
-                return ResponseEntity.ok(sucursal);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(500).build();
+            Sucursal sucursalActualizado= sucursalService.modificar(id, sucursalDTO);
+            return new ResponseEntity<>(
+                    ApiResponse.<Sucursal>builder()
+                            .statusCode(HttpStatus.OK.value())
+                            .message(HttpStatusMessage.getMessage(HttpStatus.OK))
+                            .data(sucursalActualizado)
+                            .build(),
+                    HttpStatus.OK
+            );
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(
+                    ApiResponse.<Sucursal>builder()
+                            .statusCode(e.getStatusCode().value())
+                            .message(e.getReason())
+                            .build(),
+                    e.getStatusCode()
+            );
         }
     }
+
+    @PatchMapping("/{id}/desactivar")
+    public ResponseEntity<ApiResponse<Void>> desactivarSucursal(@PathVariable Long id) {
+        try {
+            sucursalService.eliminar(id);
+            return new ResponseEntity<>(
+                    ApiResponse.<Void>builder()
+                            .statusCode(HttpStatus.OK.value())
+                            .message("Sucursal desactivado correctamente")
+                            .build(),
+                    HttpStatus.OK
+            );
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(
+                    ApiResponse.<Void>builder()
+                            .statusCode(e.getStatusCode().value())
+                            .message(e.getReason())
+                            .build(),
+                    e.getStatusCode()
+            );
+        }
+    }
+
 }

@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository
 public interface AlmacenRepository extends JpaRepository<Almacen, Long> {
 
-    @Query("SELECT a FROM Almacen a WHERE a.id_sucursal.id = :sucursal")
+    @Query("SELECT a FROM Almacen a WHERE a.sucursal.id = :sucursal")
     Optional<Almacen> findByIdSucursal(@Param("sucursal") Long sucursal);
 }

@@ -36,5 +36,5 @@ public class Reporte_Sucursal implements Serializable {
         // Getters y setters
 
 
-    public Reporte_Sucursal() {}
+
 }
