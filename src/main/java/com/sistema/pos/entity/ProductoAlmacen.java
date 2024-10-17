@@ -1,30 +1,32 @@
 package com.sistema.pos.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-@Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "producto_almacen")
+@Entity
 public class ProductoAlmacen {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private int cantidad;
-
-
     @ManyToOne
     @JoinColumn(name = "id_almacen")
-    private Almacen id_almacen;
+    @JsonIgnore
+    private Almacen almacen;
 
     @ManyToOne
     @JoinColumn(name = "id_producto")
-    private Producto id_producto;
+    private Producto producto;
 
-    /*@OneToMany(mappedBy = "id_producto_almacen", cascade = CascadeType.ALL)
-    private List<OrdenProducto> id_orden_productos;
-*/
+    private Integer stock;
+    
 }

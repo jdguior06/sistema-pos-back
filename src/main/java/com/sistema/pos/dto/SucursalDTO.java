@@ -1,6 +1,6 @@
-package com.sistema.pos.entity;
+package com.sistema.pos.dto;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,13 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "sucursal")
-@Entity
-public class Sucursal {
+public class SucursalDTO {
 	
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     
     @Column(length = 20)
     private String codigo;
@@ -27,7 +22,5 @@ public class Sucursal {
     private String razon_social;
     
     private String direccion;
-    
-    private boolean activo;
-    
+
 }
