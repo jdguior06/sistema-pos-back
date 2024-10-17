@@ -59,7 +59,6 @@ public class AlmacenController {
         }
     }
 
-
     @PostMapping
     public ResponseEntity<ApiResponse<Almacen>> guardarAlmacen(@Valid @RequestBody AlmacenDTO almacenDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -108,7 +107,6 @@ public class AlmacenController {
             );
         }
         try {
-
             Almacen almacenActual = almacenService.ModificarAlmacen(id, almacenDTO);
             return new ResponseEntity<>(
                     ApiResponse.<Almacen>builder()

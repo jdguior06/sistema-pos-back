@@ -21,7 +21,7 @@ public class Almacen {
     
     private String descripcion;
 
-    @ManyToOne()
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_sucursal")
     private Sucursal sucursal;
     

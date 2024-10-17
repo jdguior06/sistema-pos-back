@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class AlmacenDTO {
 	
     private int numero;
-    
+
     private String descripcion;
     
     private Long id_sucursal;
