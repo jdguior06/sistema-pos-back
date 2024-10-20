@@ -49,9 +49,6 @@ public class ProductoAlmacenService {
         Producto producto1=productoService.obtenerProducto(productoAlmacen.getId_producto().getId());
         ProductoAlmacen productoAlmacen1=new ProductoAlmacen();
         productoAlmacen1.setCantidad(productoAlmacen.getCantidad());
-        productoAlmacen1.setPrecio_compra(productoAlmacen.getPrecio_compra());
-        productoAlmacen1.setGanancia(productoAlmacen.getGanancia());
-        productoAlmacen1.setPrecio_venta(productoAlmacen.getPrecio_venta());
         productoAlmacen1.setId_almacen(almacen);
         productoAlmacen1.setId_producto(producto1);
         productoAlmacen1.setActivo(true);
@@ -63,9 +60,6 @@ public class ProductoAlmacenService {
         Producto producto1=productoService.obtenerProducto(productoAlmacen.getId_producto().getId());
         ProductoAlmacen productoAlmacen1=new ProductoAlmacen();
         productoAlmacen1.setCantidad(productoAlmacen.getCantidad());
-        productoAlmacen1.setPrecio_compra(productoAlmacen.getPrecio_compra());
-        productoAlmacen1.setGanancia(productoAlmacen.getGanancia());
-        productoAlmacen1.setPrecio_venta(productoAlmacen.getPrecio_venta());
         productoAlmacen1.setId_almacen(almacen);
         productoAlmacen1.setId_producto(producto1);
         return productoAlmacenRepository.save(productoAlmacen);

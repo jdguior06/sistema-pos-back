@@ -12,9 +12,6 @@ public class ProductoAlmacen {
     private Long id;
 
     private int cantidad;
-    private float Precio_compra;
-    private float Precio_venta;
-    private float ganancia;
     private boolean activo;
 
     @ManyToOne

@@ -35,7 +35,7 @@ public class AlmacenService {
     public Almacen save(AlmacenDTO almacen) {
         Sucursal sucursal= sucursalService.findById(almacen.getId_sucursal());
      Almacen almacen1 = new Almacen();
-     almacen1.setNumero(almacen.getNumero());
+
      almacen1.setDescripcion(almacen.getDescripcion());
      almacen1.setActivo(true);
      almacen1.setSucursal(sucursal);
@@ -44,7 +44,7 @@ public class AlmacenService {
 
     public Almacen ModificarAlmacen(Long id,AlmacenDTO almacen) {
         Almacen almacen1= obtenerAlmacenId(id);
-        almacen1.setNumero(almacen.getNumero());
+
         almacen1.setDescripcion(almacen.getDescripcion());
         almacen1.setSucursal(sucursalService.findById(almacen.getId_sucursal()));
         return almacenRepository.save(almacen1);
