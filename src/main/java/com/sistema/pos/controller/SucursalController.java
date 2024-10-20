@@ -1,9 +1,6 @@
 package com.sistema.pos.controller;
 
-
-
 import com.sistema.pos.dto.SucursalDTO;
-
 import com.sistema.pos.entity.Sucursal;
 import com.sistema.pos.response.ApiResponse;
 import com.sistema.pos.service.SucursalService;
@@ -16,16 +13,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 @RestController
 @RequestMapping("/sucursal")
 public class SucursalController {
-    @Autowired
+	
+	@Autowired
     private SucursalService sucursalService;
 
     @GetMapping
@@ -136,7 +131,7 @@ public class SucursalController {
     @PatchMapping("/{id}/desactivar")
     public ResponseEntity<ApiResponse<Void>> desactivarSucursal(@PathVariable Long id) {
         try {
-            sucursalService.eliminar(id);
+            sucursalService.deleteById(id);
             return new ResponseEntity<>(
                     ApiResponse.<Void>builder()
                             .statusCode(HttpStatus.OK.value())

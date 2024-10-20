@@ -1,29 +1,33 @@
 package com.sistema.pos.entity;
 
-
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.util.List;
-
-@Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "sucursal")
-public class Sucursal implements Serializable {
+@Entity
+public class Sucursal {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @Column(length = 20)
     private String codigo;
+    
+    @Column(length = 20)
     private String nit;
+    
     private String nombre;
-    private String razonSocial;
+    
+    private String razon_social;
+    
     private String direccion;
-private  boolean activo;
-    @OneToOne(mappedBy = "sucursal")
-    private Almacen almacen;
-
-
-
+    
+    private boolean activo;
+    
 }

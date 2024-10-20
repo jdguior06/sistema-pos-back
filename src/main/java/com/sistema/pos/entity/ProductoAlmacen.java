@@ -1,17 +1,21 @@
 package com.sistema.pos.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "producto_almacen")
 public class ProductoAlmacen {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private int cantidad;
+    private int stock;
     private boolean activo;
 
     @ManyToOne

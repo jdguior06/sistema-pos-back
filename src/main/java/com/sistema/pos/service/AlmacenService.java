@@ -27,7 +27,7 @@ public class AlmacenService {
     public Almacen obtenerAlmacenId(Long idAlmacen) {
         Optional<Almacen> almacen = almacenRepository.findById(idAlmacen);
         if(!almacen.isPresent()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"no existe almacen");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"no existe almacen " + idAlmacen);
         }
         return almacen.get();
     }

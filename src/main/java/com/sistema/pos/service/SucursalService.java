@@ -4,7 +4,9 @@ import com.sistema.pos.dto.SucursalDTO;
 import com.sistema.pos.entity.Sucursal;
 import com.sistema.pos.repository.SucursalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,43 +20,42 @@ public class SucursalService {
     public List<Sucursal> findAll() {
         return sucursalRepository.findAll();
     }
+    
+    public Sucursal findById(Long id) {
+    	Optional<Sucursal> sucursal = sucursalRepository.findById(id);
+    	if(!sucursal.isPresent()) {
+    		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la sucursal con el id" + id);
+    	}
+    	return sucursal.get();
+    }
 
     public Sucursal save(SucursalDTO sucursalDTO) {
-        Sucursal sucursal = new Sucursal();
-        sucursal.setCodigo(sucursalDTO.getCodigo());
+    	Sucursal sucursal = new Sucursal();
+    	sucursal.setCodigo(sucursalDTO.getCodigo());
         sucursal.setNit(sucursalDTO.getNit());
         sucursal.setNombre(sucursalDTO.getNombre());
-        sucursal.setRazonSocial(sucursalDTO.getRazonSocial());
+        sucursal.setRazon_social(sucursalDTO.getRazon_social());
         sucursal.setDireccion(sucursalDTO.getDireccion());
-        sucursal.setActivo(true);
+    	sucursal.setActivo(true);
         return sucursalRepository.save(sucursal);
     }
-
-    public Sucursal findById(Long id) {
-        Optional<Sucursal> sucursal= sucursalRepository.findById(id);
-        if(!sucursal.isPresent()){
-            throw new RuntimeException("No se encontro el id de la Sucursal");
-        }
-        return sucursal.get();
+    
+    public Sucursal modificar(Long id, SucursalDTO sucursalDTO) {
+    	Sucursal sucursal = findById(id);
+    	sucursal.setCodigo(sucursalDTO.getCodigo());
+    	sucursal.setNit(sucursalDTO.getNit());
+    	sucursal.setNombre(sucursalDTO.getNombre());
+    	sucursal.setDireccion(sucursalDTO.getDireccion());
+    	sucursal.setRazon_social(sucursalDTO.getRazon_social());
+    	return sucursalRepository.save(sucursal);
     }
 
-    public Sucursal modificar(Long id, SucursalDTO sucursalDTO)
-    {
-        Sucursal sucursal = findById(id);
-        sucursal.setCodigo(sucursalDTO.getCodigo());
-        sucursal.setNit(sucursalDTO.getNit());
-        sucursal.setNombre(sucursalDTO.getNombre());
-        sucursal.setRazonSocial(sucursalDTO.getRazonSocial());
-        sucursal.setDireccion(sucursalDTO.getDireccion());
-        return sucursalRepository.save(sucursal);
+    public void deleteById(Long id) {
+    	Sucursal sucursal = findById(id);
+    	sucursal.setActivo(false);
+        sucursalRepository.save(sucursal);
     }
-
-    public Sucursal eliminar(Long id) {
-        Sucursal sucursal = findById(id);
-        sucursal.setActivo(false);
-        return sucursalRepository.save(sucursal);
-    }
-
+    
     public boolean existsById(Long id) {
         return sucursalRepository.existsById(id);
     }

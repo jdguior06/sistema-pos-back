@@ -1,15 +1,16 @@
 package com.sistema.pos.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-@Entity
 @Data
-@Table(name = "productos")
-public class Producto extends Sucursal {
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "producto")
+@Entity
+public class Producto {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -24,17 +25,15 @@ public class Producto extends Sucursal {
     @Column(length = 1000)
     private String descripcion;
     
-    private double precio;
+    private double precioCompra;
+    
+    private double precioVenta;
     
     private String foto;
 
     @ManyToOne
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "id_producto", cascade = CascadeType.ALL)
-    private List<ProductoAlmacen> id_producto_almacen;
     
     private boolean activo;
     
