@@ -19,14 +19,11 @@ public class ProductoAlmacen {
     private boolean activo;
 
     @ManyToOne
-    @JoinColumn(name = "id_almacen")
-    private Almacen id_almacen;
+    @JoinColumn(name = "almacen_id")
+    private Almacen almacen;
 
     @ManyToOne
-    @JoinColumn(name = "id_producto")
-    private Producto id_producto;
+    @JoinColumn(name = "producto_id")
+    private Producto producto;
 
-    /*@OneToMany(mappedBy = "id_producto_almacen", cascade = CascadeType.ALL)
-    private List<OrdenProducto> id_orden_productos;
-*/
 }

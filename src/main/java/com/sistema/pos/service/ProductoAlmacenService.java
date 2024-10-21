@@ -1,5 +1,6 @@
 package com.sistema.pos.service;
 
+import com.sistema.pos.dto.DetalleNotaDTO;
 import com.sistema.pos.entity.Almacen;
 import com.sistema.pos.entity.Producto;
 import com.sistema.pos.entity.ProductoAlmacen;
@@ -43,26 +44,54 @@ public class ProductoAlmacenService {
     }
 
 
+    // Verifica si el producto ya está en el almacén y actualiza el stock
+    public ProductoAlmacen save(ProductoAlmacen productoAlmacen, DetalleNotaDTO detalleNotaDTO) {
+        // Obtener el almacén y el producto
+        Almacen almacen = almacenService.obtenerAlmacenId(productoAlmacen.getAlmacen().getId());
+        Producto producto = productoService.obtenerProducto(productoAlmacen.getProducto().getId());
 
-    public ProductoAlmacen save(ProductoAlmacen productoAlmacen) {
-        Almacen almacen = almacenService.obtenerAlmacenId(productoAlmacen.getId_almacen().getId());
-        Producto producto1=productoService.obtenerProducto(productoAlmacen.getId_producto().getId());
-        ProductoAlmacen productoAlmacen1=new ProductoAlmacen();
-        productoAlmacen1.setCantidad(productoAlmacen.getCantidad());
-        productoAlmacen1.setId_almacen(almacen);
-        productoAlmacen1.setId_producto(producto1);
-        productoAlmacen1.setActivo(true);
-        return productoAlmacenRepository.save(productoAlmacen);
+        // Verificar si el producto ya está en el almacén
+        Optional<ProductoAlmacen> existente = productoAlmacenRepository.findByAlmacen_IdAndProducto_Id(
+                productoAlmacen.getAlmacen().getId(),
+                productoAlmacen.getProducto().getId()
+        );
+
+        // Si ya existe el producto en ese almacén, sumamos la cantidad al stock actual
+        if (existente.isPresent()) {
+            ProductoAlmacen productoExistente = existente.get();
+            int nuevoStock = productoExistente.getStock() + detalleNotaDTO.getCantidad();
+            productoExistente.setStock(nuevoStock); // Actualiza el stock sumando la nueva cantidad
+            return productoAlmacenRepository.save(productoExistente);
+        } else {
+            // Si no existe, creamos un nuevo registro con la cantidad del DetalleNotaDTO
+            productoAlmacen.setStock(detalleNotaDTO.getCantidad());
+            productoAlmacen.setAlmacen(almacen);
+            productoAlmacen.setProducto(producto);
+            productoAlmacen.setActivo(true);
+            return productoAlmacenRepository.save(productoAlmacen);
+        }
     }
+    public ProductoAlmacen actualizar(Long id, ProductoAlmacen productoAlmacen, DetalleNotaDTO detalleNotaDTO) {
+        Almacen almacen = almacenService.obtenerAlmacenId(productoAlmacen.getAlmacen().getId());
+        Producto producto = productoService.obtenerProducto(productoAlmacen.getProducto().getId());
 
-    public ProductoAlmacen actualizar(Long id, ProductoAlmacen productoAlmacen) {
-        Almacen almacen = almacenService.obtenerAlmacenId(productoAlmacen.getId_almacen().getId());
-        Producto producto1=productoService.obtenerProducto(productoAlmacen.getId_producto().getId());
-        ProductoAlmacen productoAlmacen1=new ProductoAlmacen();
-        productoAlmacen1.setCantidad(productoAlmacen.getCantidad());
-        productoAlmacen1.setId_almacen(almacen);
-        productoAlmacen1.setId_producto(producto1);
-        return productoAlmacenRepository.save(productoAlmacen);
+        // Verificar si el producto ya está en el almacén
+        Optional<ProductoAlmacen> existente = productoAlmacenRepository.findByAlmacen_IdAndProducto_Id(
+                productoAlmacen.getAlmacen().getId(),
+                productoAlmacen.getProducto().getId()
+        );
+
+        if (existente.isPresent()) {
+            ProductoAlmacen productoExistente = existente.get();
+            int nuevoStock = productoExistente.getStock() + detalleNotaDTO.getCantidad();
+            productoExistente.setStock(nuevoStock); // Actualiza el stock sumando la nueva cantidad
+            return productoAlmacenRepository.save(productoExistente);
+        } else {
+            productoAlmacen.setStock(detalleNotaDTO.getCantidad());
+            productoAlmacen.setAlmacen(almacen);
+            productoAlmacen.setProducto(producto);
+            return productoAlmacenRepository.save(productoAlmacen);
+        }
     }
 
     public ProductoAlmacen eliminar(Long id) {

@@ -16,10 +16,10 @@ public class DetalleNotaE {
     private float subTotal;
 
     @ManyToOne
-    @JoinColumn(name = "id_producto")
-    private Producto id_producto;
+    @JoinColumn(name = "producto_id")
+    private Producto producto;
 
     @ManyToOne
-    @JoinColumn(name= "id_nota")
-    private Nota_Entrada id_nota;
+    @JoinColumn(name= "id_nota_entrada")
+    private Nota_Entrada notaId;
 }

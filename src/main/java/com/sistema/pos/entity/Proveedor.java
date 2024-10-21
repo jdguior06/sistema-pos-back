@@ -32,4 +32,14 @@ public class Proveedor {
 
     @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Nota_Entrada> notasEntrada;
+
+    // Relación con Almacén
+    @ManyToOne
+    @JoinColumn(name = "id_almacen") // Cambia "id_almacen" si es necesario
+    private Almacen almacen;
+
+    // Método para obtener el ID del almacén
+    public Long getAlmacenId() {
+        return almacen != null ? almacen.getId() : null; // Retorna el ID del almacén o null si no hay relación
+    }
 }

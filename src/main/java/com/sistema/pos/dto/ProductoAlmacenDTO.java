@@ -13,4 +13,5 @@ public class ProductoAlmacenDTO {
 	
 	private Long id_producto;
 
+
 }

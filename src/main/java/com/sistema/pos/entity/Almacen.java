@@ -28,4 +28,7 @@ private boolean activo;
     @OneToMany(mappedBy = "almacen", cascade = CascadeType.ALL)
     private List<ProductoAlmacen> productosAlmacen;
 
+    @JsonIgnore // Evitar problemas de referencia circular
+    @OneToMany(mappedBy = "almacen", cascade = CascadeType.ALL)
+    private List<Proveedor> proveedores; // Relación con Proveedor
 }
