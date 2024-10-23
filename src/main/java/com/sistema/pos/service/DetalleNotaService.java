@@ -12,47 +12,46 @@ import java.util.List;
 
 @Service
 public class DetalleNotaService {
+
     @Autowired
     private DetalleNotaRepository detalleNotaRepository;
+
     @Autowired
     private ProductoService productoService;
 
-
-
+    // Obtener detalles por ID de la nota
     public List<DetalleNotaE> obtenerDetallesPorNota(Long idNota) {
         return detalleNotaRepository.findByNotaId_Id(idNota);
     }
+
+    // Obtener detalles por ID del detalle
     public DetalleNotaE obtenerDetallesPorId(Long idDetalle) {
         return detalleNotaRepository.findById(idDetalle)
                 .orElseThrow(() -> new IllegalArgumentException("Detalle no encontrado"));
     }
 
-
+    // Guardar un detalle
     public DetalleNotaE guardarDetalle(DetalleNotaE detalleNota, Nota_Entrada notaEntrada) {
         Producto producto = productoService.obtenerProducto(detalleNota.getProducto().getId());
+        detalleNota.setProducto(producto);
+        detalleNota.setNotaId(notaEntrada);
 
-        DetalleNotaE detalleNotaE = new DetalleNotaE();
-        detalleNotaE.setCantidad(detalleNota.getCantidad());
-        detalleNotaE.setCostoUnitario(detalleNota.getCostoUnitario());
-        detalleNotaE.setProducto(producto);
-        detalleNotaE.setNotaId(notaEntrada);
-        // Calcular el subtotal antes de guardar
-        detalleNotaE.setSubTotal(detalleNotaE.getCantidad() * detalleNotaE.getCostoUnitario());
-        return detalleNotaRepository.save(detalleNotaE);
+        // Calcular el subtotal
+        detalleNota.setSubTotal(detalleNota.getCantidad() * detalleNota.getCostoUnitario());
+        return detalleNotaRepository.save(detalleNota);
     }
 
-    public DetalleNotaE actualizarDetalle(Long id,DetalleNotaE detalleNota) {
+    // Actualizar un detalle existente
+    public DetalleNotaE actualizarDetalle(Long id, DetalleNotaE detalleNota) {
         DetalleNotaE detalleNotaE = obtenerDetallesPorId(id);
-
         Producto producto = productoService.obtenerProducto(detalleNota.getProducto().getId());
+        detalleNotaE.setProducto(producto);
         detalleNotaE.setCantidad(detalleNota.getCantidad());
         detalleNotaE.setCostoUnitario(detalleNota.getCostoUnitario());
-        detalleNotaE.setProducto(producto);
 
+        // Calcular el nuevo subtotal
         detalleNotaE.setSubTotal(detalleNotaE.getCantidad() * detalleNotaE.getCostoUnitario());
         return detalleNotaRepository.save(detalleNotaE);
-
-
     }
 
     // Eliminar un detalle por su ID

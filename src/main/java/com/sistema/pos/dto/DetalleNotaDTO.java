@@ -11,8 +11,4 @@ public class DetalleNotaDTO {
     private int cantidad;
     private float costoUnitario;
     private Long productoId;
-    private Long notaId;
-    public float getSubtotal(){
-        return cantidad * costoUnitario;
-    }
 }

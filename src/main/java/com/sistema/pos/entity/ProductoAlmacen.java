@@ -1,5 +1,7 @@
 package com.sistema.pos.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,10 +22,12 @@ public class ProductoAlmacen {
 
     @ManyToOne
     @JoinColumn(name = "almacen_id")
+    @JsonIgnore
     private Almacen almacen;
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
+    @JsonIgnore
     private Producto producto;
 
 }

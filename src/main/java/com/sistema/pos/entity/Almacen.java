@@ -1,6 +1,7 @@
 package com.sistema.pos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,7 @@ private boolean activo;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_sucursal")
+    @JsonIgnore
     private Sucursal sucursal;
 
     @JsonIgnore
@@ -30,5 +32,6 @@ private boolean activo;
 
     @JsonIgnore // Evitar problemas de referencia circular
     @OneToMany(mappedBy = "almacen", cascade = CascadeType.ALL)
+
     private List<Proveedor> proveedores; // Relación con Proveedor
 }

@@ -35,10 +35,10 @@ public class ProductoAlmacenService {
         return cantidad != null && cantidad > 0; // Devuelve true si hay al menos un producto
     }
 
-    public ProductoAlmacen obtener(Long id_almacen){
-        Optional<ProductoAlmacen> productoA = productoAlmacenRepository.findById(id_almacen);
+    public ProductoAlmacen obtener(Long id){
+        Optional<ProductoAlmacen> productoA = productoAlmacenRepository.findById(id);
         if(!productoA.isPresent()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el producto con el id" + id_almacen);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el producto con el id" + id);
 
         }return productoA.get();
     }
@@ -50,7 +50,7 @@ public class ProductoAlmacenService {
         Almacen almacen = almacenService.obtenerAlmacenId(productoAlmacen.getAlmacen().getId());
         Producto producto = productoService.obtenerProducto(productoAlmacen.getProducto().getId());
 
-        // Verificar si el producto ya está en el almacén
+
         Optional<ProductoAlmacen> existente = productoAlmacenRepository.findByAlmacen_IdAndProducto_Id(
                 productoAlmacen.getAlmacen().getId(),
                 productoAlmacen.getProducto().getId()
@@ -71,28 +71,8 @@ public class ProductoAlmacenService {
             return productoAlmacenRepository.save(productoAlmacen);
         }
     }
-    public ProductoAlmacen actualizar(Long id, ProductoAlmacen productoAlmacen, DetalleNotaDTO detalleNotaDTO) {
-        Almacen almacen = almacenService.obtenerAlmacenId(productoAlmacen.getAlmacen().getId());
-        Producto producto = productoService.obtenerProducto(productoAlmacen.getProducto().getId());
 
-        // Verificar si el producto ya está en el almacén
-        Optional<ProductoAlmacen> existente = productoAlmacenRepository.findByAlmacen_IdAndProducto_Id(
-                productoAlmacen.getAlmacen().getId(),
-                productoAlmacen.getProducto().getId()
-        );
 
-        if (existente.isPresent()) {
-            ProductoAlmacen productoExistente = existente.get();
-            int nuevoStock = productoExistente.getStock() + detalleNotaDTO.getCantidad();
-            productoExistente.setStock(nuevoStock); // Actualiza el stock sumando la nueva cantidad
-            return productoAlmacenRepository.save(productoExistente);
-        } else {
-            productoAlmacen.setStock(detalleNotaDTO.getCantidad());
-            productoAlmacen.setAlmacen(almacen);
-            productoAlmacen.setProducto(producto);
-            return productoAlmacenRepository.save(productoAlmacen);
-        }
-    }
 
     public ProductoAlmacen eliminar(Long id) {
         ProductoAlmacen productoAlmacen =obtener(id);
