@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class AlmacenDTO {
+    private int numero;
     private String descripcion;
     private Long id_sucursal;
     private List<Long> proveedorIds;

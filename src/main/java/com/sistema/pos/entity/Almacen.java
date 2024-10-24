@@ -17,7 +17,7 @@ public class Almacen {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
+    private int numero;
     private String descripcion;
 private boolean activo;
 
