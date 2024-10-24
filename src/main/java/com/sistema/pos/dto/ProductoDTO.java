@@ -15,6 +15,10 @@ public class ProductoDTO {
     
     private String descripcion;
     
+    private double precioCompra;
+    
+    private double precioVenta;
+    
     private String foto;
     
     private Long id_categoria;
