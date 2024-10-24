@@ -43,8 +43,7 @@ public class SucursalController {
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .collect(Collectors.toList());
             return new ResponseEntity<>(
-                    ApiResponse.<Sucursal
-                                    >builder()
+                    ApiResponse.<Sucursal>builder()
                             .errors(errors)
                             .build(),
                     HttpStatus.BAD_REQUEST

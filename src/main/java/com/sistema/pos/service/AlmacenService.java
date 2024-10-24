@@ -21,44 +21,47 @@ public class AlmacenService {
 	@Autowired
 	private SucursalService sucursalService;
 
-	public List<Almacen> findAll() {
-		return almacenRepository.findAll();
-	}
+	public List<Almacen> findAllBySucursalId(Long idSucursal) {
+        Sucursal sucursal = sucursalService.findById(idSucursal);
+        return almacenRepository.findAllBySucursal(sucursal);
+    }
 
-	public Almacen obtenerAlmacenId(Long idAlmacen) {
-		Optional<Almacen> almacen = almacenRepository.findById(idAlmacen);
-		if (!almacen.isPresent()) {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "no existe almacen" + idAlmacen);
-		}
-		return almacen.get();
-	}
+	public Almacen obtenerAlmacenDeSucursal(Long idSucursal, Long idAlmacen) {
+        Sucursal sucursal = sucursalService.findById(idSucursal);
+        Optional<Almacen> almacen = almacenRepository.findByIdAndSucursal(idAlmacen, sucursal);
+        if (!almacen.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el almacén con ID " + idAlmacen + " en la sucursal " + idSucursal);
+        }
+        return almacen.get();
+    }
 
-	public Almacen save(AlmacenDTO almacenDTO) {
-		Sucursal sucursal = sucursalService.findById(almacenDTO.getId_sucursal());
-		Almacen almacen = new Almacen();
-		almacen.setNumero(almacenDTO.getNumero());
-		almacen.setDescripcion(almacenDTO.getDescripcion());
-		almacen.setActivo(true);
-		almacen.setSucursal(sucursal);
-		return almacenRepository.save(almacen);
-	}
+	public Almacen saveInSucursal(Long idSucursal, AlmacenDTO almacenDTO) {
+        Sucursal sucursal = sucursalService.findById(idSucursal);
+        Almacen almacen = new Almacen();
+        almacen.setNumero(almacenDTO.getNumero());
+        almacen.setDescripcion(almacenDTO.getDescripcion());
+        almacen.setActivo(true);
+        almacen.setSucursal(sucursal);
+        return almacenRepository.save(almacen);
+    }
 
-	public Almacen ModificarAlmacen(Long id, AlmacenDTO almacenDTO) {
-		Almacen almacen = obtenerAlmacenId(id);
-		almacen.setNumero(almacenDTO.getNumero());
-		almacen.setDescripcion(almacenDTO.getDescripcion());
-		almacen.setSucursal(sucursalService.findById(almacenDTO.getId_sucursal()));
-		return almacenRepository.save(almacen);
-	}
+	public Almacen modificarAlmacenEnSucursal(Long idSucursal, Long idAlmacen, AlmacenDTO almacenDTO) {
+        Sucursal sucursal = sucursalService.findById(idSucursal);
+        Almacen almacen = obtenerAlmacenDeSucursal(idSucursal, idAlmacen);
+        almacen.setNumero(almacenDTO.getNumero());
+        almacen.setDescripcion(almacenDTO.getDescripcion());
+        almacen.setSucursal(sucursal);
+        return almacenRepository.save(almacen);
+    }
 
-	public Almacen eliminar(Long id) {
-		Almacen almacen = obtenerAlmacenId(id);
-		almacen.setActivo(false);
-		return almacenRepository.save(almacen);
-	}
+	public void desactivarAlmacenEnSucursal(Long idSucursal, Long idAlmacen) {
+        Almacen almacen = obtenerAlmacenDeSucursal(idSucursal, idAlmacen);
+        almacen.setActivo(false);
+        almacenRepository.save(almacen);
+    }
 
 	public boolean existsById(Long id) {
-		return almacenRepository.existsById(id);
-	}
+        return almacenRepository.existsById(id);
+    }
 
 }
