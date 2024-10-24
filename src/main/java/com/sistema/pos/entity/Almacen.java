@@ -23,7 +23,6 @@ private boolean activo;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_sucursal")
-    @JsonIgnore
     private Sucursal sucursal;
 
     @JsonIgnore
