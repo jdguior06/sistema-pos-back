@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @Service
 public class AlmacenService {
+	
     @Autowired
     private AlmacenRepository almacenRepository;
 
@@ -29,7 +30,7 @@ public class AlmacenService {
 		return almacenRepository.findAll();
 	}
 
-public List<Almacen> findAllBySucursalId(Long idSucursal) {
+	public List<Almacen> findAllBySucursalId(Long idSucursal) {
         Sucursal sucursal = sucursalService.findById(idSucursal);
         return almacenRepository.findAllBySucursal(sucursal);
     }
@@ -42,7 +43,7 @@ public List<Almacen> findAllBySucursalId(Long idSucursal) {
 		return almacen.get();
 	}
 
-public Almacen obtenerAlmacenPorProv(Long proveedorId) {
+	public Almacen obtenerAlmacenPorProv(Long proveedorId) {
         Proveedor proveedor = proveedorRespository.findById(proveedorId)
                 .orElseThrow(() -> new RuntimeException("Proveedor no encontrado con ID: " + proveedorId));
 

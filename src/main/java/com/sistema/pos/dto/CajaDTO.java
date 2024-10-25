@@ -4,13 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class AlmacenDTO {
+public class CajaDTO {
 	
-    private int numero;
-    private String descripcion;
+    private String nombre;
     private Long id_sucursal;
     
 }

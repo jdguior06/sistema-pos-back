@@ -95,7 +95,7 @@ public class CategoriaController {
 		}
 	}
 
-    @DeleteMapping("/{id}/desactivar")
+    @PatchMapping("/{id}/desactivar")
 	public ResponseEntity<ApiResponse<Void>> desactivarCategoria(@PathVariable Long id) {
 		try {
 			categoriaService.eliminarCategoria(id);

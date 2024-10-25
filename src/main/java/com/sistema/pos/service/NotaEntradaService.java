@@ -120,7 +120,7 @@ public class NotaEntradaService {
            ProductoAlmacen productoAlmacen = new ProductoAlmacen();
            productoAlmacen.setProducto(detalleNota.getProducto());
            productoAlmacen.setAlmacen(almacen);
-           productoAlmacenService.save(productoAlmacen, detalle); // Actualizar el stock
+//           productoAlmacenService.save(productoAlmacen, detalle); // Actualizar el stock
        }
 
        total -= notaEntradaCompletaDto.getDescuento(); // Aplicar descuento

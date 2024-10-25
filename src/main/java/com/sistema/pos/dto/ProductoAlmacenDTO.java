@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProductoAlmacenDTO {
 	
-	private Long id_almacen;
-	
 	private Long id_producto;
 
 

@@ -1,6 +1,7 @@
 package com.sistema.pos.repository;
 
 
+import com.sistema.pos.entity.Almacen;
 import com.sistema.pos.entity.ProductoAlmacen;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,13 +13,11 @@ import java.util.Optional;
 
 @Repository
 public interface ProductoAlmacenRepository extends JpaRepository<ProductoAlmacen,Long> {
+	
     @Query("SELECT COUNT(c) FROM ProductoAlmacen c WHERE c.almacen.id = :idAlmacen AND c.producto.id = :idProducto")
- Long verificarProducto(@Param("idAlmacen") Long idAlmacen, @Param("idProducto") Long idProducto);
-//
-//    @Query("SELECT c FROM ProductoAlmacen c WHERE c.id_almacen.id = :idAlmacen AND c.id_producto.id = :idProducto")
-//    Optional<ProductoAlmacen> traerProducto(@Param("idAlmacen") Long idAlmacen, @Param("idProducto") Long idProducto);
+    Long verificarProducto(@Param("idAlmacen") Long idAlmacen, @Param("idProducto") Long idProducto);
 
-    Optional<ProductoAlmacen> findByAlmacen_IdAndProducto_Id(Long almacenId, Long productoId);
+    Optional<ProductoAlmacen> findByIdAndAlmacen(Long idProductoAlmacen, Almacen almacen);
 
-    List<ProductoAlmacen> findByAlmacen_Id(Long almacenId);
+    List<ProductoAlmacen> findAllByAlmacen(Almacen almacen);
 }
