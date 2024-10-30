@@ -3,68 +3,52 @@ package com.sistema.pos.service;
 import com.sistema.pos.dto.PlanDTO;
 import com.sistema.pos.dto.UsuarioDTO;
 import com.sistema.pos.entity.Plan;
-import com.sistema.pos.entity.Rol;
 import com.sistema.pos.entity.Suscriptor;
 import com.sistema.pos.entity.Usuario;
 import com.sistema.pos.repository.PlanRepository;
 import com.sistema.pos.repository.RolRepository;
 import com.sistema.pos.repository.SuscriptorRepository;
 import com.sistema.pos.repository.UsuarioRepository;
+import com.sistema.pos.response.AuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class SuscriptorService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-
     @Autowired
     private PlanRepository planRepository;
-
     @Autowired
     private SuscriptorRepository suscriptorRepository;
-
     @Autowired
     private RolRepository rolRepository;
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Transactional
     public Suscriptor crearSuscriptor(UsuarioDTO usuarioDTO, PlanDTO planDTO) {
 
-        // Paso 1: Buscar o crear el rol de "ADMINISTRADOR"
-        Rol rolAdmin = rolRepository.findByNombre("ADMINISTRADOR")
-                .orElseGet(() -> rolRepository.save(new Rol("ADMINISTRADOR")));
+        // Paso 1: Crear usuario administrador (o asegurarse de que existe) y obtener el token
+        usuarioService.createUserAdmin(usuarioDTO);
 
-        // Paso 2: Registrar al usuario y asignarle el rol de administrador si no existe
+        // Buscar al usuario creado por su email para obtener el objeto Usuario completo
         Usuario usuario = usuarioRepository.findByEmail(usuarioDTO.getEmail())
-                .orElseGet(() -> {
-                    Usuario nuevoUsuario = new Usuario();
-                    nuevoUsuario.setNombre(usuarioDTO.getNombre());
-                    nuevoUsuario.setApellido(usuarioDTO.getApellido());
-                    nuevoUsuario.setEmail(usuarioDTO.getEmail());
-                    nuevoUsuario.setPassword(usuarioDTO.getPassword());
+                .orElseThrow(() -> new RuntimeException("Error al crear el usuario administrador."));
 
-                    // Asignar el rol de administrador
-                    Set<Rol> roles = new HashSet<>();
-                    roles.add(rolAdmin);
-                    nuevoUsuario.setRol(roles);
-
-                    return usuarioRepository.save(nuevoUsuario);
-                });
-
-        // Paso 3: Verificar el tipo de plan y calcular la fecha final
+        // Paso 2: Verificar el tipo de plan y calcular la fecha final
         Plan plan = planRepository.findByNombre(planDTO.getNombre())
                 .orElseThrow(() -> new RuntimeException("El plan no existe."));
 
         LocalDate fechaInicio = LocalDate.now();
         LocalDate fechaFinal;
 
+        // Calcular la fecha final según el tipo de plan
         switch (plan.getTipo().toLowerCase()) {
             case "mes":
                 fechaFinal = fechaInicio.plusDays(30);
@@ -76,14 +60,14 @@ public class SuscriptorService {
                 throw new RuntimeException("Tipo de plan desconocido: " + plan.getTipo());
         }
 
-        // Paso 4: Crear y guardar el suscriptor
+        // Paso 3: Crear y guardar el suscriptor
         Suscriptor suscriptor = new Suscriptor();
-        suscriptor.setNombre(usuario.getNombre());
+        suscriptor.setNombre(usuario.getEmail());
         suscriptor.setFecha_inicio(java.sql.Date.valueOf(fechaInicio));
         suscriptor.setFecha_final(java.sql.Date.valueOf(fechaFinal));
         suscriptor.setEstado(true);
-        suscriptor.setId_usuario(usuario);
-        suscriptor.setId_plan(plan);
+        suscriptor.setId_usuario(usuario); // Asignar el usuario al suscriptor
+        suscriptor.setId_plan(plan); // Asignar el plan al suscriptor
 
         return suscriptorRepository.save(suscriptor);
     }
