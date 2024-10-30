@@ -15,16 +15,12 @@ public class UsuarioDTO {
 
     @NotEmpty(message = "ingrese un nombre")
     private String nombre;
-
     @NotEmpty(message = "ingrese un apellido")
     private String apellido;
-    
     @Email(message = "El email debe ser válido")
     private String email;
-    
     @NotEmpty(message = "ingrese su contraseña")
     private String password;
-    
     private Long rolId;
 
 }

@@ -36,6 +36,8 @@ public class SegurityConfig {
 				"/img/**").permitAll()
 //				.requestMatchers(HttpMethod.GET).permitAll()
 				.requestMatchers(HttpMethod.OPTIONS).permitAll()
+				.requestMatchers("/pos/plan").permitAll()
+				.requestMatchers("/pos/suscriptores/crear").permitAll()
 				.requestMatchers("/pos/auth/**").permitAll()
 				.anyRequest().authenticated()
 					)
