@@ -1,6 +1,7 @@
 package com.sistema.pos.service;
 
 import com.sistema.pos.dto.DetalleNotaDTO;
+import com.sistema.pos.dto.ProductoAlmacenDTO;
 import com.sistema.pos.entity.Almacen;
 import com.sistema.pos.entity.Producto;
 import com.sistema.pos.entity.ProductoAlmacen;
@@ -11,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,10 +35,28 @@ public class ProductoAlmacenService {
     public List<ProductoAlmacen> findAll() {
         return productoAlmacenRepository.findAll();
     }
-    
-    public List<ProductoAlmacen> findAllByAlmacenId(Long idAlmacen){
-    	Almacen almacen = almacenService.obtenerAlmacenId(idAlmacen);
-    	return productoAlmacenRepository.findByAlmacen_Id(idAlmacen);
+
+    public List<ProductoAlmacenDTO> findAllByAlmacenId(Long idAlmacen) {
+        List<ProductoAlmacenDTO> productosAlmacenDTOList = new ArrayList<>();
+
+        // Obtener productos almacenados en el almacén dado
+        List<ProductoAlmacen> productosAlmacen = productoAlmacenRepository.findByAlmacen_Id(idAlmacen);
+
+        for (ProductoAlmacen productoAlmacen : productosAlmacen) {
+            Producto producto = productoAlmacen.getProducto();
+
+            // Crear un nuevo DTO combinando los datos de Producto y ProductoAlmacen
+            ProductoAlmacenDTO productoAlmacenDTO = new ProductoAlmacenDTO(
+                    producto.getNombre(),
+                    producto.getDescripcion(),
+                    producto.getId(),
+                    productoAlmacen.getStock()
+            );
+
+            productosAlmacenDTOList.add(productoAlmacenDTO);
+        }
+
+        return productosAlmacenDTOList;
     }
 
 
