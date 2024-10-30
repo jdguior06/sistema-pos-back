@@ -16,36 +16,32 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SegurityConfig {
-	
+
 	@Autowired
 	private JwtAuthenticationFilter jwtAuthenticationFilter;
 
 	@Autowired
 	private AuthenticationProvider authenticationProvider;
-	
+
 	@Bean
 	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http
-			.csrf(csrf -> csrf
-					.disable())
-			.authorizeHttpRequests(authorize -> authorize
-				.requestMatchers(
-				"/registro**",
-				"/js/**",
-				"/css/**",
-				"/img/**").permitAll()
-//				.requestMatchers(HttpMethod.GET).permitAll()
-				.requestMatchers(HttpMethod.OPTIONS).permitAll()
-				.requestMatchers("/pos/plan").permitAll()
-				.requestMatchers("/pos/suscriptores/crear").permitAll()
-				.requestMatchers("/pos/auth/**").permitAll()
-				.anyRequest().authenticated()
-					)
-			.sessionManagement(sessionManager -> sessionManager
-					.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-			.authenticationProvider(authenticationProvider)
-			.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-			.build();
+				.csrf(csrf -> csrf.disable()) // Desactivar CSRF para APIs REST; habilitarlo para formularios si es necesario
+				.authorizeHttpRequests(authorize -> authorize
+						.requestMatchers(
+								"/registro**",          // Permitir acceso sin autenticación
+								"/js/**", "/css/**", "/img/**" // Recursos estáticos
+						).permitAll()
+						.requestMatchers(HttpMethod.OPTIONS).permitAll() // Permitir pre-flight requests de CORS
+						.requestMatchers("/pos/plan").permitAll()         // Permitir acceso público a este endpoint específico
+						.requestMatchers("/pos/suscriptor/crear").permitAll() // Endpoint de creación de suscriptor como público
+						.requestMatchers("/pos/auth/**").permitAll()      // Permitir acceso público a autenticación
+						.anyRequest().authenticated() // Requerir autenticación para el resto de las rutas
+				)
+				.sessionManagement(sessionManager -> sessionManager
+						.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless session management para JWT
+				.authenticationProvider(authenticationProvider)
+				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+				.build();
 	}
-
 }

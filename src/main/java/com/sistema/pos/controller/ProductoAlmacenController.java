@@ -42,70 +42,70 @@ public class ProductoAlmacenController {
         );
     }
 
-//    // Obtener un producto en el almacén por ID
-//    @GetMapping("/{id}")
-//    public ResponseEntity<ApiResponse<ProductoAlmacen>> getProductoAlmace(@PathVariable Long id) {
-//        try {
-//            ProductoAlmacen productoAlmacen = productoAlmacenService.obtener(id);
-//            return new ResponseEntity<>(
-//                    ApiResponse.<ProductoAlmacen>builder()
-//                            .statusCode(HttpStatus.OK.value())
-//                            .message(HttpStatusMessage.getMessage(HttpStatus.OK))
-//                            .data(productoAlmacen)
-//                            .build(),
-//                    HttpStatus.OK
-//            );
-//        } catch (ResponseStatusException e) {
-//            return new ResponseEntity<>(
-//                    ApiResponse.<ProductoAlmacen>builder()
-//                            .statusCode(e.getStatusCode().value())
-//                            .message(e.getReason())
-//                            .build(),
-//                    e.getStatusCode()
-//            );
-//        }
-//    }
-//
-//    // Guardar o actualizar el stock de un producto en el almacén usando DetalleNotaDTO
-//    @PostMapping
-//    public ResponseEntity<ApiResponse<ProductoAlmacen>> guardarProductoAlmacen(
-//            @Valid @RequestBody ProductoAlmacen productoAlmacen,
-//            @RequestBody DetalleNotaDTO detalleNotaDTO,
-//            BindingResult bindingResult) {
-//
-//        // Validación de errores
-//        if (bindingResult.hasErrors()) {
-//            List<String> errors = bindingResult.getAllErrors().stream()
-//                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
-//                    .collect(Collectors.toList());
-//            return new ResponseEntity<>(
-//                    ApiResponse.<ProductoAlmacen>builder()
-//                            .errors(errors)
-//                            .build(),
-//                    HttpStatus.BAD_REQUEST
-//            );
-//        }
-//
-//        try {
-//            // Guardar o actualizar el stock de un producto en el almacén
-//            ProductoAlmacen producto = productoAlmacenService.save(productoAlmacen, detalleNotaDTO);
-//            return new ResponseEntity<>(
-//                    ApiResponse.<ProductoAlmacen>builder()
-//                            .statusCode(HttpStatus.CREATED.value())
-//                            .message(HttpStatusMessage.getMessage(HttpStatus.CREATED))
-//                            .data(producto)
-//                            .build(),
-//                    HttpStatus.CREATED
-//            );
-//        } catch (ResponseStatusException e) {
-//            return new ResponseEntity<>(
-//                    ApiResponse.<ProductoAlmacen>builder()
-//                            .statusCode(e.getStatusCode().value())
-//                            .message(e.getReason())
-//                            .build(),
-//                    e.getStatusCode()
-//            );
-//        }
-//    }
+   // Obtener un producto en el almacén por ID
+   @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<ProductoAlmacen>> getProductoAlmace(@PathVariable Long id) {
+        try {
+            ProductoAlmacen productoAlmacen = productoAlmacenService.obtener(id);
+            return new ResponseEntity<>(
+                    ApiResponse.<ProductoAlmacen>builder()
+                            .statusCode(HttpStatus.OK.value())
+                            .message(HttpStatusMessage.getMessage(HttpStatus.OK))
+                            .data(productoAlmacen)
+                            .build(),
+                    HttpStatus.OK
+            );
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(
+                    ApiResponse.<ProductoAlmacen>builder()
+                            .statusCode(e.getStatusCode().value())
+                            .message(e.getReason())
+                            .build(),
+                    e.getStatusCode()
+            );
+        }
+    }
+
+    // Guardar o actualizar el stock de un producto en el almacén usando DetalleNotaDTO
+    @PostMapping
+    public ResponseEntity<ApiResponse<ProductoAlmacen>> guardarProductoAlmacen(
+            @Valid @RequestBody ProductoAlmacen productoAlmacen,
+            @RequestBody DetalleNotaDTO detalleNotaDTO,
+            BindingResult bindingResult) {
+
+        // Validación de errores
+        if (bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream()
+                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                    .collect(Collectors.toList());
+            return new ResponseEntity<>(
+                    ApiResponse.<ProductoAlmacen>builder()
+                            .errors(errors)
+                            .build(),
+                    HttpStatus.BAD_REQUEST
+            );
+        }
+
+        try {
+            // Guardar o actualizar el stock de un producto en el almacén
+            ProductoAlmacen producto = productoAlmacenService.save(productoAlmacen, detalleNotaDTO);
+            return new ResponseEntity<>(
+                    ApiResponse.<ProductoAlmacen>builder()
+                            .statusCode(HttpStatus.CREATED.value())
+                            .message(HttpStatusMessage.getMessage(HttpStatus.CREATED))
+                            .data(producto)
+                            .build(),
+                    HttpStatus.CREATED
+            );
+        } catch (ResponseStatusException e) {
+            return new ResponseEntity<>(
+                    ApiResponse.<ProductoAlmacen>builder()
+                            .statusCode(e.getStatusCode().value())
+                            .message(e.getReason())
+                            .build(),
+                    e.getStatusCode()
+            );
+        }
+    }
 
 }
