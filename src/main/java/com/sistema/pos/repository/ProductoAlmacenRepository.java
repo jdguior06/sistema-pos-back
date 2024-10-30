@@ -17,7 +17,10 @@ public interface ProductoAlmacenRepository extends JpaRepository<ProductoAlmacen
     @Query("SELECT COUNT(c) FROM ProductoAlmacen c WHERE c.almacen.id = :idAlmacen AND c.producto.id = :idProducto")
     Long verificarProducto(@Param("idAlmacen") Long idAlmacen, @Param("idProducto") Long idProducto);
 
-    Optional<ProductoAlmacen> findByIdAndAlmacen(Long idProductoAlmacen, Almacen almacen);
+    //Optional<ProductoAlmacen> findByIdAndAlmacen(Long idProductoAlmacen, Almacen almacen);
 
-    List<ProductoAlmacen> findAllByAlmacen(Almacen almacen);
+    //List<ProductoAlmacen> findAllByAlmacen(Almacen almacen);
+    Optional<ProductoAlmacen> findByAlmacen_IdAndProducto_Id(Long almacenId, Long productoId);
+
+    List<ProductoAlmacen> findByAlmacen_Id(Long almacenId);
 }
