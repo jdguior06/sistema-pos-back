@@ -30,10 +30,10 @@ public class ProductoAlmacenController {
 
     // Obtener todos los productos en almacenes
     @GetMapping
-    public ResponseEntity<ApiResponse<List<ProductoAlmacen>>> getAllProductoAlmacen(@PathVariable Long idAlmacen) {
-        List<ProductoAlmacen> productoAlmacens = productoAlmacenService.findAllByAlmacenId(idAlmacen);
+    public ResponseEntity<ApiResponse<List<ProductoAlmacenDTO>>> getAllProductoAlmacen(@PathVariable Long idAlmacen) {
+        List<ProductoAlmacenDTO> productoAlmacens = productoAlmacenService.findAllByAlmacenId(idAlmacen);
         return new ResponseEntity<>(
-                ApiResponse.<List<ProductoAlmacen>>builder()
+                ApiResponse.<List<ProductoAlmacenDTO>>builder()
                         .statusCode(HttpStatus.OK.value())
                         .message(HttpStatusMessage.getMessage(HttpStatus.OK))
                         .data(productoAlmacens)
