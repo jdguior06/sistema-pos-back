@@ -58,11 +58,17 @@ public class RolService {
 		if (rol.isPresent()) {
 			return rol.get();
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el rol con el id" + id
-					);
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el rol con el id" + id);
 		}
 	}
-	
+	public Rol obtenerRolnnombre(String nombre){
+		Optional<Rol> rol = rolRepository.findByNombre(nombre);
+		if (rol.isPresent()) {
+			return rol.get();
+		} else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el rol con el id" + nombre);
+		}
+	}
 	public Rol actualizarRol(Long id, Rol rolDto) {
 		Rol rol = obtenerRol(id);
 		rol.setNombre(rolDto.getNombre());

@@ -1,5 +1,6 @@
 package com.sistema.pos.entity;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "rol")
 @Entity
-public class Rol {
+public class Rol implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
