@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -37,6 +38,7 @@ public class SucursalController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('PERMISO_ADMINISTRAR_SUCURSALES')")
     public ResponseEntity<ApiResponse<Sucursal>> guardarSucursal(@Valid @RequestBody SucursalDTO sucursalDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult.getAllErrors().stream()
@@ -94,6 +96,7 @@ public class SucursalController {
     }
 
     @PatchMapping("/{id}")
+    @PreAuthorize("hasAuthority('PERMISO_ADMINISTRAR_SUCURSALES')")
     public ResponseEntity<ApiResponse<Sucursal>> actualizarProducto(@PathVariable Long id, @Valid @RequestBody SucursalDTO sucursalDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult.getAllErrors().stream()
@@ -128,6 +131,7 @@ public class SucursalController {
     }
 
     @PatchMapping("/{id}/desactivar")
+    @PreAuthorize("hasAuthority('PERMISO_ADMINISTRAR_SUCURSALES')")
     public ResponseEntity<ApiResponse<Void>> desactivarSucursal(@PathVariable Long id) {
         try {
             sucursalService.deleteById(id);

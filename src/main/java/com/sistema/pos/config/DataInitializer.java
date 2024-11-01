@@ -10,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.sistema.pos.entity.Permiso;
 import com.sistema.pos.entity.Rol;
-import com.sistema.pos.entity.Usuario;
 import com.sistema.pos.repository.PermisoRepository;
 import com.sistema.pos.repository.RolRepository;
 import com.sistema.pos.repository.UsuarioRepository;

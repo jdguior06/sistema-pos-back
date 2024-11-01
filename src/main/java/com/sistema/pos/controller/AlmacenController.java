@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -47,6 +48,7 @@ public class AlmacenController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('PERMISO_ADMINISTRAR_ALMACENES')")
     public ResponseEntity<ApiResponse<Almacen>> guardarAlmacen(
             @PathVariable Long idSucursal, @Valid @RequestBody AlmacenDTO almacenDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -72,6 +74,7 @@ public class AlmacenController {
     }
 
     @PatchMapping("/{idAlmacen}")
+    @PreAuthorize("hasAuthority('PERMISO_ADMINISTRAR_ALMACENES')")
     public ResponseEntity<ApiResponse<Almacen>> actualizarAlmacen(
             @PathVariable Long idSucursal, @PathVariable Long idAlmacen,
             @Valid @RequestBody AlmacenDTO almacenDTO, BindingResult bindingResult) {
@@ -97,6 +100,7 @@ public class AlmacenController {
     }
 
     @PatchMapping("/{idAlmacen}/desactivar")
+    @PreAuthorize("hasAuthority('PERMISO_ADMINISTRAR_ALMACENES')")
     public ResponseEntity<ApiResponse<Void>> desactivarAlmacen(
             @PathVariable Long idSucursal, @PathVariable Long idAlmacen) {
         almacenService.desactivarAlmacenEnSucursal(idSucursal, idAlmacen);

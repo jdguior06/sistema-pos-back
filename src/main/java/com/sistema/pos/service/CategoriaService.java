@@ -1,5 +1,6 @@
 package com.sistema.pos.service;
 
+import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.dto.CategoriaDTO;
 import com.sistema.pos.entity.Categoria;
 import com.sistema.pos.repository.CategoriaRepository;
@@ -20,7 +21,8 @@ public class CategoriaService {
     public List<Categoria> findAll() {
         return categoriaRepository.findAll();
     }
-
+    
+    @LoggableAction
     public Categoria save(CategoriaDTO categoriaDTO) {
     	Categoria categoria = new Categoria();
     	categoria.setNombre(categoriaDTO.getNombre());
@@ -38,13 +40,15 @@ public class CategoriaService {
 		return categoria.get();
     }
     
+    @LoggableAction
 	public Categoria modificarCategoria(Long id, CategoriaDTO categoriaDTO) {
 		Categoria categoriaAct = findById(id);
 		categoriaAct.setNombre(categoriaDTO.getNombre());
 		categoriaAct.setDescripcion(categoriaDTO.getDescripcion());
 		return categoriaRepository.save(categoriaAct);
 	}
-
+    
+    @LoggableAction
 	public Categoria eliminarCategoria(Long id) {
 		Categoria categoria = findById(id);
 		categoria.setActivo(false);

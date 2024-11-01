@@ -34,8 +34,8 @@ public class TenantService {
 	            break;
 	    }
 
-//	    administradorPrincipal.setEsAdministradorPrincipal(true);
-//	    administradorPrincipal.setTenant(tenant);
+	    administradorPrincipal.setEsAdministradorPrincipal(true);
+	    administradorPrincipal.setTenant(tenant);
 	    tenant.getUsuarios().add(administradorPrincipal);
 
 	    tenantRepository.save(tenant);
