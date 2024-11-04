@@ -23,4 +23,19 @@ public interface ProductoAlmacenRepository extends JpaRepository<ProductoAlmacen
     Optional<ProductoAlmacen> findByAlmacen_IdAndProducto_Id(Long almacenId, Long productoId);
 
     List<ProductoAlmacen> findByAlmacen_Id(Long almacenId);
+
+
+    @Query("SELECT pa FROM ProductoAlmacen pa WHERE " +
+            "(:almacen IS NULL OR pa.almacen.id = :almacen) AND " +
+            "(:producto IS NULL OR pa.producto.id = :producto) AND " +
+            "(:stockMin IS NULL OR pa.stock >= :stockMin) AND " +
+            "(:stockMax IS NULL OR pa.stock <= :stockMax)")
+    List<ProductoAlmacen> findByAlmacenAndProductoAndStockRange(
+            @Param("almacen") Long almacen,
+            @Param("producto") Long producto,
+            @Param("stockMin") Integer stockMin,
+            @Param("stockMax") Integer stockMax
+    );
+
+
 }
