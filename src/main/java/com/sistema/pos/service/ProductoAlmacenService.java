@@ -1,5 +1,6 @@
 package com.sistema.pos.service;
 
+import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.dto.DetalleNotaDTO;
 import com.sistema.pos.dto.ProductoAlmacenDTO;
 import com.sistema.pos.entity.Almacen;
@@ -82,7 +83,7 @@ public class ProductoAlmacenService {
     }*/
 
 
-    
+    @LoggableAction
     public ProductoAlmacen save(ProductoAlmacen productoAlmacen, DetalleNotaDTO detalleNotaDTO) {
         // Obtener el almacén y el producto
         Almacen almacen = almacenService.obtenerAlmacenId(productoAlmacen.getAlmacen().getId());
@@ -111,7 +112,7 @@ public class ProductoAlmacenService {
     }
 
 
-
+    @LoggableAction
     public ProductoAlmacen eliminar(Long id) {
         ProductoAlmacen productoAlmacen =obtener(id);
         productoAlmacen.setActivo(false);

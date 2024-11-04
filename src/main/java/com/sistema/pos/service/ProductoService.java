@@ -1,5 +1,6 @@
 package com.sistema.pos.service;
 
+import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.dto.ProductoDTO;
 import com.sistema.pos.entity.Categoria;
 import com.sistema.pos.entity.Producto;
@@ -33,6 +34,7 @@ public class ProductoService {
 		return producto.get();
 	}
 
+    @LoggableAction
     public Producto save(ProductoDTO productoDTO) {
     	Categoria categoria = categoriaService.findById(productoDTO.getId_categoria());
     	Producto producto = new Producto();
@@ -47,6 +49,7 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
     
+    @LoggableAction
     public Producto actualizarProducto(Long id, ProductoDTO productoDTO) {
     	Producto producto = obtenerProducto(id);
     	Categoria categoria = categoriaService.findById(productoDTO.getId_categoria());
@@ -59,7 +62,8 @@ public class ProductoService {
     	producto.setCategoria(categoria);
     	return productoRepository.save(producto);
     }
-
+    
+    @LoggableAction
     public Producto eliminarProducto(Long id) {
 		Producto producto = obtenerProducto(id);
 		producto.setActivo(false);

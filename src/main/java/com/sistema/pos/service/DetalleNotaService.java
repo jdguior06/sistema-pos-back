@@ -1,5 +1,6 @@
 package com.sistema.pos.service;
 
+import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.dto.DetalleNotaDTO;
 import com.sistema.pos.entity.DetalleNotaE;
 import com.sistema.pos.entity.Nota_Entrada;
@@ -31,6 +32,7 @@ public class DetalleNotaService {
     }
 
     // Guardar un detalle
+    @LoggableAction
     public DetalleNotaE guardarDetalle(DetalleNotaE detalleNota, Nota_Entrada notaEntrada) {
         Producto producto = productoService.obtenerProducto(detalleNota.getProducto().getId());
         detalleNota.setProducto(producto);
@@ -42,6 +44,7 @@ public class DetalleNotaService {
     }
 
     // Actualizar un detalle existente
+    @LoggableAction
     public DetalleNotaE actualizarDetalle(Long id, DetalleNotaE detalleNota) {
         DetalleNotaE detalleNotaE = obtenerDetallesPorId(id);
         Producto producto = productoService.obtenerProducto(detalleNota.getProducto().getId());
@@ -55,6 +58,7 @@ public class DetalleNotaService {
     }
 
     // Eliminar un detalle por su ID
+    @LoggableAction
     public void eliminarDetalle(Long idDetalle) {
         detalleNotaRepository.deleteById(idDetalle);
     }

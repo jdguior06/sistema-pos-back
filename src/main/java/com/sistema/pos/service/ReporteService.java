@@ -1,5 +1,6 @@
 package com.sistema.pos.service;
 
+import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.dto.ReporteFiltroDTO;
 import com.sistema.pos.repository.NotaEntradaRepository;
 import com.sistema.pos.repository.ProductoAlmacenRepository;
@@ -24,7 +25,7 @@ public class ReporteService {
     @Autowired
     private NotaEntradaRepository notaEntradaRepository;
 
-
+    @LoggableAction
     public List<?>generarReporte(ReporteFiltroDTO filtros){
         switch (filtros.getTipoReporte()) {
             case PRODUCTO:
@@ -40,15 +41,19 @@ public class ReporteService {
         }
     }
 
+    @LoggableAction
     private List<?>generarReporteProductos(ReporteFiltroDTO filtros) {
         return productoRepository.findAll();
 
     }
 
+    @LoggableAction
     private List<?> generarReporteProveedores(ReporteFiltroDTO filtros) {
         // Aplicar filtros en el repositorio de proveedores
         return proveedorRepository.findAll();  // Agrega los filtros necesarios
     }
+    
+    @LoggableAction
     public List<?>generarReporteProductoAlmacen(ReporteFiltroDTO filtros) {
         Long almacenId = filtros.getAlmacen() != null ? Long.parseLong(filtros.getAlmacen()) : null;
         Long productoId = filtros.getProducto() != null ? Long.parseLong(filtros.getProducto()) : null;
@@ -57,6 +62,8 @@ public class ReporteService {
                 almacenId, productoId, filtros.getStockMin(), filtros.getStockMax()
         );
     }
+    
+    @LoggableAction
     public List<?>generarReporteNota(ReporteFiltroDTO filtros) {
         return notaEntradaRepository.findByProveedorAndFechaAndTotal(
                 Long.parseLong(String.valueOf(filtros.getProveedor())), filtros.getFechaInicio(), filtros.getFechaFin(), filtros.getTotalMin(), filtros.getTotalMax());

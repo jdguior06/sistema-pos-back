@@ -6615,3 +6615,1900 @@ io.jsonwebtoken.ExpiredJwtException: JWT expired at 2024-11-04T08:46:24Z. Curren
 2024-11-04 13:54:08 - Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-11-04 13:54:08 - HikariPool-1 - Shutdown initiated...
 2024-11-04 13:54:08 - HikariPool-1 - Shutdown completed.
+2024-11-04 14:06:00 - HV000001: Hibernate Validator 8.0.1.Final
+2024-11-04 14:06:00 - Starting SistemaPosBackApplication using Java 21.0.3 with PID 14408 (D:\Proyectos\sistema-pos-back\target\classes started by Diego in D:\Proyectos\sistema-pos-back)
+2024-11-04 14:06:00 - No active profile set, falling back to 1 default profile: "default"
+2024-11-04 14:06:00 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-04 14:06:00 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-04 14:06:01 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-04 14:06:01 - Finished Spring Data repository scanning in 79 ms. Found 17 JPA repository interfaces.
+2024-11-04 14:06:02 - Tomcat initialized with port 8080 (http)
+2024-11-04 14:06:02 - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:06:02 - Starting service [Tomcat]
+2024-11-04 14:06:02 - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-11-04 14:06:02 - Initializing Spring embedded WebApplicationContext
+2024-11-04 14:06:02 - Root WebApplicationContext: initialization completed in 1960 ms
+2024-11-04 14:06:02 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-04 14:06:02 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-11-04 14:06:02 - HHH000026: Second-level cache disabled
+2024-11-04 14:06:02 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-04 14:06:02 - HikariPool-1 - Starting...
+2024-11-04 14:06:02 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1f40e2e7
+2024-11-04 14:06:02 - HikariPool-1 - Start completed.
+2024-11-04 14:06:03 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-04 14:06:04 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:06:04 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-04 14:06:05 - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-11-04 14:06:05 - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-11-04 14:06:05 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-04 14:06:05 - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2024-11-04 14:06:06 - LiveReload server is running on port 35729
+2024-11-04 14:06:06 - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:06:06 - Tomcat started on port 8080 (http) with context path '/'
+2024-11-04 14:06:06 - Started SistemaPosBackApplication in 6.603 seconds (process running for 7.356)
+2024-11-04 14:06:06 - Application run failed
+java.lang.IllegalStateException: No thread-bound request found: Are you referring to request attributes outside of an actual web request, or processing a request outside of the originally receiving thread? If you are actually operating within a web request and still receive this message, your code is probably running outside of DispatcherServlet: In this case, use RequestContextListener or RequestContextFilter to expose the current request.
+	at org.springframework.web.context.request.RequestContextHolder.currentRequestAttributes(RequestContextHolder.java:131)
+	at org.springframework.web.context.support.WebApplicationContextUtils.currentRequestAttributes(WebApplicationContextUtils.java:313)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:329)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:324)
+	at org.springframework.beans.factory.support.AutowireUtils$ObjectFactoryDelegatingInvocationHandler.invoke(AutowireUtils.java:283)
+	at jdk.proxy2/jdk.proxy2.$Proxy154.getHeader(Unknown Source)
+	at com.sistema.pos.config.BitacoraAspect.getClientIp(BitacoraAspect.java:75)
+	at com.sistema.pos.config.BitacoraAspect.BitacoraAction(BitacoraAspect.java:43)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
+	at com.sistema.pos.service.PlanService$$SpringCGLIB$$0.modificarPlan(<generated>)
+	at com.sistema.pos.config.PlanInitializationService.crearPlanSiNoExiste(PlanInitializationService.java:54)
+	at com.sistema.pos.config.PlanInitializationService.initializeData(PlanInitializationService.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.doInvoke(ApplicationListenerMethodAdapter.java:365)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.processEvent(ApplicationListenerMethodAdapter.java:237)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.onApplicationEvent(ApplicationListenerMethodAdapter.java:168)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:452)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:385)
+	at org.springframework.boot.context.event.EventPublishingRunListener.ready(EventPublishingRunListener.java:109)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$ready$6(SpringApplicationRunListeners.java:80)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.ready(SpringApplicationRunListeners.java:80)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:349)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.sistema.pos.SistemaPosBackApplication.main(SistemaPosBackApplication.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-11-04 14:06:06 - Stopping ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:06:06 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:06:06 - HikariPool-1 - Shutdown initiated...
+2024-11-04 14:06:06 - HikariPool-1 - Shutdown completed.
+2024-11-04 14:08:42 - HV000001: Hibernate Validator 8.0.1.Final
+2024-11-04 14:08:42 - Starting SistemaPosBackApplication using Java 21.0.3 with PID 1736 (D:\Proyectos\sistema-pos-back\target\classes started by Diego in D:\Proyectos\sistema-pos-back)
+2024-11-04 14:08:42 - No active profile set, falling back to 1 default profile: "default"
+2024-11-04 14:08:42 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-04 14:08:42 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-04 14:08:43 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-04 14:08:43 - Finished Spring Data repository scanning in 81 ms. Found 17 JPA repository interfaces.
+2024-11-04 14:08:43 - Tomcat initialized with port 8080 (http)
+2024-11-04 14:08:43 - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:08:43 - Starting service [Tomcat]
+2024-11-04 14:08:43 - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-11-04 14:08:44 - Initializing Spring embedded WebApplicationContext
+2024-11-04 14:08:44 - Root WebApplicationContext: initialization completed in 1535 ms
+2024-11-04 14:08:44 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-04 14:08:44 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-11-04 14:08:44 - HHH000026: Second-level cache disabled
+2024-11-04 14:08:44 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-04 14:08:44 - HikariPool-1 - Starting...
+2024-11-04 14:08:44 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@314eede7
+2024-11-04 14:08:44 - HikariPool-1 - Start completed.
+2024-11-04 14:08:45 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-04 14:08:46 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:08:46 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-04 14:08:47 - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-11-04 14:08:47 - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-11-04 14:08:47 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-04 14:08:48 - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2024-11-04 14:08:48 - LiveReload server is running on port 35729
+2024-11-04 14:08:48 - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:08:48 - Tomcat started on port 8080 (http) with context path '/'
+2024-11-04 14:08:48 - Started SistemaPosBackApplication in 6.391 seconds (process running for 7.137)
+2024-11-04 14:08:48 - Application run failed
+java.lang.IllegalStateException: No thread-bound request found: Are you referring to request attributes outside of an actual web request, or processing a request outside of the originally receiving thread? If you are actually operating within a web request and still receive this message, your code is probably running outside of DispatcherServlet: In this case, use RequestContextListener or RequestContextFilter to expose the current request.
+	at org.springframework.web.context.request.RequestContextHolder.currentRequestAttributes(RequestContextHolder.java:131)
+	at org.springframework.web.context.support.WebApplicationContextUtils.currentRequestAttributes(WebApplicationContextUtils.java:313)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:329)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:324)
+	at org.springframework.beans.factory.support.AutowireUtils$ObjectFactoryDelegatingInvocationHandler.invoke(AutowireUtils.java:283)
+	at jdk.proxy2/jdk.proxy2.$Proxy154.getHeader(Unknown Source)
+	at com.sistema.pos.config.BitacoraAspect.getClientIp(BitacoraAspect.java:75)
+	at com.sistema.pos.config.BitacoraAspect.BitacoraAction(BitacoraAspect.java:43)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
+	at com.sistema.pos.service.PlanService$$SpringCGLIB$$0.modificarPlan(<generated>)
+	at com.sistema.pos.config.PlanInitializationService.crearPlanSiNoExiste(PlanInitializationService.java:54)
+	at com.sistema.pos.config.PlanInitializationService.initializeData(PlanInitializationService.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.doInvoke(ApplicationListenerMethodAdapter.java:365)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.processEvent(ApplicationListenerMethodAdapter.java:237)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.onApplicationEvent(ApplicationListenerMethodAdapter.java:168)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:452)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:385)
+	at org.springframework.boot.context.event.EventPublishingRunListener.ready(EventPublishingRunListener.java:109)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$ready$6(SpringApplicationRunListeners.java:80)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.ready(SpringApplicationRunListeners.java:80)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:349)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.sistema.pos.SistemaPosBackApplication.main(SistemaPosBackApplication.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-11-04 14:08:48 - Stopping ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:08:48 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:08:48 - HikariPool-1 - Shutdown initiated...
+2024-11-04 14:08:48 - HikariPool-1 - Shutdown completed.
+2024-11-04 14:17:21 - HV000001: Hibernate Validator 8.0.1.Final
+2024-11-04 14:17:21 - Starting SistemaPosBackApplication using Java 21.0.3 with PID 10248 (D:\Proyectos\sistema-pos-back\target\classes started by Diego in D:\Proyectos\sistema-pos-back)
+2024-11-04 14:17:21 - No active profile set, falling back to 1 default profile: "default"
+2024-11-04 14:17:21 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-04 14:17:21 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-04 14:17:22 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-04 14:17:22 - Finished Spring Data repository scanning in 100 ms. Found 17 JPA repository interfaces.
+2024-11-04 14:17:23 - Tomcat initialized with port 8080 (http)
+2024-11-04 14:17:23 - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:17:23 - Starting service [Tomcat]
+2024-11-04 14:17:23 - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-11-04 14:17:23 - Initializing Spring embedded WebApplicationContext
+2024-11-04 14:17:23 - Root WebApplicationContext: initialization completed in 2180 ms
+2024-11-04 14:17:23 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-04 14:17:23 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-11-04 14:17:23 - HHH000026: Second-level cache disabled
+2024-11-04 14:17:24 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-04 14:17:24 - HikariPool-1 - Starting...
+2024-11-04 14:17:24 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@29984b19
+2024-11-04 14:17:24 - HikariPool-1 - Start completed.
+2024-11-04 14:17:25 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-04 14:17:26 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:17:26 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-04 14:17:27 - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-11-04 14:17:27 - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-11-04 14:17:27 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-04 14:17:28 - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2024-11-04 14:17:28 - LiveReload server is running on port 35729
+2024-11-04 14:17:28 - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:17:28 - Tomcat started on port 8080 (http) with context path '/'
+2024-11-04 14:17:28 - Started SistemaPosBackApplication in 7.959 seconds (process running for 8.916)
+2024-11-04 14:17:28 - Application run failed
+java.lang.IllegalStateException: No thread-bound request found: Are you referring to request attributes outside of an actual web request, or processing a request outside of the originally receiving thread? If you are actually operating within a web request and still receive this message, your code is probably running outside of DispatcherServlet: In this case, use RequestContextListener or RequestContextFilter to expose the current request.
+	at org.springframework.web.context.request.RequestContextHolder.currentRequestAttributes(RequestContextHolder.java:131)
+	at org.springframework.web.context.support.WebApplicationContextUtils.currentRequestAttributes(WebApplicationContextUtils.java:313)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:329)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:324)
+	at org.springframework.beans.factory.support.AutowireUtils$ObjectFactoryDelegatingInvocationHandler.invoke(AutowireUtils.java:283)
+	at jdk.proxy2/jdk.proxy2.$Proxy154.getHeader(Unknown Source)
+	at com.sistema.pos.config.BitacoraAspect.getClientIp(BitacoraAspect.java:75)
+	at com.sistema.pos.config.BitacoraAspect.BitacoraAction(BitacoraAspect.java:43)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
+	at com.sistema.pos.service.PlanService$$SpringCGLIB$$0.modificarPlan(<generated>)
+	at com.sistema.pos.config.PlanInitializationService.crearPlanSiNoExiste(PlanInitializationService.java:54)
+	at com.sistema.pos.config.PlanInitializationService.initializeData(PlanInitializationService.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.doInvoke(ApplicationListenerMethodAdapter.java:365)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.processEvent(ApplicationListenerMethodAdapter.java:237)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.onApplicationEvent(ApplicationListenerMethodAdapter.java:168)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:452)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:385)
+	at org.springframework.boot.context.event.EventPublishingRunListener.ready(EventPublishingRunListener.java:109)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$ready$6(SpringApplicationRunListeners.java:80)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.ready(SpringApplicationRunListeners.java:80)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:349)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.sistema.pos.SistemaPosBackApplication.main(SistemaPosBackApplication.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-11-04 14:17:28 - Stopping ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:17:28 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:17:28 - HikariPool-1 - Shutdown initiated...
+2024-11-04 14:17:28 - HikariPool-1 - Shutdown completed.
+2024-11-04 14:30:42 - HV000001: Hibernate Validator 8.0.1.Final
+2024-11-04 14:30:42 - Starting SistemaPosBackApplication using Java 21.0.3 with PID 19620 (D:\Proyectos\sistema-pos-back\target\classes started by Diego in D:\Proyectos\sistema-pos-back)
+2024-11-04 14:30:42 - No active profile set, falling back to 1 default profile: "default"
+2024-11-04 14:30:42 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-04 14:30:42 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-04 14:30:43 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-04 14:30:43 - Finished Spring Data repository scanning in 99 ms. Found 17 JPA repository interfaces.
+2024-11-04 14:30:44 - Tomcat initialized with port 8080 (http)
+2024-11-04 14:30:44 - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:30:44 - Starting service [Tomcat]
+2024-11-04 14:30:44 - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-11-04 14:30:44 - Initializing Spring embedded WebApplicationContext
+2024-11-04 14:30:44 - Root WebApplicationContext: initialization completed in 1965 ms
+2024-11-04 14:30:44 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-04 14:30:45 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-11-04 14:30:45 - HHH000026: Second-level cache disabled
+2024-11-04 14:30:45 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-04 14:30:45 - HikariPool-1 - Starting...
+2024-11-04 14:30:45 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@31f91fa7
+2024-11-04 14:30:45 - HikariPool-1 - Start completed.
+2024-11-04 14:30:47 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-04 14:30:47 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:30:47 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-04 14:30:48 - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-11-04 14:30:48 - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-11-04 14:30:49 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-04 14:30:49 - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2024-11-04 14:30:49 - LiveReload server is running on port 35729
+2024-11-04 14:30:49 - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:30:49 - Tomcat started on port 8080 (http) with context path '/'
+2024-11-04 14:30:49 - Started SistemaPosBackApplication in 7.637 seconds (process running for 8.525)
+2024-11-04 14:30:50 - Application run failed
+java.lang.IllegalStateException: No thread-bound request found: Are you referring to request attributes outside of an actual web request, or processing a request outside of the originally receiving thread? If you are actually operating within a web request and still receive this message, your code is probably running outside of DispatcherServlet: In this case, use RequestContextListener or RequestContextFilter to expose the current request.
+	at org.springframework.web.context.request.RequestContextHolder.currentRequestAttributes(RequestContextHolder.java:131)
+	at org.springframework.web.context.support.WebApplicationContextUtils.currentRequestAttributes(WebApplicationContextUtils.java:313)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:329)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:324)
+	at org.springframework.beans.factory.support.AutowireUtils$ObjectFactoryDelegatingInvocationHandler.invoke(AutowireUtils.java:283)
+	at jdk.proxy2/jdk.proxy2.$Proxy154.getHeader(Unknown Source)
+	at com.sistema.pos.config.BitacoraAspect.getClientIp(BitacoraAspect.java:75)
+	at com.sistema.pos.config.BitacoraAspect.BitacoraAction(BitacoraAspect.java:43)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
+	at com.sistema.pos.service.PlanService$$SpringCGLIB$$0.modificarPlan(<generated>)
+	at com.sistema.pos.config.PlanInitializationService.crearPlanSiNoExiste(PlanInitializationService.java:54)
+	at com.sistema.pos.config.PlanInitializationService.initializeData(PlanInitializationService.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.doInvoke(ApplicationListenerMethodAdapter.java:365)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.processEvent(ApplicationListenerMethodAdapter.java:237)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.onApplicationEvent(ApplicationListenerMethodAdapter.java:168)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:452)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:385)
+	at org.springframework.boot.context.event.EventPublishingRunListener.ready(EventPublishingRunListener.java:109)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$ready$6(SpringApplicationRunListeners.java:80)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.ready(SpringApplicationRunListeners.java:80)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:349)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.sistema.pos.SistemaPosBackApplication.main(SistemaPosBackApplication.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-11-04 14:30:50 - Stopping ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:30:50 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:30:50 - HikariPool-1 - Shutdown initiated...
+2024-11-04 14:30:50 - HikariPool-1 - Shutdown completed.
+2024-11-04 14:37:03 - HV000001: Hibernate Validator 8.0.1.Final
+2024-11-04 14:37:03 - Starting SistemaPosBackApplication using Java 21.0.3 with PID 4092 (D:\Proyectos\sistema-pos-back\target\classes started by Diego in D:\Proyectos\sistema-pos-back)
+2024-11-04 14:37:03 - No active profile set, falling back to 1 default profile: "default"
+2024-11-04 14:37:03 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-04 14:37:03 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-04 14:37:04 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-04 14:37:04 - Finished Spring Data repository scanning in 93 ms. Found 17 JPA repository interfaces.
+2024-11-04 14:37:05 - Tomcat initialized with port 8080 (http)
+2024-11-04 14:37:05 - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:37:05 - Starting service [Tomcat]
+2024-11-04 14:37:05 - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-11-04 14:37:05 - Initializing Spring embedded WebApplicationContext
+2024-11-04 14:37:05 - Root WebApplicationContext: initialization completed in 1857 ms
+2024-11-04 14:37:05 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-04 14:37:05 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-11-04 14:37:06 - HHH000026: Second-level cache disabled
+2024-11-04 14:37:06 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-04 14:37:06 - HikariPool-1 - Starting...
+2024-11-04 14:37:06 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@153d57c1
+2024-11-04 14:37:06 - HikariPool-1 - Start completed.
+2024-11-04 14:37:07 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-04 14:37:08 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:37:08 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-04 14:37:09 - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-11-04 14:37:09 - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-11-04 14:37:10 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-04 14:37:10 - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2024-11-04 14:37:10 - LiveReload server is running on port 35729
+2024-11-04 14:37:10 - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:37:10 - Tomcat started on port 8080 (http) with context path '/'
+2024-11-04 14:37:10 - Started SistemaPosBackApplication in 7.608 seconds (process running for 8.595)
+2024-11-04 14:37:20 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-04 14:37:20 - Initializing Servlet 'dispatcherServlet'
+2024-11-04 14:37:20 - Completed initialization in 1 ms
+2024-11-04 14:37:20 - Securing GET /pos/plan
+2024-11-04 14:37:20 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:37:20 - Secured GET /pos/plan
+2024-11-04 14:37:42 - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-11-04 14:37:42 - Stopping ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:37:42 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:37:42 - HikariPool-1 - Shutdown initiated...
+2024-11-04 14:37:42 - HikariPool-1 - Shutdown completed.
+2024-11-04 14:37:42 - Starting SistemaPosBackApplication using Java 21.0.3 with PID 4092 (D:\Proyectos\sistema-pos-back\target\classes started by Diego in D:\Proyectos\sistema-pos-back)
+2024-11-04 14:37:42 - No active profile set, falling back to 1 default profile: "default"
+2024-11-04 14:37:42 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-04 14:37:42 - Finished Spring Data repository scanning in 46 ms. Found 17 JPA repository interfaces.
+2024-11-04 14:37:43 - Tomcat initialized with port 8080 (http)
+2024-11-04 14:37:43 - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:37:43 - Starting service [Tomcat]
+2024-11-04 14:37:43 - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-11-04 14:37:43 - Initializing Spring embedded WebApplicationContext
+2024-11-04 14:37:43 - Root WebApplicationContext: initialization completed in 636 ms
+2024-11-04 14:37:43 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-04 14:37:43 - HHH000026: Second-level cache disabled
+2024-11-04 14:37:43 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-04 14:37:43 - HikariPool-2 - Starting...
+2024-11-04 14:37:43 - HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@4d95e211
+2024-11-04 14:37:43 - HikariPool-2 - Start completed.
+2024-11-04 14:37:43 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-04 14:37:44 - SQL Warning Code: 0, SQLState: 00000
+2024-11-04 14:37:44 - no existe la restricción «uk35t4wyxqrevf09uwx9e9p6o75» en la relación «categoria», omitiendo
+2024-11-04 14:37:44 - SQL Warning Code: 0, SQLState: 00000
+2024-11-04 14:37:44 - no existe la restricción «ukcmxo70m08n43599l3h0h07cc6» en la relación «cliente», omitiendo
+2024-11-04 14:37:44 - SQL Warning Code: 0, SQLState: 00000
+2024-11-04 14:37:44 - no existe la restricción «ukou6oi9246xevkpv4u4r0jge2t» en la relación «proveedor», omitiendo
+2024-11-04 14:37:44 - SQL Warning Code: 0, SQLState: 00000
+2024-11-04 14:37:44 - no existe la restricción «ukbe1x49uyenphs83woddpgtplm» en la relación «suscriptor», omitiendo
+2024-11-04 14:37:44 - SQL Warning Code: 0, SQLState: 00000
+2024-11-04 14:37:44 - no existe la restricción «ukduyovd3j8y9777ydfbjafoc1e» en la relación «tarjeta», omitiendo
+2024-11-04 14:37:44 - SQL Warning Code: 0, SQLState: 00000
+2024-11-04 14:37:44 - no existe la restricción «uk3eeqwp9jxas8mst3yha8k8qig» en la relación «tarjeta», omitiendo
+2024-11-04 14:37:44 - SQL Warning Code: 0, SQLState: 00000
+2024-11-04 14:37:44 - no existe la restricción «uk5171l57faosmj8myawaucatdw» en la relación «usuario», omitiendo
+2024-11-04 14:37:44 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:37:44 - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-11-04 14:37:44 - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-11-04 14:37:44 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-04 14:37:45 - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2024-11-04 14:37:45 - LiveReload server is running on port 35729
+2024-11-04 14:37:45 - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:37:45 - Tomcat started on port 8080 (http) with context path '/'
+2024-11-04 14:37:45 - Started SistemaPosBackApplication in 2.865 seconds (process running for 42.943)
+2024-11-04 14:37:45 - Condition evaluation unchanged
+2024-11-04 14:37:52 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-04 14:37:52 - Initializing Servlet 'dispatcherServlet'
+2024-11-04 14:37:52 - Completed initialization in 0 ms
+2024-11-04 14:37:52 - Securing GET /pos/plan
+2024-11-04 14:37:52 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:37:52 - Secured GET /pos/plan
+2024-11-04 14:37:52 - Securing GET /pos/plan
+2024-11-04 14:37:52 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:37:52 - Secured GET /pos/plan
+2024-11-04 14:37:56 - Securing GET /pos/plan
+2024-11-04 14:37:56 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:37:56 - Secured GET /pos/plan
+2024-11-04 14:37:56 - Securing GET /pos/plan
+2024-11-04 14:37:56 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:37:56 - Secured GET /pos/plan
+2024-11-04 14:38:01 - Securing GET /pos/plan
+2024-11-04 14:38:01 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:38:01 - Secured GET /pos/plan
+2024-11-04 14:38:01 - Securing GET /pos/plan
+2024-11-04 14:38:01 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:38:01 - Secured GET /pos/plan
+2024-11-04 14:38:20 - Securing OPTIONS /pos/suscriptor/crear
+2024-11-04 14:38:20 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:38:20 - Secured OPTIONS /pos/suscriptor/crear
+2024-11-04 14:38:20 - Securing POST /pos/suscriptor/crear
+2024-11-04 14:38:20 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:38:20 - Secured POST /pos/suscriptor/crear
+2024-11-04 14:38:25 - Securing OPTIONS /pos/auth/login
+2024-11-04 14:38:25 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:38:25 - Secured OPTIONS /pos/auth/login
+2024-11-04 14:38:25 - Securing POST /pos/auth/login
+2024-11-04 14:38:25 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:38:25 - Secured POST /pos/auth/login
+2024-11-04 14:38:25 - Authenticated user
+2024-11-04 14:38:27 - Securing OPTIONS /pos/cliente
+2024-11-04 14:38:27 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:38:27 - Securing OPTIONS /pos/cliente
+2024-11-04 14:38:27 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:38:27 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 14:38:27 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 14:38:27 - Securing OPTIONS /error
+2024-11-04 14:38:27 - Securing OPTIONS /error
+2024-11-04 14:38:27 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:38:27 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 14:38:27 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:38:27 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 14:38:27 - Securing OPTIONS /pos/proveedor
+2024-11-04 14:38:27 - Securing OPTIONS /pos/proveedor
+2024-11-04 14:38:27 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:38:27 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:38:27 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 14:38:27 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 14:38:27 - Securing OPTIONS /error
+2024-11-04 14:38:27 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:38:27 - Securing OPTIONS /error
+2024-11-04 14:38:27 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 14:38:27 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:38:27 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 14:40:39 - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-11-04 14:40:39 - Stopping ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:40:39 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:40:39 - HikariPool-2 - Shutdown initiated...
+2024-11-04 14:40:39 - HikariPool-2 - Shutdown completed.
+2024-11-04 14:40:39 - Starting SistemaPosBackApplication using Java 21.0.3 with PID 4092 (D:\Proyectos\sistema-pos-back\target\classes started by Diego in D:\Proyectos\sistema-pos-back)
+2024-11-04 14:40:39 - No active profile set, falling back to 1 default profile: "default"
+2024-11-04 14:40:39 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-04 14:40:39 - Finished Spring Data repository scanning in 37 ms. Found 17 JPA repository interfaces.
+2024-11-04 14:40:39 - Tomcat initialized with port 8080 (http)
+2024-11-04 14:40:39 - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:40:39 - Starting service [Tomcat]
+2024-11-04 14:40:39 - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-11-04 14:40:39 - Initializing Spring embedded WebApplicationContext
+2024-11-04 14:40:39 - Root WebApplicationContext: initialization completed in 542 ms
+2024-11-04 14:40:39 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-04 14:40:39 - HHH000026: Second-level cache disabled
+2024-11-04 14:40:39 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-04 14:40:39 - HikariPool-3 - Starting...
+2024-11-04 14:40:40 - HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@66379cd7
+2024-11-04 14:40:40 - HikariPool-3 - Start completed.
+2024-11-04 14:40:40 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-04 14:40:40 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:40:41 - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-11-04 14:40:41 - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-11-04 14:40:41 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-04 14:40:41 - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2024-11-04 14:40:41 - LiveReload server is running on port 35729
+2024-11-04 14:40:41 - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:40:41 - Tomcat started on port 8080 (http) with context path '/'
+2024-11-04 14:40:41 - Started SistemaPosBackApplication in 2.459 seconds (process running for 219.408)
+2024-11-04 14:40:41 - Condition evaluation unchanged
+2024-11-04 14:40:41 - Application run failed
+java.lang.IllegalStateException: No thread-bound request found: Are you referring to request attributes outside of an actual web request, or processing a request outside of the originally receiving thread? If you are actually operating within a web request and still receive this message, your code is probably running outside of DispatcherServlet: In this case, use RequestContextListener or RequestContextFilter to expose the current request.
+	at org.springframework.web.context.request.RequestContextHolder.currentRequestAttributes(RequestContextHolder.java:131)
+	at org.springframework.web.context.support.WebApplicationContextUtils.currentRequestAttributes(WebApplicationContextUtils.java:313)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:329)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:324)
+	at org.springframework.beans.factory.support.AutowireUtils$ObjectFactoryDelegatingInvocationHandler.invoke(AutowireUtils.java:283)
+	at jdk.proxy2/jdk.proxy2.$Proxy154.getHeader(Unknown Source)
+	at com.sistema.pos.config.BitacoraAspect.getClientIp(BitacoraAspect.java:75)
+	at com.sistema.pos.config.BitacoraAspect.BitacoraAction(BitacoraAspect.java:43)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
+	at com.sistema.pos.service.PlanService$$SpringCGLIB$$0.modificarPlan(<generated>)
+	at com.sistema.pos.config.PlanInitializationService.crearPlanSiNoExiste(PlanInitializationService.java:54)
+	at com.sistema.pos.config.PlanInitializationService.initializeData(PlanInitializationService.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.doInvoke(ApplicationListenerMethodAdapter.java:365)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.processEvent(ApplicationListenerMethodAdapter.java:237)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.onApplicationEvent(ApplicationListenerMethodAdapter.java:168)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:452)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:385)
+	at org.springframework.boot.context.event.EventPublishingRunListener.ready(EventPublishingRunListener.java:109)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$ready$6(SpringApplicationRunListeners.java:80)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.ready(SpringApplicationRunListeners.java:80)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:349)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.sistema.pos.SistemaPosBackApplication.main(SistemaPosBackApplication.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-11-04 14:40:41 - Stopping ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:40:41 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:40:41 - HikariPool-3 - Shutdown initiated...
+2024-11-04 14:40:41 - HikariPool-3 - Shutdown completed.
+2024-11-04 14:42:16 - Starting SistemaPosBackApplication using Java 21.0.3 with PID 4092 (D:\Proyectos\sistema-pos-back\target\classes started by Diego in D:\Proyectos\sistema-pos-back)
+2024-11-04 14:42:16 - No active profile set, falling back to 1 default profile: "default"
+2024-11-04 14:42:16 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-04 14:42:16 - Finished Spring Data repository scanning in 88 ms. Found 17 JPA repository interfaces.
+2024-11-04 14:42:16 - Tomcat initialized with port 8080 (http)
+2024-11-04 14:42:16 - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:42:16 - Starting service [Tomcat]
+2024-11-04 14:42:16 - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-11-04 14:42:16 - Initializing Spring embedded WebApplicationContext
+2024-11-04 14:42:16 - Root WebApplicationContext: initialization completed in 559 ms
+2024-11-04 14:42:16 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-04 14:42:16 - HHH000026: Second-level cache disabled
+2024-11-04 14:42:16 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-04 14:42:16 - HikariPool-4 - Starting...
+2024-11-04 14:42:16 - HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@19432a29
+2024-11-04 14:42:16 - HikariPool-4 - Start completed.
+2024-11-04 14:42:17 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-04 14:42:17 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:42:17 - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-11-04 14:42:17 - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-11-04 14:42:18 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-04 14:42:18 - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2024-11-04 14:42:18 - LiveReload server is running on port 35729
+2024-11-04 14:42:18 - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:42:18 - Tomcat started on port 8080 (http) with context path '/'
+2024-11-04 14:42:18 - Started SistemaPosBackApplication in 2.432 seconds (process running for 316.251)
+2024-11-04 14:42:18 - Condition evaluation unchanged
+2024-11-04 14:42:18 - Application run failed
+java.lang.IllegalStateException: No thread-bound request found: Are you referring to request attributes outside of an actual web request, or processing a request outside of the originally receiving thread? If you are actually operating within a web request and still receive this message, your code is probably running outside of DispatcherServlet: In this case, use RequestContextListener or RequestContextFilter to expose the current request.
+	at org.springframework.web.context.request.RequestContextHolder.currentRequestAttributes(RequestContextHolder.java:131)
+	at org.springframework.web.context.support.WebApplicationContextUtils.currentRequestAttributes(WebApplicationContextUtils.java:313)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:329)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:324)
+	at org.springframework.beans.factory.support.AutowireUtils$ObjectFactoryDelegatingInvocationHandler.invoke(AutowireUtils.java:283)
+	at jdk.proxy2/jdk.proxy2.$Proxy154.getHeader(Unknown Source)
+	at com.sistema.pos.config.BitacoraAspect.getClientIp(BitacoraAspect.java:75)
+	at com.sistema.pos.config.BitacoraAspect.BitacoraAction(BitacoraAspect.java:43)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
+	at com.sistema.pos.service.PlanService$$SpringCGLIB$$0.modificarPlan(<generated>)
+	at com.sistema.pos.config.PlanInitializationService.crearPlanSiNoExiste(PlanInitializationService.java:54)
+	at com.sistema.pos.config.PlanInitializationService.initializeData(PlanInitializationService.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.doInvoke(ApplicationListenerMethodAdapter.java:365)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.processEvent(ApplicationListenerMethodAdapter.java:237)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.onApplicationEvent(ApplicationListenerMethodAdapter.java:168)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:452)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:385)
+	at org.springframework.boot.context.event.EventPublishingRunListener.ready(EventPublishingRunListener.java:109)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$ready$6(SpringApplicationRunListeners.java:80)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.ready(SpringApplicationRunListeners.java:80)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:349)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.sistema.pos.SistemaPosBackApplication.main(SistemaPosBackApplication.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-11-04 14:42:18 - Stopping ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:42:18 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:42:18 - HikariPool-4 - Shutdown initiated...
+2024-11-04 14:42:18 - HikariPool-4 - Shutdown completed.
+2024-11-04 14:42:34 - Starting SistemaPosBackApplication using Java 21.0.3 with PID 4092 (D:\Proyectos\sistema-pos-back\target\classes started by Diego in D:\Proyectos\sistema-pos-back)
+2024-11-04 14:42:34 - No active profile set, falling back to 1 default profile: "default"
+2024-11-04 14:42:34 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-04 14:42:34 - Finished Spring Data repository scanning in 46 ms. Found 17 JPA repository interfaces.
+2024-11-04 14:42:34 - Tomcat initialized with port 8080 (http)
+2024-11-04 14:42:34 - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:42:34 - Starting service [Tomcat]
+2024-11-04 14:42:34 - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-11-04 14:42:34 - Initializing Spring embedded WebApplicationContext
+2024-11-04 14:42:34 - Root WebApplicationContext: initialization completed in 534 ms
+2024-11-04 14:42:34 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-04 14:42:34 - HHH000026: Second-level cache disabled
+2024-11-04 14:42:34 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-04 14:42:34 - HikariPool-5 - Starting...
+2024-11-04 14:42:34 - HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@689cefb8
+2024-11-04 14:42:34 - HikariPool-5 - Start completed.
+2024-11-04 14:42:35 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-04 14:42:35 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:42:36 - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-11-04 14:42:36 - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-11-04 14:42:36 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-04 14:42:36 - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2024-11-04 14:42:36 - LiveReload server is running on port 35729
+2024-11-04 14:42:36 - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:42:36 - Tomcat started on port 8080 (http) with context path '/'
+2024-11-04 14:42:36 - Started SistemaPosBackApplication in 2.275 seconds (process running for 334.182)
+2024-11-04 14:42:36 - Condition evaluation unchanged
+2024-11-04 14:42:36 - Application run failed
+java.lang.IllegalStateException: No thread-bound request found: Are you referring to request attributes outside of an actual web request, or processing a request outside of the originally receiving thread? If you are actually operating within a web request and still receive this message, your code is probably running outside of DispatcherServlet: In this case, use RequestContextListener or RequestContextFilter to expose the current request.
+	at org.springframework.web.context.request.RequestContextHolder.currentRequestAttributes(RequestContextHolder.java:131)
+	at org.springframework.web.context.support.WebApplicationContextUtils.currentRequestAttributes(WebApplicationContextUtils.java:313)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:329)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:324)
+	at org.springframework.beans.factory.support.AutowireUtils$ObjectFactoryDelegatingInvocationHandler.invoke(AutowireUtils.java:283)
+	at jdk.proxy2/jdk.proxy2.$Proxy154.getHeader(Unknown Source)
+	at com.sistema.pos.config.BitacoraAspect.getClientIp(BitacoraAspect.java:75)
+	at com.sistema.pos.config.BitacoraAspect.BitacoraAction(BitacoraAspect.java:43)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
+	at com.sistema.pos.service.PlanService$$SpringCGLIB$$0.modificarPlan(<generated>)
+	at com.sistema.pos.config.PlanInitializationService.crearPlanSiNoExiste(PlanInitializationService.java:54)
+	at com.sistema.pos.config.PlanInitializationService.initializeData(PlanInitializationService.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.doInvoke(ApplicationListenerMethodAdapter.java:365)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.processEvent(ApplicationListenerMethodAdapter.java:237)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.onApplicationEvent(ApplicationListenerMethodAdapter.java:168)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:452)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:385)
+	at org.springframework.boot.context.event.EventPublishingRunListener.ready(EventPublishingRunListener.java:109)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$ready$6(SpringApplicationRunListeners.java:80)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.ready(SpringApplicationRunListeners.java:80)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:349)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.sistema.pos.SistemaPosBackApplication.main(SistemaPosBackApplication.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-11-04 14:42:36 - Stopping ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:42:36 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:42:36 - HikariPool-5 - Shutdown initiated...
+2024-11-04 14:42:36 - HikariPool-5 - Shutdown completed.
+2024-11-04 14:42:58 - Starting SistemaPosBackApplication using Java 21.0.3 with PID 4092 (D:\Proyectos\sistema-pos-back\target\classes started by Diego in D:\Proyectos\sistema-pos-back)
+2024-11-04 14:42:58 - No active profile set, falling back to 1 default profile: "default"
+2024-11-04 14:42:58 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-04 14:42:58 - Finished Spring Data repository scanning in 44 ms. Found 17 JPA repository interfaces.
+2024-11-04 14:42:58 - Tomcat initialized with port 8080 (http)
+2024-11-04 14:42:58 - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:42:58 - Starting service [Tomcat]
+2024-11-04 14:42:58 - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-11-04 14:42:58 - Initializing Spring embedded WebApplicationContext
+2024-11-04 14:42:58 - Root WebApplicationContext: initialization completed in 499 ms
+2024-11-04 14:42:59 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-04 14:42:59 - HHH000026: Second-level cache disabled
+2024-11-04 14:42:59 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-04 14:42:59 - HikariPool-6 - Starting...
+2024-11-04 14:42:59 - HikariPool-6 - Added connection org.postgresql.jdbc.PgConnection@6e9fbad2
+2024-11-04 14:42:59 - HikariPool-6 - Start completed.
+2024-11-04 14:42:59 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-04 14:42:59 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:43:00 - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-11-04 14:43:00 - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-11-04 14:43:00 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-04 14:43:00 - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2024-11-04 14:43:00 - LiveReload server is running on port 35729
+2024-11-04 14:43:00 - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:43:00 - Tomcat started on port 8080 (http) with context path '/'
+2024-11-04 14:43:00 - Started SistemaPosBackApplication in 2.357 seconds (process running for 358.404)
+2024-11-04 14:43:00 - Condition evaluation unchanged
+2024-11-04 14:43:00 - Application run failed
+java.lang.IllegalStateException: No thread-bound request found: Are you referring to request attributes outside of an actual web request, or processing a request outside of the originally receiving thread? If you are actually operating within a web request and still receive this message, your code is probably running outside of DispatcherServlet: In this case, use RequestContextListener or RequestContextFilter to expose the current request.
+	at org.springframework.web.context.request.RequestContextHolder.currentRequestAttributes(RequestContextHolder.java:131)
+	at org.springframework.web.context.support.WebApplicationContextUtils.currentRequestAttributes(WebApplicationContextUtils.java:313)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:329)
+	at org.springframework.web.context.support.WebApplicationContextUtils$RequestObjectFactory.getObject(WebApplicationContextUtils.java:324)
+	at org.springframework.beans.factory.support.AutowireUtils$ObjectFactoryDelegatingInvocationHandler.invoke(AutowireUtils.java:283)
+	at jdk.proxy2/jdk.proxy2.$Proxy154.getHeader(Unknown Source)
+	at com.sistema.pos.config.BitacoraAspect.getClientIp(BitacoraAspect.java:75)
+	at com.sistema.pos.config.BitacoraAspect.BitacoraAction(BitacoraAspect.java:43)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:637)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:71)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:173)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:379)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:768)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:720)
+	at com.sistema.pos.service.PlanService$$SpringCGLIB$$0.modificarPlan(<generated>)
+	at com.sistema.pos.config.PlanInitializationService.crearPlanSiNoExiste(PlanInitializationService.java:54)
+	at com.sistema.pos.config.PlanInitializationService.initializeData(PlanInitializationService.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.doInvoke(ApplicationListenerMethodAdapter.java:365)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.processEvent(ApplicationListenerMethodAdapter.java:237)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.onApplicationEvent(ApplicationListenerMethodAdapter.java:168)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:452)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:385)
+	at org.springframework.boot.context.event.EventPublishingRunListener.ready(EventPublishingRunListener.java:109)
+	at org.springframework.boot.SpringApplicationRunListeners.lambda$ready$6(SpringApplicationRunListeners.java:80)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:118)
+	at org.springframework.boot.SpringApplicationRunListeners.doWithListeners(SpringApplicationRunListeners.java:112)
+	at org.springframework.boot.SpringApplicationRunListeners.ready(SpringApplicationRunListeners.java:80)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:349)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at com.sistema.pos.SistemaPosBackApplication.main(SistemaPosBackApplication.java:17)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+2024-11-04 14:43:00 - Stopping ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:43:00 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:43:00 - HikariPool-6 - Shutdown initiated...
+2024-11-04 14:43:00 - HikariPool-6 - Shutdown completed.
+2024-11-04 14:44:08 - Starting SistemaPosBackApplication using Java 21.0.3 with PID 4092 (D:\Proyectos\sistema-pos-back\target\classes started by Diego in D:\Proyectos\sistema-pos-back)
+2024-11-04 14:44:08 - No active profile set, falling back to 1 default profile: "default"
+2024-11-04 14:44:09 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-04 14:44:09 - Finished Spring Data repository scanning in 55 ms. Found 17 JPA repository interfaces.
+2024-11-04 14:44:09 - Tomcat initialized with port 8080 (http)
+2024-11-04 14:44:09 - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:44:09 - Starting service [Tomcat]
+2024-11-04 14:44:09 - Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-11-04 14:44:09 - Initializing Spring embedded WebApplicationContext
+2024-11-04 14:44:09 - Root WebApplicationContext: initialization completed in 499 ms
+2024-11-04 14:44:09 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-04 14:44:09 - HHH000026: Second-level cache disabled
+2024-11-04 14:44:09 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-04 14:44:09 - HikariPool-7 - Starting...
+2024-11-04 14:44:09 - HikariPool-7 - Added connection org.postgresql.jdbc.PgConnection@7650960d
+2024-11-04 14:44:09 - HikariPool-7 - Start completed.
+2024-11-04 14:44:09 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-04 14:44:10 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 14:44:10 - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-11-04 14:44:10 - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-11-04 14:44:10 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-04 14:44:11 - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2024-11-04 14:44:11 - LiveReload server is running on port 35729
+2024-11-04 14:44:11 - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-04 14:44:11 - Tomcat started on port 8080 (http) with context path '/'
+2024-11-04 14:44:11 - Started SistemaPosBackApplication in 2.477 seconds (process running for 428.981)
+2024-11-04 14:44:11 - Condition evaluation unchanged
+2024-11-04 14:44:14 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-04 14:44:14 - Initializing Servlet 'dispatcherServlet'
+2024-11-04 14:44:14 - Completed initialization in 1 ms
+2024-11-04 14:44:14 - Securing GET /pos/plan
+2024-11-04 14:44:14 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:44:14 - Secured GET /pos/plan
+2024-11-04 14:47:22 - Securing GET /pos/plan
+2024-11-04 14:47:22 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:47:22 - Secured GET /pos/plan
+2024-11-04 14:47:22 - Securing GET /pos/plan
+2024-11-04 14:47:22 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:47:22 - Secured GET /pos/plan
+2024-11-04 14:48:24 - Securing POST /pos/auth/login
+2024-11-04 14:48:24 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:48:24 - Secured POST /pos/auth/login
+2024-11-04 14:48:24 - Failed to find user 'admin@gmail.com'
+2024-11-04 14:48:24 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 14:48:24 - Securing POST /error
+2024-11-04 14:48:24 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:48:24 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 14:48:30 - Securing POST /pos/auth/login
+2024-11-04 14:48:30 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:48:30 - Secured POST /pos/auth/login
+2024-11-04 14:48:30 - Failed to find user 'admin@gmail.com'
+2024-11-04 14:48:30 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 14:48:30 - Securing POST /error
+2024-11-04 14:48:30 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:48:30 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 14:48:31 - Securing GET /pos/plan
+2024-11-04 14:48:31 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:48:31 - Secured GET /pos/plan
+2024-11-04 14:48:32 - Securing GET /pos/plan
+2024-11-04 14:48:32 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:48:32 - Secured GET /pos/plan
+2024-11-04 14:48:36 - Securing POST /pos/suscriptor/crear
+2024-11-04 14:48:36 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:48:36 - Secured POST /pos/suscriptor/crear
+2024-11-04 14:48:44 - Securing POST /pos/auth/login
+2024-11-04 14:48:44 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:48:44 - Secured POST /pos/auth/login
+2024-11-04 14:48:44 - Authenticated user
+2024-11-04 14:51:57 - Securing OPTIONS /pos/auth/me
+2024-11-04 14:51:57 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:51:57 - Secured OPTIONS /pos/auth/me
+2024-11-04 14:51:57 - Securing GET /pos/auth/me
+2024-11-04 14:51:57 - Secured GET /pos/auth/me
+2024-11-04 14:51:57 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 14:51:57 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 14:55:44 - Securing OPTIONS /pos/cliente
+2024-11-04 14:55:44 - Securing OPTIONS /pos/cliente
+2024-11-04 14:55:44 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:55:44 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:55:44 - Secured OPTIONS /pos/cliente
+2024-11-04 14:55:44 - Secured OPTIONS /pos/cliente
+2024-11-04 14:55:44 - Securing GET /pos/cliente
+2024-11-04 14:55:44 - Secured GET /pos/cliente
+2024-11-04 14:55:44 - Securing GET /pos/cliente
+2024-11-04 14:55:44 - Secured GET /pos/cliente
+2024-11-04 14:55:47 - Securing OPTIONS /pos/plan
+2024-11-04 14:55:47 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:55:47 - Secured OPTIONS /pos/plan
+2024-11-04 14:55:47 - Securing OPTIONS /pos/plan
+2024-11-04 14:55:47 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:55:47 - Secured OPTIONS /pos/plan
+2024-11-04 14:55:47 - Securing GET /pos/plan
+2024-11-04 14:55:47 - Secured GET /pos/plan
+2024-11-04 14:55:47 - Securing GET /pos/plan
+2024-11-04 14:55:47 - Secured GET /pos/plan
+2024-11-04 14:55:56 - Securing GET /pos/plan
+2024-11-04 14:55:56 - Secured GET /pos/plan
+2024-11-04 14:55:56 - Securing GET /pos/plan
+2024-11-04 14:55:56 - Secured GET /pos/plan
+2024-11-04 14:56:01 - Securing OPTIONS /pos/sucursal
+2024-11-04 14:56:01 - Securing OPTIONS /pos/sucursal
+2024-11-04 14:56:01 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:56:01 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:56:01 - Secured OPTIONS /pos/sucursal
+2024-11-04 14:56:01 - Secured OPTIONS /pos/sucursal
+2024-11-04 14:56:01 - Securing GET /pos/sucursal
+2024-11-04 14:56:01 - Secured GET /pos/sucursal
+2024-11-04 14:56:01 - Securing GET /pos/sucursal
+2024-11-04 14:56:01 - Secured GET /pos/sucursal
+2024-11-04 14:56:04 - Securing GET /pos/cliente
+2024-11-04 14:56:04 - Secured GET /pos/cliente
+2024-11-04 14:56:04 - Securing GET /pos/cliente
+2024-11-04 14:56:04 - Secured GET /pos/cliente
+2024-11-04 14:56:07 - Securing GET /pos/plan
+2024-11-04 14:56:07 - Secured GET /pos/plan
+2024-11-04 14:56:07 - Securing GET /pos/plan
+2024-11-04 14:56:07 - Secured GET /pos/plan
+2024-11-04 14:59:16 - Securing POST /pos/auth/login
+2024-11-04 14:59:16 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 14:59:16 - Secured POST /pos/auth/login
+2024-11-04 14:59:16 - Authenticated user
+2024-11-04 14:59:22 - Securing GET /pos/auth/me
+2024-11-04 14:59:22 - Secured GET /pos/auth/me
+2024-11-04 14:59:22 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 14:59:22 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 14:59:22 - Securing GET /pos/auth/me
+2024-11-04 14:59:22 - Secured GET /pos/auth/me
+2024-11-04 14:59:22 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 14:59:22 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 14:59:43 - Securing GET /pos/auth/me
+2024-11-04 14:59:43 - Secured GET /pos/auth/me
+2024-11-04 14:59:43 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 14:59:43 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 14:59:43 - Securing GET /pos/auth/me
+2024-11-04 14:59:43 - Secured GET /pos/auth/me
+2024-11-04 14:59:43 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 14:59:43 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:01:28 - Securing GET /pos/auth/me
+2024-11-04 15:01:28 - Secured GET /pos/auth/me
+2024-11-04 15:01:28 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:01:28 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:01:28 - Securing GET /pos/auth/me
+2024-11-04 15:01:28 - Secured GET /pos/auth/me
+2024-11-04 15:01:28 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:01:28 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:01:35 - Securing POST /pos/auth/login
+2024-11-04 15:01:35 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:01:35 - Secured POST /pos/auth/login
+2024-11-04 15:01:35 - Authenticated user
+2024-11-04 15:01:39 - Securing GET /pos/auth/me
+2024-11-04 15:01:39 - Secured GET /pos/auth/me
+2024-11-04 15:01:39 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:01:39 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:01:39 - Securing GET /pos/auth/me
+2024-11-04 15:01:39 - Secured GET /pos/auth/me
+2024-11-04 15:01:39 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:01:39 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:01:42 - Securing GET /pos/cliente
+2024-11-04 15:01:42 - Secured GET /pos/cliente
+2024-11-04 15:01:42 - Securing GET /pos/cliente
+2024-11-04 15:01:42 - Secured GET /pos/cliente
+2024-11-04 15:02:32 - Securing GET /pos/auth/me
+2024-11-04 15:02:32 - Secured GET /pos/auth/me
+2024-11-04 15:02:32 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:02:32 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:04:56 - Securing GET /pos/cliente
+2024-11-04 15:04:56 - Securing GET /pos/auth/me
+2024-11-04 15:04:56 - Secured GET /pos/cliente
+2024-11-04 15:04:56 - Securing GET /pos/cliente
+2024-11-04 15:04:57 - Secured GET /pos/auth/me
+2024-11-04 15:04:57 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:04:57 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:04:57 - Secured GET /pos/cliente
+2024-11-04 15:04:57 - Securing GET /pos/auth/me
+2024-11-04 15:04:57 - Secured GET /pos/auth/me
+2024-11-04 15:04:57 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:04:57 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:05:42 - Securing GET /pos/cliente
+2024-11-04 15:05:42 - Securing GET /pos/auth/me
+2024-11-04 15:05:42 - Secured GET /pos/cliente
+2024-11-04 15:05:42 - Secured GET /pos/auth/me
+2024-11-04 15:05:42 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:05:42 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:05:42 - Securing GET /pos/cliente
+2024-11-04 15:05:42 - Securing GET /pos/auth/me
+2024-11-04 15:05:42 - Secured GET /pos/cliente
+2024-11-04 15:05:42 - Secured GET /pos/auth/me
+2024-11-04 15:05:42 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:05:42 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:05:49 - Securing GET /pos/cliente
+2024-11-04 15:05:49 - Securing GET /pos/auth/me
+2024-11-04 15:05:49 - Secured GET /pos/cliente
+2024-11-04 15:05:49 - Secured GET /pos/auth/me
+2024-11-04 15:05:49 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:05:49 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:05:49 - Securing GET /pos/cliente
+2024-11-04 15:05:49 - Securing GET /pos/auth/me
+2024-11-04 15:05:49 - Secured GET /pos/cliente
+2024-11-04 15:05:49 - Secured GET /pos/auth/me
+2024-11-04 15:05:49 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:05:49 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:05:55 - Securing POST /pos/auth/login
+2024-11-04 15:05:55 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:05:55 - Secured POST /pos/auth/login
+2024-11-04 15:05:56 - Authenticated user
+2024-11-04 15:06:00 - Securing GET /pos/auth/me
+2024-11-04 15:06:00 - Secured GET /pos/auth/me
+2024-11-04 15:06:00 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:06:00 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:06:00 - Securing GET /pos/auth/me
+2024-11-04 15:06:00 - Secured GET /pos/auth/me
+2024-11-04 15:06:00 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:06:00 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:06:35 - Securing POST /pos/auth/login
+2024-11-04 15:06:35 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:06:35 - Secured POST /pos/auth/login
+2024-11-04 15:06:35 - Authenticated user
+2024-11-04 15:06:39 - Securing GET /pos/auth/me
+2024-11-04 15:06:39 - Secured GET /pos/auth/me
+2024-11-04 15:06:39 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:06:39 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:06:39 - Securing GET /pos/auth/me
+2024-11-04 15:06:39 - Secured GET /pos/auth/me
+2024-11-04 15:06:39 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:06:39 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:07:43 - Securing GET /pos/cliente
+2024-11-04 15:07:43 - Secured GET /pos/cliente
+2024-11-04 15:07:43 - Securing GET /pos/cliente
+2024-11-04 15:07:43 - Secured GET /pos/cliente
+2024-11-04 15:07:49 - Securing GET /pos/sucursal
+2024-11-04 15:07:49 - Secured GET /pos/sucursal
+2024-11-04 15:07:49 - Securing GET /pos/sucursal
+2024-11-04 15:07:49 - Secured GET /pos/sucursal
+2024-11-04 15:07:51 - Securing OPTIONS /pos/producto
+2024-11-04 15:07:51 - Securing OPTIONS /pos/categoria
+2024-11-04 15:07:51 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:07:51 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:07:51 - Secured OPTIONS /pos/producto
+2024-11-04 15:07:51 - Secured OPTIONS /pos/categoria
+2024-11-04 15:07:51 - Securing OPTIONS /pos/producto
+2024-11-04 15:07:51 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:07:51 - Secured OPTIONS /pos/producto
+2024-11-04 15:07:51 - Securing OPTIONS /pos/categoria
+2024-11-04 15:07:51 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:07:51 - Secured OPTIONS /pos/categoria
+2024-11-04 15:07:51 - Securing GET /pos/categoria
+2024-11-04 15:07:51 - Securing GET /pos/producto
+2024-11-04 15:07:51 - Secured GET /pos/categoria
+2024-11-04 15:07:51 - Secured GET /pos/producto
+2024-11-04 15:07:51 - Securing GET /pos/producto
+2024-11-04 15:07:51 - Securing GET /pos/categoria
+2024-11-04 15:07:51 - Secured GET /pos/categoria
+2024-11-04 15:07:51 - Secured GET /pos/producto
+2024-11-04 15:07:52 - Securing GET /pos/categoria
+2024-11-04 15:07:52 - Secured GET /pos/categoria
+2024-11-04 15:07:52 - Securing GET /pos/categoria
+2024-11-04 15:07:52 - Secured GET /pos/categoria
+2024-11-04 15:07:53 - Securing GET /pos/cliente
+2024-11-04 15:07:53 - Secured GET /pos/cliente
+2024-11-04 15:07:53 - Securing GET /pos/cliente
+2024-11-04 15:07:53 - Secured GET /pos/cliente
+2024-11-04 15:10:00 - Securing GET /pos/auth/me
+2024-11-04 15:10:00 - Secured GET /pos/auth/me
+2024-11-04 15:10:00 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:10:00 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:10:01 - Securing GET /pos/auth/me
+2024-11-04 15:10:01 - Secured GET /pos/auth/me
+2024-11-04 15:10:01 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:10:01 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:11:40 - Securing POST /pos/auth/login
+2024-11-04 15:11:40 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:11:40 - Secured POST /pos/auth/login
+2024-11-04 15:11:40 - Authenticated user
+2024-11-04 15:12:09 - Securing GET /pos/me
+2024-11-04 15:12:09 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+io.jsonwebtoken.ExpiredJwtException: JWT expired at 2024-11-04T08:34:17Z. Current time: 2024-11-04T19:12:09Z, a difference of 38272526 milliseconds.  Allowed clock skew: 0 milliseconds.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:427)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:529)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589)
+	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173)
+	at com.sistema.pos.config.JwtService.getAllClaims(JwtService.java:60)
+	at com.sistema.pos.config.JwtService.getClaim(JwtService.java:65)
+	at com.sistema.pos.config.JwtService.getUsernameFromToken(JwtService.java:43)
+	at com.sistema.pos.config.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:41)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-11-04 15:12:09 - Securing GET /error
+2024-11-04 15:12:09 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:12:09 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 15:12:17 - Securing GET /pos/auth/me
+2024-11-04 15:12:17 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+io.jsonwebtoken.ExpiredJwtException: JWT expired at 2024-11-04T08:34:17Z. Current time: 2024-11-04T19:12:17Z, a difference of 38280456 milliseconds.  Allowed clock skew: 0 milliseconds.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:427)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:529)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:589)
+	at io.jsonwebtoken.impl.ImmutableJwtParser.parseClaimsJws(ImmutableJwtParser.java:173)
+	at com.sistema.pos.config.JwtService.getAllClaims(JwtService.java:60)
+	at com.sistema.pos.config.JwtService.getClaim(JwtService.java:65)
+	at com.sistema.pos.config.JwtService.getUsernameFromToken(JwtService.java:43)
+	at com.sistema.pos.config.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:41)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:384)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:904)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-11-04 15:12:17 - Securing GET /error
+2024-11-04 15:12:17 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:12:17 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 15:12:38 - Securing GET /pos/auth/me
+2024-11-04 15:12:38 - Secured GET /pos/auth/me
+2024-11-04 15:12:38 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:12:38 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:19:04 - Securing GET /pos/auth/me
+2024-11-04 15:19:04 - Secured GET /pos/auth/me
+2024-11-04 15:19:04 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:19:04 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:19:04 - Securing GET /pos/auth/me
+2024-11-04 15:19:04 - Secured GET /pos/auth/me
+2024-11-04 15:19:04 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:19:04 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:19:11 - Securing GET /pos/auth/me
+2024-11-04 15:19:11 - Secured GET /pos/auth/me
+2024-11-04 15:19:11 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:19:11 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:20:46 - Securing GET /pos/auth/me
+2024-11-04 15:20:46 - Secured GET /pos/auth/me
+2024-11-04 15:20:46 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:20:46 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:20:46 - Securing GET /pos/auth/me
+2024-11-04 15:20:46 - Secured GET /pos/auth/me
+2024-11-04 15:20:46 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:20:46 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:21:22 - Securing GET /pos/auth/me
+2024-11-04 15:21:22 - Secured GET /pos/auth/me
+2024-11-04 15:21:22 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:21:22 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:21:22 - Securing GET /pos/auth/me
+2024-11-04 15:21:22 - Secured GET /pos/auth/me
+2024-11-04 15:21:22 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:21:22 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:21:35 - Securing OPTIONS /pos/auth/login
+2024-11-04 15:21:35 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:21:35 - Secured OPTIONS /pos/auth/login
+2024-11-04 15:21:35 - Securing POST /pos/auth/login
+2024-11-04 15:21:35 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:21:35 - Secured POST /pos/auth/login
+2024-11-04 15:21:35 - Authenticated user
+2024-11-04 15:21:41 - Securing GET /pos/auth/me
+2024-11-04 15:21:41 - Secured GET /pos/auth/me
+2024-11-04 15:21:41 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:21:41 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:21:41 - Securing GET /pos/auth/me
+2024-11-04 15:21:41 - Secured GET /pos/auth/me
+2024-11-04 15:21:41 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:21:41 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:27:11 - Securing OPTIONS /pos/auth/me
+2024-11-04 15:27:11 - Securing OPTIONS /pos/auth/me
+2024-11-04 15:27:11 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:27:11 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:27:11 - Secured OPTIONS /pos/auth/me
+2024-11-04 15:27:11 - Secured OPTIONS /pos/auth/me
+2024-11-04 15:27:11 - Securing GET /pos/auth/me
+2024-11-04 15:27:11 - Secured GET /pos/auth/me
+2024-11-04 15:27:11 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:27:11 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:27:11 - Securing GET /pos/auth/me
+2024-11-04 15:27:11 - Secured GET /pos/auth/me
+2024-11-04 15:27:11 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:27:11 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:27:46 - Securing GET /pos/auth/me
+2024-11-04 15:27:46 - Secured GET /pos/auth/me
+2024-11-04 15:27:46 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:27:46 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:27:46 - Securing GET /pos/auth/me
+2024-11-04 15:27:46 - Secured GET /pos/auth/me
+2024-11-04 15:27:46 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:27:46 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:28:22 - Securing GET /pos/auth/me
+2024-11-04 15:28:22 - Secured GET /pos/auth/me
+2024-11-04 15:28:22 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:28:22 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:28:22 - Securing GET /pos/auth/me
+2024-11-04 15:28:22 - Secured GET /pos/auth/me
+2024-11-04 15:28:22 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:28:22 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:30:30 - Securing GET /pos/auth/me
+2024-11-04 15:30:30 - Secured GET /pos/auth/me
+2024-11-04 15:30:30 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:30:30 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:30:30 - Securing GET /pos/auth/me
+2024-11-04 15:30:30 - Secured GET /pos/auth/me
+2024-11-04 15:30:30 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:30:30 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:30:41 - Securing GET /pos/auth/me
+2024-11-04 15:30:41 - Secured GET /pos/auth/me
+2024-11-04 15:30:41 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:30:41 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:30:41 - Securing GET /pos/auth/me
+2024-11-04 15:30:41 - Secured GET /pos/auth/me
+2024-11-04 15:30:41 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:30:41 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:30:47 - Securing OPTIONS /pos/cliente
+2024-11-04 15:30:47 - Securing OPTIONS /pos/cliente
+2024-11-04 15:30:47 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:30:47 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:30:47 - Secured OPTIONS /pos/cliente
+2024-11-04 15:30:47 - Secured OPTIONS /pos/cliente
+2024-11-04 15:30:47 - Securing GET /pos/cliente
+2024-11-04 15:30:47 - Secured GET /pos/cliente
+2024-11-04 15:30:48 - Securing GET /pos/cliente
+2024-11-04 15:30:48 - Secured GET /pos/cliente
+2024-11-04 15:30:54 - Securing POST /pos/auth/login
+2024-11-04 15:30:54 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:30:54 - Secured POST /pos/auth/login
+2024-11-04 15:30:54 - Authenticated user
+2024-11-04 15:30:55 - Securing GET /pos/cliente
+2024-11-04 15:30:55 - Secured GET /pos/cliente
+2024-11-04 15:30:55 - Securing GET /pos/cliente
+2024-11-04 15:30:55 - Secured GET /pos/cliente
+2024-11-04 15:30:57 - Securing OPTIONS /pos/proveedor
+2024-11-04 15:30:57 - Securing OPTIONS /pos/proveedor
+2024-11-04 15:30:57 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:30:57 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:30:57 - Secured OPTIONS /pos/proveedor
+2024-11-04 15:30:57 - Secured OPTIONS /pos/proveedor
+2024-11-04 15:30:57 - Securing GET /pos/proveedor
+2024-11-04 15:30:57 - Secured GET /pos/proveedor
+2024-11-04 15:30:57 - Securing GET /pos/proveedor
+2024-11-04 15:30:57 - Secured GET /pos/proveedor
+2024-11-04 15:30:57 - Securing OPTIONS /pos/permiso
+2024-11-04 15:30:57 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:30:57 - Secured OPTIONS /pos/permiso
+2024-11-04 15:30:57 - Securing OPTIONS /pos/rol
+2024-11-04 15:30:57 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:30:57 - Secured OPTIONS /pos/rol
+2024-11-04 15:30:57 - Securing OPTIONS /pos/rol
+2024-11-04 15:30:57 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:30:57 - Secured OPTIONS /pos/rol
+2024-11-04 15:30:57 - Securing GET /pos/permiso
+2024-11-04 15:30:57 - Securing OPTIONS /pos/permiso
+2024-11-04 15:30:57 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:30:57 - Secured OPTIONS /pos/permiso
+2024-11-04 15:30:57 - Securing GET /pos/rol
+2024-11-04 15:30:57 - Secured GET /pos/permiso
+2024-11-04 15:30:57 - Secured GET /pos/rol
+2024-11-04 15:30:57 - Securing GET /pos/permiso
+2024-11-04 15:30:57 - Secured GET /pos/permiso
+2024-11-04 15:30:57 - Securing GET /pos/rol
+2024-11-04 15:30:57 - Secured GET /pos/rol
+2024-11-04 15:30:59 - Securing GET /pos/rol
+2024-11-04 15:30:59 - Securing GET /pos/permiso
+2024-11-04 15:30:59 - Securing GET /pos/auth/me
+2024-11-04 15:30:59 - Secured GET /pos/rol
+2024-11-04 15:30:59 - Securing GET /pos/rol
+2024-11-04 15:30:59 - Secured GET /pos/permiso
+2024-11-04 15:30:59 - Secured GET /pos/rol
+2024-11-04 15:30:59 - Secured GET /pos/auth/me
+2024-11-04 15:30:59 - Securing GET /pos/permiso
+2024-11-04 15:30:59 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:30:59 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:30:59 - Securing GET /pos/auth/me
+2024-11-04 15:30:59 - Secured GET /pos/permiso
+2024-11-04 15:30:59 - Secured GET /pos/auth/me
+2024-11-04 15:30:59 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:30:59 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:00 - Securing GET /pos/permiso
+2024-11-04 15:31:00 - Secured GET /pos/permiso
+2024-11-04 15:31:00 - Securing GET /pos/permiso
+2024-11-04 15:31:00 - Secured GET /pos/permiso
+2024-11-04 15:31:01 - Securing GET /pos/rol
+2024-11-04 15:31:01 - Securing GET /pos/permiso
+2024-11-04 15:31:01 - Secured GET /pos/rol
+2024-11-04 15:31:01 - Secured GET /pos/permiso
+2024-11-04 15:31:01 - Securing GET /pos/rol
+2024-11-04 15:31:01 - Securing GET /pos/permiso
+2024-11-04 15:31:01 - Secured GET /pos/rol
+2024-11-04 15:31:01 - Secured GET /pos/permiso
+2024-11-04 15:31:01 - Securing GET /pos/proveedor
+2024-11-04 15:31:01 - Secured GET /pos/proveedor
+2024-11-04 15:31:01 - Securing GET /pos/proveedor
+2024-11-04 15:31:01 - Secured GET /pos/proveedor
+2024-11-04 15:31:02 - Securing GET /pos/proveedor
+2024-11-04 15:31:02 - Securing GET /pos/auth/me
+2024-11-04 15:31:02 - Secured GET /pos/proveedor
+2024-11-04 15:31:02 - Secured GET /pos/auth/me
+2024-11-04 15:31:02 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:02 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:02 - Securing GET /pos/proveedor
+2024-11-04 15:31:02 - Securing GET /pos/auth/me
+2024-11-04 15:31:02 - Secured GET /pos/proveedor
+2024-11-04 15:31:02 - Secured GET /pos/auth/me
+2024-11-04 15:31:02 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:02 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:03 - Securing GET /pos/proveedor
+2024-11-04 15:31:03 - Securing GET /pos/auth/me
+2024-11-04 15:31:03 - Secured GET /pos/proveedor
+2024-11-04 15:31:03 - Secured GET /pos/auth/me
+2024-11-04 15:31:03 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:03 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:03 - Securing GET /pos/proveedor
+2024-11-04 15:31:03 - Securing GET /pos/auth/me
+2024-11-04 15:31:03 - Secured GET /pos/proveedor
+2024-11-04 15:31:03 - Secured GET /pos/auth/me
+2024-11-04 15:31:03 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:03 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:05 - Securing OPTIONS /pos/sucursal
+2024-11-04 15:31:05 - Securing OPTIONS /pos/sucursal
+2024-11-04 15:31:05 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:31:05 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:31:05 - Secured OPTIONS /pos/sucursal
+2024-11-04 15:31:05 - Secured OPTIONS /pos/sucursal
+2024-11-04 15:31:05 - Securing GET /pos/sucursal
+2024-11-04 15:31:05 - Secured GET /pos/sucursal
+2024-11-04 15:31:05 - Securing GET /pos/sucursal
+2024-11-04 15:31:05 - Secured GET /pos/sucursal
+2024-11-04 15:31:08 - Securing GET /pos/auth/me
+2024-11-04 15:31:08 - Secured GET /pos/auth/me
+2024-11-04 15:31:08 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:08 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:08 - Securing GET /pos/auth/me
+2024-11-04 15:31:08 - Secured GET /pos/auth/me
+2024-11-04 15:31:08 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:08 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:08 - Securing GET /pos/auth/me
+2024-11-04 15:31:08 - Secured GET /pos/auth/me
+2024-11-04 15:31:08 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:08 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:08 - Securing GET /pos/auth/me
+2024-11-04 15:31:08 - Secured GET /pos/auth/me
+2024-11-04 15:31:08 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:08 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:31:20 - Securing GET /pos/permiso
+2024-11-04 15:31:20 - Secured GET /pos/permiso
+2024-11-04 15:31:20 - Securing GET /pos/permiso
+2024-11-04 15:31:20 - Secured GET /pos/permiso
+2024-11-04 15:31:25 - Securing GET /pos/rol
+2024-11-04 15:31:25 - Securing GET /pos/permiso
+2024-11-04 15:31:25 - Secured GET /pos/rol
+2024-11-04 15:31:25 - Secured GET /pos/permiso
+2024-11-04 15:31:25 - Securing GET /pos/permiso
+2024-11-04 15:31:25 - Securing GET /pos/rol
+2024-11-04 15:31:25 - Secured GET /pos/rol
+2024-11-04 15:31:25 - Secured GET /pos/permiso
+2024-11-04 15:31:25 - Securing GET /pos/permiso
+2024-11-04 15:31:25 - Secured GET /pos/permiso
+2024-11-04 15:31:26 - Securing GET /pos/permiso
+2024-11-04 15:31:26 - Secured GET /pos/permiso
+2024-11-04 15:31:31 - Securing OPTIONS /pos/user?search=
+2024-11-04 15:31:31 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:31:31 - Secured OPTIONS /pos/user?search=
+2024-11-04 15:31:31 - Securing OPTIONS /pos/user?search=
+2024-11-04 15:31:31 - Securing GET /pos/rol
+2024-11-04 15:31:31 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:31:31 - Secured OPTIONS /pos/user?search=
+2024-11-04 15:31:31 - Securing GET /pos/user?search=
+2024-11-04 15:31:31 - Secured GET /pos/rol
+2024-11-04 15:31:31 - Secured GET /pos/user?search=
+2024-11-04 15:31:31 - Securing GET /pos/rol
+2024-11-04 15:31:31 - Secured GET /pos/rol
+2024-11-04 15:31:31 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 15:31:31 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 15:31:31 - Securing GET /pos/user?search=
+2024-11-04 15:31:31 - Secured GET /pos/user?search=
+2024-11-04 15:31:31 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 15:31:31 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 15:31:33 - Securing GET /pos/sucursal
+2024-11-04 15:31:33 - Secured GET /pos/sucursal
+2024-11-04 15:31:33 - Securing GET /pos/sucursal
+2024-11-04 15:31:33 - Secured GET /pos/sucursal
+2024-11-04 15:31:39 - Securing GET /pos/rol
+2024-11-04 15:31:39 - Securing GET /pos/user?search=
+2024-11-04 15:31:39 - Secured GET /pos/rol
+2024-11-04 15:31:39 - Secured GET /pos/user?search=
+2024-11-04 15:31:39 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 15:31:39 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 15:31:39 - Securing GET /pos/rol
+2024-11-04 15:31:39 - Securing GET /pos/user?search=
+2024-11-04 15:31:39 - Secured GET /pos/rol
+2024-11-04 15:31:39 - Secured GET /pos/user?search=
+2024-11-04 15:31:39 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 15:31:39 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 15:31:51 - Securing GET /pos/producto
+2024-11-04 15:31:51 - Securing GET /pos/categoria
+2024-11-04 15:31:51 - Secured GET /pos/categoria
+2024-11-04 15:31:51 - Secured GET /pos/producto
+2024-11-04 15:31:51 - Securing GET /pos/categoria
+2024-11-04 15:31:51 - Securing GET /pos/producto
+2024-11-04 15:31:51 - Secured GET /pos/producto
+2024-11-04 15:31:51 - Secured GET /pos/categoria
+2024-11-04 15:31:52 - Securing GET /pos/categoria
+2024-11-04 15:31:52 - Secured GET /pos/categoria
+2024-11-04 15:31:52 - Securing GET /pos/categoria
+2024-11-04 15:31:52 - Secured GET /pos/categoria
+2024-11-04 15:31:52 - Securing GET /pos/producto
+2024-11-04 15:31:52 - Securing GET /pos/categoria
+2024-11-04 15:31:52 - Secured GET /pos/producto
+2024-11-04 15:31:52 - Secured GET /pos/categoria
+2024-11-04 15:31:52 - Securing GET /pos/categoria
+2024-11-04 15:31:52 - Securing GET /pos/producto
+2024-11-04 15:31:52 - Secured GET /pos/categoria
+2024-11-04 15:31:52 - Secured GET /pos/producto
+2024-11-04 15:31:55 - Securing GET /pos/categoria
+2024-11-04 15:31:55 - Secured GET /pos/categoria
+2024-11-04 15:31:55 - Securing GET /pos/categoria
+2024-11-04 15:31:55 - Secured GET /pos/categoria
+2024-11-04 15:36:46 - Securing GET /pos/auth/me
+2024-11-04 15:36:46 - Secured GET /pos/auth/me
+2024-11-04 15:36:46 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:36:46 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:36:46 - Securing GET /pos/auth/me
+2024-11-04 15:36:46 - Secured GET /pos/auth/me
+2024-11-04 15:36:46 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:36:46 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:36:53 - Securing POST /pos/auth/login
+2024-11-04 15:36:53 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:36:53 - Secured POST /pos/auth/login
+2024-11-04 15:36:53 - Authenticated user
+2024-11-04 15:36:56 - Securing GET /pos/auth/me
+2024-11-04 15:36:56 - Secured GET /pos/auth/me
+2024-11-04 15:36:56 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:36:56 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:36:56 - Securing GET /pos/auth/me
+2024-11-04 15:36:56 - Secured GET /pos/auth/me
+2024-11-04 15:36:56 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:36:56 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:42:09 - Securing GET /pos/auth/me
+2024-11-04 15:42:09 - Secured GET /pos/auth/me
+2024-11-04 15:42:09 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:42:09 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:42:09 - Securing GET /pos/auth/me
+2024-11-04 15:42:09 - Secured GET /pos/auth/me
+2024-11-04 15:42:09 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:42:09 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:42:26 - Securing GET /pos/auth/me
+2024-11-04 15:42:26 - Secured GET /pos/auth/me
+2024-11-04 15:42:26 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:42:26 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:42:26 - Securing GET /pos/auth/me
+2024-11-04 15:42:26 - Secured GET /pos/auth/me
+2024-11-04 15:42:26 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:42:26 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:42:54 - Securing GET /pos/auth/me
+2024-11-04 15:42:54 - Secured GET /pos/auth/me
+2024-11-04 15:42:54 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:42:54 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:43:32 - Securing GET /pos/auth/me
+2024-11-04 15:43:32 - Secured GET /pos/auth/me
+2024-11-04 15:43:32 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:43:32 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:43:32 - Securing GET /pos/auth/me
+2024-11-04 15:43:32 - Secured GET /pos/auth/me
+2024-11-04 15:43:32 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:43:32 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:43:43 - Securing GET /pos/auth/me
+2024-11-04 15:43:43 - Secured GET /pos/auth/me
+2024-11-04 15:43:43 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:43:43 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:43:43 - Securing GET /pos/auth/me
+2024-11-04 15:43:43 - Secured GET /pos/auth/me
+2024-11-04 15:43:43 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:43:43 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:43:47 - Securing GET /pos/permiso
+2024-11-04 15:43:47 - Secured GET /pos/permiso
+2024-11-04 15:43:47 - Securing GET /pos/permiso
+2024-11-04 15:43:47 - Secured GET /pos/permiso
+2024-11-04 15:43:50 - Securing GET /pos/auth/me
+2024-11-04 15:43:50 - Secured GET /pos/auth/me
+2024-11-04 15:43:50 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:43:50 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:43:50 - Securing GET /pos/auth/me
+2024-11-04 15:43:50 - Secured GET /pos/auth/me
+2024-11-04 15:43:50 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:43:50 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:43:57 - Securing POST /pos/auth/login
+2024-11-04 15:43:57 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 15:43:57 - Secured POST /pos/auth/login
+2024-11-04 15:43:57 - Authenticated user
+2024-11-04 15:44:00 - Securing GET /pos/cliente
+2024-11-04 15:44:00 - Secured GET /pos/cliente
+2024-11-04 15:44:00 - Securing GET /pos/cliente
+2024-11-04 15:44:00 - Secured GET /pos/cliente
+2024-11-04 15:44:02 - Securing GET /pos/auth/me
+2024-11-04 15:44:02 - Secured GET /pos/auth/me
+2024-11-04 15:44:02 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:44:02 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:44:02 - Securing GET /pos/auth/me
+2024-11-04 15:44:02 - Secured GET /pos/auth/me
+2024-11-04 15:44:02 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:44:02 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:44:05 - Securing GET /pos/auth/me
+2024-11-04 15:44:05 - Secured GET /pos/auth/me
+2024-11-04 15:44:05 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:44:05 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:44:05 - Securing GET /pos/auth/me
+2024-11-04 15:44:05 - Secured GET /pos/auth/me
+2024-11-04 15:44:05 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:44:05 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:47:14 - Securing GET /pos/cliente
+2024-11-04 15:47:14 - Secured GET /pos/cliente
+2024-11-04 15:47:15 - Securing GET /pos/cliente
+2024-11-04 15:47:15 - Secured GET /pos/cliente
+2024-11-04 15:47:58 - Securing GET /pos/proveedor
+2024-11-04 15:47:58 - Secured GET /pos/proveedor
+2024-11-04 15:47:58 - Securing GET /pos/proveedor
+2024-11-04 15:47:58 - Secured GET /pos/proveedor
+2024-11-04 15:47:59 - Securing GET /pos/cliente
+2024-11-04 15:47:59 - Secured GET /pos/cliente
+2024-11-04 15:47:59 - Securing GET /pos/cliente
+2024-11-04 15:47:59 - Secured GET /pos/cliente
+2024-11-04 15:48:02 - Securing GET /pos/proveedor
+2024-11-04 15:48:02 - Secured GET /pos/proveedor
+2024-11-04 15:48:02 - Securing GET /pos/proveedor
+2024-11-04 15:48:02 - Secured GET /pos/proveedor
+2024-11-04 15:48:04 - Securing GET /pos/cliente
+2024-11-04 15:48:04 - Secured GET /pos/cliente
+2024-11-04 15:48:04 - Securing GET /pos/cliente
+2024-11-04 15:48:04 - Secured GET /pos/cliente
+2024-11-04 15:48:05 - Securing GET /pos/sucursal
+2024-11-04 15:48:05 - Secured GET /pos/sucursal
+2024-11-04 15:48:05 - Securing GET /pos/sucursal
+2024-11-04 15:48:05 - Secured GET /pos/sucursal
+2024-11-04 15:48:06 - Securing GET /pos/rol
+2024-11-04 15:48:06 - Securing GET /pos/permiso
+2024-11-04 15:48:06 - Secured GET /pos/rol
+2024-11-04 15:48:06 - Securing GET /pos/rol
+2024-11-04 15:48:06 - Secured GET /pos/permiso
+2024-11-04 15:48:06 - Secured GET /pos/rol
+2024-11-04 15:48:06 - Securing GET /pos/permiso
+2024-11-04 15:48:06 - Secured GET /pos/permiso
+2024-11-04 15:48:06 - Securing GET /pos/permiso
+2024-11-04 15:48:06 - Secured GET /pos/permiso
+2024-11-04 15:48:06 - Securing GET /pos/permiso
+2024-11-04 15:48:06 - Secured GET /pos/permiso
+2024-11-04 15:48:09 - Securing GET /pos/permiso
+2024-11-04 15:48:09 - Secured GET /pos/permiso
+2024-11-04 15:48:09 - Securing GET /pos/permiso
+2024-11-04 15:48:09 - Secured GET /pos/permiso
+2024-11-04 15:48:09 - Securing GET /pos/proveedor
+2024-11-04 15:48:09 - Secured GET /pos/proveedor
+2024-11-04 15:48:09 - Securing GET /pos/proveedor
+2024-11-04 15:48:09 - Secured GET /pos/proveedor
+2024-11-04 15:48:10 - Securing GET /pos/cliente
+2024-11-04 15:48:10 - Secured GET /pos/cliente
+2024-11-04 15:48:10 - Securing GET /pos/cliente
+2024-11-04 15:48:10 - Secured GET /pos/cliente
+2024-11-04 15:48:10 - Securing GET /pos/rol
+2024-11-04 15:48:10 - Securing GET /pos/user?search=
+2024-11-04 15:48:10 - Secured GET /pos/user?search=
+2024-11-04 15:48:10 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 15:48:10 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 15:48:10 - Secured GET /pos/rol
+2024-11-04 15:48:10 - Securing GET /pos/user?search=
+2024-11-04 15:48:10 - Securing GET /pos/rol
+2024-11-04 15:48:10 - Secured GET /pos/rol
+2024-11-04 15:48:10 - Secured GET /pos/user?search=
+2024-11-04 15:48:10 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 15:48:10 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 15:48:11 - Securing GET /pos/sucursal
+2024-11-04 15:48:11 - Secured GET /pos/sucursal
+2024-11-04 15:48:11 - Securing GET /pos/sucursal
+2024-11-04 15:48:11 - Secured GET /pos/sucursal
+2024-11-04 15:48:14 - Securing GET /pos/auth/me
+2024-11-04 15:48:14 - Secured GET /pos/auth/me
+2024-11-04 15:48:14 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:48:14 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:48:14 - Securing GET /pos/auth/me
+2024-11-04 15:48:14 - Secured GET /pos/auth/me
+2024-11-04 15:48:14 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 15:48:14 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 16:02:00 - Securing OPTIONS /pos/user/me
+2024-11-04 16:02:00 - Securing OPTIONS /pos/user/me
+2024-11-04 16:02:00 - Securing OPTIONS /pos/auth/me
+2024-11-04 16:02:00 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:02:00 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:02:00 - Secured OPTIONS /pos/user/me
+2024-11-04 16:02:00 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:02:00 - Secured OPTIONS /pos/user/me
+2024-11-04 16:02:00 - Secured OPTIONS /pos/auth/me
+2024-11-04 16:02:00 - Securing GET /pos/user/me
+2024-11-04 16:02:00 - Secured GET /pos/user/me
+2024-11-04 16:02:00 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:02:00 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:02:00 - Securing GET /pos/user/me
+2024-11-04 16:02:00 - Securing GET /pos/auth/me
+2024-11-04 16:02:00 - Secured GET /pos/auth/me
+2024-11-04 16:02:00 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 16:02:00 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 16:02:00 - Secured GET /pos/user/me
+2024-11-04 16:02:00 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:02:00 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:03:13 - Securing OPTIONS /pos/user/theme
+2024-11-04 16:03:13 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:03:13 - Secured OPTIONS /pos/user/theme
+2024-11-04 16:03:13 - Securing PUT /pos/user/theme
+2024-11-04 16:03:13 - Secured PUT /pos/user/theme
+2024-11-04 16:03:13 - Authorizing method invocation ReflectiveMethodInvocation: public void com.sistema.pos.controller.UsuarioController.updateThemeColor(org.springframework.security.core.Authentication,com.sistema.pos.dto.ThemeColorRequest); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:03:13 - Authorized method invocation ReflectiveMethodInvocation: public void com.sistema.pos.controller.UsuarioController.updateThemeColor(org.springframework.security.core.Authentication,com.sistema.pos.dto.ThemeColorRequest); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:05:04 - Securing GET /pos/user/me
+2024-11-04 16:05:04 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:04 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 16:05:04 - Securing GET /error
+2024-11-04 16:05:04 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:04 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 16:05:04 - Securing GET /pos/user/me
+2024-11-04 16:05:04 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:04 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 16:05:04 - Securing GET /error
+2024-11-04 16:05:04 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:04 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 16:05:18 - Securing OPTIONS /pos/auth/login
+2024-11-04 16:05:18 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:18 - Secured OPTIONS /pos/auth/login
+2024-11-04 16:05:18 - Securing POST /pos/auth/login
+2024-11-04 16:05:18 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:18 - Secured POST /pos/auth/login
+2024-11-04 16:05:18 - Authenticated user
+2024-11-04 16:05:26 - Securing OPTIONS /pos/permiso
+2024-11-04 16:05:26 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:26 - Secured OPTIONS /pos/permiso
+2024-11-04 16:05:26 - Securing OPTIONS /pos/permiso
+2024-11-04 16:05:26 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:26 - Secured OPTIONS /pos/permiso
+2024-11-04 16:05:26 - Securing GET /pos/permiso
+2024-11-04 16:05:26 - Secured GET /pos/permiso
+2024-11-04 16:05:26 - Securing GET /pos/permiso
+2024-11-04 16:05:26 - Secured GET /pos/permiso
+2024-11-04 16:05:28 - Securing OPTIONS /pos/sucursal
+2024-11-04 16:05:28 - Securing OPTIONS /pos/sucursal
+2024-11-04 16:05:28 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:28 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:28 - Secured OPTIONS /pos/sucursal
+2024-11-04 16:05:28 - Secured OPTIONS /pos/sucursal
+2024-11-04 16:05:28 - Securing GET /pos/sucursal
+2024-11-04 16:05:28 - Secured GET /pos/sucursal
+2024-11-04 16:05:28 - Securing GET /pos/sucursal
+2024-11-04 16:05:28 - Secured GET /pos/sucursal
+2024-11-04 16:05:29 - Securing GET /pos/sucursal
+2024-11-04 16:05:29 - Securing GET /pos/user/me
+2024-11-04 16:05:29 - Securing GET /pos/auth/me
+2024-11-04 16:05:29 - Secured GET /pos/sucursal
+2024-11-04 16:05:29 - Secured GET /pos/user/me
+2024-11-04 16:05:29 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:05:29 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:05:29 - Secured GET /pos/auth/me
+2024-11-04 16:05:29 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 16:05:29 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 16:05:29 - Securing GET /pos/sucursal
+2024-11-04 16:05:29 - Secured GET /pos/sucursal
+2024-11-04 16:05:29 - Securing GET /pos/auth/me
+2024-11-04 16:05:29 - Securing GET /pos/user/me
+2024-11-04 16:05:29 - Secured GET /pos/auth/me
+2024-11-04 16:05:29 - Secured GET /pos/user/me
+2024-11-04 16:05:29 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 16:05:29 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 16:05:29 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:05:29 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:05:32 - Securing OPTIONS /pos/proveedor
+2024-11-04 16:05:32 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:32 - Secured OPTIONS /pos/proveedor
+2024-11-04 16:05:32 - Securing OPTIONS /pos/proveedor
+2024-11-04 16:05:32 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:32 - Secured OPTIONS /pos/proveedor
+2024-11-04 16:05:32 - Securing GET /pos/proveedor
+2024-11-04 16:05:32 - Secured GET /pos/proveedor
+2024-11-04 16:05:32 - Securing GET /pos/proveedor
+2024-11-04 16:05:32 - Secured GET /pos/proveedor
+2024-11-04 16:05:33 - Securing GET /pos/permiso
+2024-11-04 16:05:33 - Secured GET /pos/permiso
+2024-11-04 16:05:33 - Securing GET /pos/permiso
+2024-11-04 16:05:33 - Secured GET /pos/permiso
+2024-11-04 16:05:33 - Securing OPTIONS /pos/rol
+2024-11-04 16:05:33 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:33 - Secured OPTIONS /pos/rol
+2024-11-04 16:05:33 - Securing OPTIONS /pos/rol
+2024-11-04 16:05:33 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:33 - Secured OPTIONS /pos/rol
+2024-11-04 16:05:33 - Securing GET /pos/permiso
+2024-11-04 16:05:33 - Securing GET /pos/rol
+2024-11-04 16:05:33 - Secured GET /pos/permiso
+2024-11-04 16:05:33 - Secured GET /pos/rol
+2024-11-04 16:05:34 - Securing GET /pos/permiso
+2024-11-04 16:05:34 - Securing GET /pos/rol
+2024-11-04 16:05:34 - Secured GET /pos/rol
+2024-11-04 16:05:34 - Secured GET /pos/permiso
+2024-11-04 16:05:34 - Securing OPTIONS /pos/cliente
+2024-11-04 16:05:34 - Securing OPTIONS /pos/cliente
+2024-11-04 16:05:34 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:34 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:34 - Secured OPTIONS /pos/cliente
+2024-11-04 16:05:34 - Secured OPTIONS /pos/cliente
+2024-11-04 16:05:34 - Securing GET /pos/cliente
+2024-11-04 16:05:34 - Secured GET /pos/cliente
+2024-11-04 16:05:34 - Securing GET /pos/cliente
+2024-11-04 16:05:34 - Secured GET /pos/cliente
+2024-11-04 16:05:35 - Securing OPTIONS /pos/user?search=
+2024-11-04 16:05:35 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:35 - Secured OPTIONS /pos/user?search=
+2024-11-04 16:05:35 - Securing GET /pos/rol
+2024-11-04 16:05:35 - Securing OPTIONS /pos/user?search=
+2024-11-04 16:05:35 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:35 - Secured OPTIONS /pos/user?search=
+2024-11-04 16:05:35 - Securing GET /pos/user?search=
+2024-11-04 16:05:35 - Secured GET /pos/rol
+2024-11-04 16:05:35 - Secured GET /pos/user?search=
+2024-11-04 16:05:35 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:05:35 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:05:35 - Securing GET /pos/rol
+2024-11-04 16:05:35 - Securing GET /pos/user?search=
+2024-11-04 16:05:35 - Secured GET /pos/rol
+2024-11-04 16:05:35 - Secured GET /pos/user?search=
+2024-11-04 16:05:35 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:05:35 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.listarUsuarios(java.lang.String); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:05:40 - Securing POST /pos/auth/login
+2024-11-04 16:05:40 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:05:40 - Secured POST /pos/auth/login
+2024-11-04 16:05:40 - Authenticated user
+2024-11-04 16:05:48 - Securing PUT /pos/user/theme
+2024-11-04 16:05:48 - Secured PUT /pos/user/theme
+2024-11-04 16:05:48 - Authorizing method invocation ReflectiveMethodInvocation: public void com.sistema.pos.controller.UsuarioController.updateThemeColor(org.springframework.security.core.Authentication,com.sistema.pos.dto.ThemeColorRequest); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:05:48 - Authorized method invocation ReflectiveMethodInvocation: public void com.sistema.pos.controller.UsuarioController.updateThemeColor(org.springframework.security.core.Authentication,com.sistema.pos.dto.ThemeColorRequest); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:07:39 - Securing GET /pos/user/me
+2024-11-04 16:07:39 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:07:39 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 16:07:39 - Securing GET /error
+2024-11-04 16:07:39 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:07:39 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 16:07:39 - Securing GET /pos/user/me
+2024-11-04 16:07:39 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:07:39 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 16:07:39 - Securing GET /error
+2024-11-04 16:07:39 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:07:39 - Pre-authenticated entry point called. Rejecting access
+2024-11-04 16:07:45 - Securing OPTIONS /pos/auth/login
+2024-11-04 16:07:45 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:07:45 - Secured OPTIONS /pos/auth/login
+2024-11-04 16:07:45 - Securing POST /pos/auth/login
+2024-11-04 16:07:45 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:07:45 - Secured POST /pos/auth/login
+2024-11-04 16:07:45 - Authenticated user
+2024-11-04 16:07:52 - Securing OPTIONS /pos/user/me
+2024-11-04 16:07:52 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:07:52 - Secured OPTIONS /pos/user/me
+2024-11-04 16:07:52 - Securing OPTIONS /pos/auth/me
+2024-11-04 16:07:52 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:07:52 - Secured OPTIONS /pos/auth/me
+2024-11-04 16:07:52 - Securing OPTIONS /pos/user/me
+2024-11-04 16:07:52 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:07:52 - Secured OPTIONS /pos/user/me
+2024-11-04 16:07:52 - Securing OPTIONS /pos/auth/me
+2024-11-04 16:07:52 - Set SecurityContextHolder to anonymous SecurityContext
+2024-11-04 16:07:52 - Secured OPTIONS /pos/auth/me
+2024-11-04 16:07:52 - Securing GET /pos/user/me
+2024-11-04 16:07:52 - Securing GET /pos/auth/me
+2024-11-04 16:07:52 - Secured GET /pos/user/me
+2024-11-04 16:07:52 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:07:52 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:07:52 - Secured GET /pos/auth/me
+2024-11-04 16:07:52 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 16:07:52 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 16:07:52 - Securing GET /pos/user/me
+2024-11-04 16:07:52 - Securing GET /pos/auth/me
+2024-11-04 16:07:52 - Secured GET /pos/user/me
+2024-11-04 16:07:52 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:07:52 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.UsuarioController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.UsuarioController]
+2024-11-04 16:07:52 - Secured GET /pos/auth/me
+2024-11-04 16:07:52 - Authorizing method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 16:07:52 - Authorized method invocation ReflectiveMethodInvocation: public org.springframework.http.ResponseEntity com.sistema.pos.controller.RegistroController.getCurrentUser(org.springframework.security.core.Authentication); target is of class [com.sistema.pos.controller.RegistroController]
+2024-11-04 16:09:46 - Application shutdown requested.
+2024-11-04 16:09:46 - Stopping ProtocolHandler ["http-nio-8080"]
+2024-11-04 16:09:46 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-04 16:09:46 - HikariPool-7 - Shutdown initiated...
+2024-11-04 16:09:46 - HikariPool-7 - Shutdown completed.

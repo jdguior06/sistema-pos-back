@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.entity.Permiso;
 import com.sistema.pos.entity.Rol;
 import com.sistema.pos.repository.PermisoRepository;
@@ -29,6 +30,7 @@ public class RolService {
 		return roles;
 	}
 	
+	@LoggableAction
 	public Rol guardarRol(String nombre, List<String> nombresPermisos) {
 		Rol rol = new Rol();
 		rol.setNombre(nombre);
@@ -40,6 +42,7 @@ public class RolService {
 		return rolRepository.save(rol);
 	}
 	
+	@LoggableAction
 	public Rol modificarRol(Long id, String nombre, List<String> nombresPermisos) {
 		Rol rol = obtenerRol(id);
 	    if (nombre != null && !nombre.isEmpty()) {
@@ -61,6 +64,7 @@ public class RolService {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el rol con el id" + id);
 		}
 	}
+	
 	public Rol obtenerRolnnombre(String nombre){
 		Optional<Rol> rol = rolRepository.findByNombre(nombre);
 		if (rol.isPresent()) {
@@ -69,6 +73,8 @@ public class RolService {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el rol con el id" + nombre);
 		}
 	}
+	
+	@LoggableAction
 	public Rol actualizarRol(Long id, Rol rolDto) {
 		Rol rol = obtenerRol(id);
 		rol.setNombre(rolDto.getNombre());

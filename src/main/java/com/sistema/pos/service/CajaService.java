@@ -1,5 +1,6 @@
 package com.sistema.pos.service;
 
+import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.dto.CajaDTO;
 import com.sistema.pos.entity.*;
 import com.sistema.pos.repository.CajaRepository;
@@ -39,6 +40,7 @@ public class CajaService {
         }
         return caja.get();
     }
+    
     public Caja obtenerCajaDeSucursal(Long idSucursal, Long idCaja) {
         Sucursal sucursal = sucursalService.findById(idSucursal);
         Optional<Caja> caja = cajaRepository.findByIdAndSucursal(idCaja, sucursal);
@@ -47,7 +49,8 @@ public class CajaService {
         }
         return caja.get();
     }
-
+    
+    @LoggableAction
     public Caja saveInSucursal(Long idSucursal, CajaDTO caja) {
         Sucursal sucursal = sucursalService.findById(idSucursal);
         Caja nuevo = new Caja();
@@ -57,6 +60,7 @@ public class CajaService {
         return cajaRepository.save(nuevo);
     }
     
+    @LoggableAction
     public Caja modificarCajaEnSucursal(Long idSucursal, Long idCaja, CajaDTO cajaDTO) {
         Sucursal sucursal = sucursalService.findById(idSucursal);
         Caja caja = obtenerCajaDeSucursal(idSucursal, idCaja);
@@ -64,7 +68,8 @@ public class CajaService {
         caja.setSucursal(sucursal);
         return cajaRepository.save(caja);
     }
-
+    
+    @LoggableAction
     public void eliminarCaja(Long id) {
        Optional<Caja> caja = cajaRepository.findById(id);
        Caja eliminadacaja=caja.get();
@@ -75,7 +80,8 @@ public class CajaService {
     public List<Caja> buscarCajas(String searchTerm) {
         return cajaRepository.buscarCajas(searchTerm);
     }
-
+    
+    @LoggableAction
     public void desactivarCajaEnSucursal(Long idSucursal, Long idCaja) {
         Caja caja = obtenerCajaDeSucursal(idSucursal, idCaja);
         caja.setActivo(false);
