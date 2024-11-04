@@ -141,8 +141,10 @@ public class UsuarioService {
 	
 	public AuthResponse loader(Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String token = jwtService.getToken(userDetails);
 		Usuario user = usuarioDetailsService.getUser(userDetails.getUsername());
         return AuthResponse.builder()
+        	.token(token)
 			.email(user.getEmail())
 			.role(user.getRol().iterator().next())
 			.nombre(user.getNombre())
