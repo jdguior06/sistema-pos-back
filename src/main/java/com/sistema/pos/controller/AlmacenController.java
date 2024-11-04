@@ -33,6 +33,19 @@ public class AlmacenController {
         );
     }
 
+    // Nuevo endpoint para obtener todos los almacenes
+    @GetMapping("/todos")
+    public ResponseEntity<ApiResponse<List<Almacen>>> getAllAlmacenes() {
+        List<Almacen> almacenes = almacenService.findAll();
+        return ResponseEntity.ok(
+                ApiResponse.<List<Almacen>>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .message("Lista de todos los almacenes")
+                        .data(almacenes)
+                        .build()
+        );
+    }
+
     @GetMapping("/{idAlmacen}")
     public ResponseEntity<ApiResponse<Almacen>> getAlmacen(
             @PathVariable Long idSucursal, @PathVariable Long idAlmacen) {
