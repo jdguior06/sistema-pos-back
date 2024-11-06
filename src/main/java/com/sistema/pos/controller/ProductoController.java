@@ -99,36 +99,6 @@ public class ProductoController {
 		}
 	}
 
-    // Obtener productos para la vista Ecommerce
-//    @GetMapping("/ecommerce")
-//    public ResponseEntity<List<Ecommerce>> traerTotal() {
-//        try {
-//            List<Producto> productos = productoService.findAll();
-//            List<Ecommerce> lista = productos.stream().map(p -> {
-//                Ecommerce nuevo = new Ecommerce();
-//                nuevo.setDescripcion(p.getDescripcion());
-//                nuevo.setNombre(p.getNombre());
-//                nuevo.setId_categoria(p.getId_categoria().getId());
-//                nuevo.setPrecio(p.getPrecio());
-//
-//                // Calcular la cantidad total
-//                int cantidad = p.getId_producto_almacen().stream()
-//                        .mapToInt(ProductoAlmacen::getCantidad)
-//                        .sum();
-//                nuevo.setCantidad(cantidad);
-//
-//                return nuevo;
-//            }).toList();
-//
-//            return ResponseEntity.ok(lista);
-//
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .header("Error-Message", e.getMessage())
-//                    .build();
-//        }
-//    }
-
     // Actualizar producto
     @PatchMapping("/{id}")
     public ResponseEntity<ApiResponse<Producto>> actualizarProducto(@PathVariable Long id, @Valid @RequestBody ProductoDTO productoDTO, BindingResult bindingResult) {

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -197,5 +198,15 @@ public class UsuarioService {
 	public List<Usuario> buscarUsuarios(String searchTerm) {
         return usuarioRepository.findByNombreOrApellidoOrEmail(searchTerm);
     }
+	
+	public Usuario obtenerUsuarioAuthenticado(){
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			String email = ((UserDetails) principal).getUsername();
+			return getUser(email);
+		} else {
+			throw new IllegalStateException("Usuario no autenticado");
+		}
+	}
 	
 }

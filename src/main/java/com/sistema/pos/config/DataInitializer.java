@@ -54,28 +54,10 @@ public class DataInitializer {
 	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_GENERAR_VENTAS"));
 	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_VER_REPORTE_VENTAS"));
 	    
-	    Rol adminRole = rolRepository.findByNombre("ADMIN")
-	            .orElseGet(() -> {
-	                Rol newRole = new Rol("ADMIN");
-	                newRole.setPermiso(permisos);
-	                return rolRepository.save(newRole); 
-	            });
-
-//	    if (!usuarioRepository.existsByEmail("admin@gmail.com")) {
-//	        Usuario adminUser = new Usuario();
-//	        adminUser.setNombre("Admin");
-//	        adminUser.setApellido("User");
-//	        adminUser.setEmail("admin@gmail.com");
-//	        adminUser.setPassword(passwordEncoder.encode("123456"));
-//	        adminUser.setRol(Set.of(adminRole)); // Asigna el rol al usuario
-//	        adminUser.setActivo(true);
-//	        adminUser.setCuentaNoExpirada(true);
-//	        adminUser.setCuentaNoBloqueada(true);
-//	        adminUser.setCredencialesNoExpiradas(true);
-//	        
-//	        usuarioRepository.save(adminUser);
-//	    }
-	    
+	    Rol adminRole = rolRepository.findByNombre("ADMIN").orElseGet(() -> new Rol("ADMIN"));
+	    adminRole.setPermiso(permisos);
+	    rolRepository.save(adminRole); 
+	            
 	}
 
 }

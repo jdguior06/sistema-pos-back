@@ -5,14 +5,10 @@ import com.sistema.pos.entity.Plan;
 import com.sistema.pos.repository.PlanRepository;
 import com.sistema.pos.service.PlanService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 @Component

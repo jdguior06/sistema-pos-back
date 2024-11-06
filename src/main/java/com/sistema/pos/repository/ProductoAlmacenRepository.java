@@ -1,7 +1,6 @@
 package com.sistema.pos.repository;
 
 
-import com.sistema.pos.entity.Almacen;
 import com.sistema.pos.entity.ProductoAlmacen;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

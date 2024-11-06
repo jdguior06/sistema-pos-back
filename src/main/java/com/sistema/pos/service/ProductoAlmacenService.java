@@ -73,15 +73,12 @@ public class ProductoAlmacenService {
 
         }return productoA.get();
     }
-    /*public ProductoAlmacen obtenerProductoDelAlmacen(Long idAlmacen, Long idProductoAlmacen){
-    	Almacen almacen = almacenService.obtenerAlmacenId(idAlmacen);
-        Optional<ProductoAlmacen> productoAlmacen = productoAlmacenRepository.findByIdAndAlmacen(idAlmacen, almacen);
-        if(!productoAlmacen.isPresent()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el producto con el id" + idProductoAlmacen);
-
-        }return productoAlmacen.get();
-    }*/
-
+    
+    public ProductoAlmacen obtenerProductoAlmacenPorProductoYAlmacen(Long almacenId, Long productoId) {
+        return productoAlmacenRepository.findByAlmacen_IdAndProducto_Id(almacenId, productoId)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "Producto no encontrado en el almacén seleccionado"));
+    }
 
     @LoggableAction
     public ProductoAlmacen save(ProductoAlmacen productoAlmacen, DetalleNotaDTO detalleNotaDTO) {
@@ -118,4 +115,9 @@ public class ProductoAlmacenService {
         productoAlmacen.setActivo(false);
         return productoAlmacenRepository.save(productoAlmacen);
     }
+    
+    public void actualizarStock(ProductoAlmacen productoAlmacen) {
+    	productoAlmacenRepository.save(productoAlmacen);
+    }
+    
 }
