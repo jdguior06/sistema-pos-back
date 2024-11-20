@@ -28,10 +28,6 @@ public class Cliente {
     
     @Email(message = "El email debe ser válido")
     private String email;
-    
     private String nit;
-    
     private boolean activo;
-
-    
 }

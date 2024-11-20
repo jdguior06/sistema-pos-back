@@ -1,0 +1,27 @@
+package com.sistema.pos.entity;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.time.DateTimeException;
+import java.util.Date;
+
+@Data
+@Entity
+@Table(name = "pedido_usuario ")
+public class Pedido {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;
+    private Float toal;
+    private Boolean estado;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "id_usuario",nullable = false)
+    private  Usuario usuario;
+
+}
