@@ -36,5 +36,6 @@ public class Producto {
     private Categoria categoria;
     
     private boolean activo;
+
     
 }

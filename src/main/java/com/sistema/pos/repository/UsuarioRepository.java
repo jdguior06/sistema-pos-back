@@ -14,6 +14,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	
 	public Optional<Usuario> findByEmail(String email);
 	boolean existsByEmail(String email);
+	//Optional<Usuario> findByEmail(String email);
 	
 	@Query("SELECT c FROM Usuario c WHERE " +
 	           "LOWER(c.nombre) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
