@@ -14,6 +14,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
@@ -47,6 +48,7 @@ public class PedidoService {
         Pedido pedido = new Pedido();
         pedido.setFecha(new Date());
         pedido.setEstado(true);
+        pedido.setDescripcion(pedidoDTO.getDescripcion());
         pedido.setUsuario(usuario);
 
         // Obtener todos los productos en una sola consulta
@@ -92,5 +94,12 @@ public class PedidoService {
 
         return pedidoGuardado;
     }
+    public List<Pedido> obtenerPedidosActivosPorUsuario(String email) {
+        // Verificar que el usuario existe
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
 
+        // Obtener pedidos activos
+        return pedidoRepository.findByUsuarioAndEstadoTrue(usuario);
+    }
 }

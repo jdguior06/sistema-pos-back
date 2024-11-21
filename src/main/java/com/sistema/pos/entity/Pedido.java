@@ -19,6 +19,7 @@ public class Pedido {
     private Date fecha;
     private Float toal;
     private Boolean estado;
+    private String descripcion;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_usuario",nullable = false)
