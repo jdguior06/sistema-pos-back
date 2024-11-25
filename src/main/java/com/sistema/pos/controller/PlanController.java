@@ -1,7 +1,6 @@
 package com.sistema.pos.controller;
 
 
-import com.sistema.pos.entity.Permiso;
 import com.sistema.pos.entity.Plan;
 import com.sistema.pos.response.ApiResponse;
 import com.sistema.pos.service.PlanService;

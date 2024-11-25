@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.sistema.pos.config.JwtService;
+import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.dto.UsuarioDTO;
 import com.sistema.pos.entity.Rol;
 import com.sistema.pos.entity.Usuario;
@@ -80,7 +81,8 @@ public class UsuarioService {
 			throw new UsernameNotFoundException("El usuario no se encuentra");
 		}
 	}
-
+	
+	@LoggableAction
 	public AuthResponse createUser(UsuarioDTO userDto) {
 		Optional<Rol> optionalUserRole = rolRepository.findByNombre("CAJERO");
 		Rol userRole = optionalUserRole.orElseGet(() -> rolRepository.save(new Rol ("CAJERO")));
@@ -92,6 +94,7 @@ public class UsuarioService {
 		return AuthResponse.builder().token(jwtService.getToken(usuario)).build();
 	}
 	
+	@LoggableAction
 	public Usuario registrarUser(UsuarioDTO userDto) {
 //		List<Rol> roles  = rolService.listarRoles();
 		Rol roles = rolService.obtenerRol(userDto.getRolId());
@@ -138,16 +141,28 @@ public class UsuarioService {
 	
 	public AuthResponse loader(Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String token = jwtService.getToken(userDetails);
 		Usuario user = usuarioDetailsService.getUser(userDetails.getUsername());
         return AuthResponse.builder()
+        	.token(token)
 			.email(user.getEmail())
 			.role(user.getRol().iterator().next())
 			.nombre(user.getNombre())
 			.apellido(user.getApellido())
 			.id(user.getId())
+			.themeColor(user.getThemeColor())
             .build();
 	}
-
+	
+	@LoggableAction
+	public Usuario updateThemeColor(Authentication authentication, String themeColor) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		Usuario user = usuarioDetailsService.getUser(userDetails.getUsername());
+        user.setThemeColor(themeColor);
+        return usuarioRepository.save(user);
+    }
+	
+	@LoggableAction
 	public Usuario updateUser(Long id, UsuarioDTO userDto) {
 		Usuario user = obtenerUserPorId(id);
 		user.setNombre(userDto.getNombre());
@@ -158,6 +173,7 @@ public class UsuarioService {
 	}
 	
 	@Transactional
+	@LoggableAction
 	public void deleteUser(Long id) {
 		Usuario user = obtenerUserPorId(id);
 		user.setActivo(false);
@@ -168,6 +184,7 @@ public class UsuarioService {
 	}
 	
 	@Transactional
+	@LoggableAction
 	public void activeUser(Long id) {
 		Usuario user = obtenerUserPorId(id);
 		user.setActivo(true);

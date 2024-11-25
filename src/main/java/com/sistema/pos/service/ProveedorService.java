@@ -1,5 +1,6 @@
 package com.sistema.pos.service;
 
+import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.entity.Proveedor;
 import com.sistema.pos.repository.ProveedorRespository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +29,13 @@ public class ProveedorService {
 		}
 	}
 	
+	@LoggableAction
 	public Proveedor registrarProveedor(Proveedor proveedor) {
 		proveedor.setActivo(true);
 		return proveedorRespository.save(proveedor);
 	}
 	
+	@LoggableAction
 	public Proveedor modificarProveedor(Long id, Proveedor proveedor) {
 		Proveedor proveedorModificado = obtenerProveedorPorId(id);
 		proveedorModificado.setNombre(proveedor.getNombre());
@@ -42,6 +45,7 @@ public class ProveedorService {
 		return proveedorRespository.save(proveedorModificado);
 	}
 	
+	@LoggableAction
 	public void eliminarProveedor(Long id) {
 		Proveedor proveedor = obtenerProveedorPorId(id);
 		proveedor.setActivo(false);

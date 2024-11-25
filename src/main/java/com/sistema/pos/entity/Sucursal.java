@@ -30,4 +30,8 @@ public class Sucursal {
     
     private boolean activo;
     
+    @ManyToOne
+    @JoinColumn(name = "tenant_id")
+    private Tenant tenant;
+    
 }

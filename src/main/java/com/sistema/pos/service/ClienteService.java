@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.entity.Cliente;
 import com.sistema.pos.repository.ClienteRepository;
 
@@ -29,11 +30,13 @@ public class ClienteService {
 		}
 	}
 	
+	@LoggableAction
 	public Cliente registrarCliente(Cliente cliente) {
 		cliente.setActivo(true);
 		return clienteRepository.save(cliente);
 	}
 	
+	@LoggableAction
 	public Cliente modificarCliente(Long id, Cliente cliente) {
 		Cliente clienteModificado = obtenerClientePorId(id);
 		clienteModificado.setNombre(cliente.getNombre());
@@ -43,6 +46,7 @@ public class ClienteService {
 		return clienteRepository.save(clienteModificado);
 	}
 	
+	@LoggableAction
 	public void eliminarCliente(Long id) {
 		Cliente cliente = obtenerClientePorId(id);
 		cliente.setActivo(false);

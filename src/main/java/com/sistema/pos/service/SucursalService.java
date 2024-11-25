@@ -1,5 +1,6 @@
 package com.sistema.pos.service;
 
+import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.dto.SucursalDTO;
 import com.sistema.pos.entity.Sucursal;
 import com.sistema.pos.repository.SucursalRepository;
@@ -29,6 +30,7 @@ public class SucursalService {
     	return sucursal.get();
     }
 
+    @LoggableAction
     public Sucursal save(SucursalDTO sucursalDTO) {
     	Sucursal sucursal = new Sucursal();
     	sucursal.setCodigo(sucursalDTO.getCodigo());
@@ -40,6 +42,7 @@ public class SucursalService {
         return sucursalRepository.save(sucursal);
     }
     
+    @LoggableAction
     public Sucursal modificar(Long id, SucursalDTO sucursalDTO) {
     	Sucursal sucursal = findById(id);
     	sucursal.setCodigo(sucursalDTO.getCodigo());
@@ -50,6 +53,7 @@ public class SucursalService {
     	return sucursalRepository.save(sucursal);
     }
 
+    @LoggableAction
     public void deleteById(Long id) {
     	Sucursal sucursal = findById(id);
     	sucursal.setActivo(false);

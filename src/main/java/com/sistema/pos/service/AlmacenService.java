@@ -1,5 +1,6 @@
 package com.sistema.pos.service;
 
+import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.dto.AlmacenDTO;
 import com.sistema.pos.entity.Almacen;
 import com.sistema.pos.entity.Proveedor;
@@ -61,6 +62,7 @@ public class AlmacenService {
         return almacen.get();
     }
 
+    @LoggableAction
 	public Almacen saveInSucursal(Long idSucursal, AlmacenDTO almacenDTO) {
         Sucursal sucursal = sucursalService.findById(idSucursal);
         Almacen almacen = new Almacen();
@@ -71,6 +73,7 @@ public class AlmacenService {
         return almacenRepository.save(almacen);
     }
 
+    @LoggableAction
 	public Almacen modificarAlmacenEnSucursal(Long idSucursal, Long idAlmacen, AlmacenDTO almacenDTO) {
         Sucursal sucursal = sucursalService.findById(idSucursal);
         Almacen almacen = obtenerAlmacenDeSucursal(idSucursal, idAlmacen);
@@ -80,6 +83,7 @@ public class AlmacenService {
         return almacenRepository.save(almacen);
     }
 
+    @LoggableAction
 	public void desactivarAlmacenEnSucursal(Long idSucursal, Long idAlmacen) {
         Almacen almacen = obtenerAlmacenDeSucursal(idSucursal, idAlmacen);
         almacen.setActivo(false);

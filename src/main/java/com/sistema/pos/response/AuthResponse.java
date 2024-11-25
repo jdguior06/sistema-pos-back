@@ -19,5 +19,6 @@ public class AuthResponse {
 	String nombre;
 	String apellido;
 	Long id;
+	private String themeColor;
 	
 }

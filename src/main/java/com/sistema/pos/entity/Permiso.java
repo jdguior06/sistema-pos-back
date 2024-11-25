@@ -21,5 +21,10 @@ public class Permiso {
 	private Long id; 
 
 	private String nombre;
+
+	public Permiso(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
 	
 }

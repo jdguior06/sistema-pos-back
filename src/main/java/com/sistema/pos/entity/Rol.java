@@ -1,6 +1,5 @@
 package com.sistema.pos.entity;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -22,7 +21,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "rol")
 @Entity
-public class Rol implements Serializable {
+public class Rol {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,7 +29,7 @@ public class Rol implements Serializable {
 	
 	private String nombre;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
     		name = "rol_permiso",
     		joinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id"),

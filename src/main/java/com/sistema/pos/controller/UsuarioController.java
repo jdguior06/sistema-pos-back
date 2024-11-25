@@ -11,20 +11,22 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.sistema.pos.dto.ThemeColorRequest;
 import com.sistema.pos.dto.UsuarioDTO;
 import com.sistema.pos.entity.Usuario;
 import com.sistema.pos.response.ApiResponse;
+import com.sistema.pos.response.AuthResponse;
 import com.sistema.pos.service.UsuarioService;
 import com.sistema.pos.util.HttpStatusMessage;
 
@@ -38,7 +40,7 @@ public class UsuarioController {
     private UsuarioService service;
 
 	@GetMapping
-	@PreAuthorize("hasAuthority('ADMINISTRAR_PERSONAL')")
+	@PreAuthorize("hasAuthority('PERMISO_GESTIONAR_PERSONAL')")
 	public ResponseEntity<ApiResponse<List<Usuario>>> listarUsuarios(@RequestParam(value = "search", required = false) String searchTerm) {
 		List<Usuario> user;
 		if (searchTerm != null && !searchTerm.isEmpty()) {
@@ -63,10 +65,22 @@ public class UsuarioController {
         
         return ResponseEntity.ok("Acceso concedido");
     }
+    
+    @GetMapping("/me")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<AuthResponse> getCurrentUser(Authentication authentication) {
+        return ResponseEntity.ok(service.loader(authentication));
+    }
+    
+    @PutMapping("/theme")
+    @PreAuthorize("isAuthenticated()")
+    public void updateThemeColor(Authentication authentication, @RequestBody ThemeColorRequest themeColorRequest) {
+    	service.updateThemeColor(authentication, themeColorRequest.getThemeColor());
+    }
 
     
 	@GetMapping("/{id}")
-	@PreAuthorize("hasRole('ROLE_ADMIN')") 
+	@PreAuthorize("hasAuthority('PERMISO_GESTIONAR_PERSONAL')")
 	public ResponseEntity<ApiResponse<Usuario>> obtenerUsuario(@PathVariable Long id) {
 		try {
 			Usuario usuariosOpt = service.obtenerUserPorId(id);
@@ -91,7 +105,7 @@ public class UsuarioController {
     
 
 	@PatchMapping("/{id}")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasAuthority('PERMISO_GESTIONAR_PERSONAL')")
 	public ResponseEntity<ApiResponse<Usuario>>actualizarUsuario(@PathVariable Long id, @Valid @RequestBody UsuarioDTO userDTO, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			List<String> errors = bindingResult.getAllErrors().stream()
@@ -125,8 +139,8 @@ public class UsuarioController {
 		}
 	}
 
-	@DeleteMapping("/{id}")
-	@PreAuthorize("hasAuthority('ADMINISTRAR_PERSONAL')")
+	@PatchMapping("/{id}/desactivar")
+	@PreAuthorize("hasAuthority('PERMISO_GESTIONAR_PERSONAL')")
 	public ResponseEntity<ApiResponse<Void>> eliminarUsuario(@PathVariable Long id) {
 		try {
 			service.deleteUser(id);
@@ -148,8 +162,8 @@ public class UsuarioController {
 		}
 	}
 	
-	@PostMapping("/{id}")
-	@PreAuthorize("hasAuthority('ADMINISTRAR_PERSONAL')")
+	@PatchMapping("/{id}/activar")
+	@PreAuthorize("hasAuthority('PERMISO_GESTIONAR_PERSONAL')")
 	public ResponseEntity<ApiResponse<Void>> activarUsuario(@PathVariable Long id) {
 		try {
 			service.activeUser(id);
@@ -172,7 +186,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping
-	@PreAuthorize("hasAuthority('ADMINISTRAR_PERSONAL')")
+	@PreAuthorize("hasAuthority('PERMISO_GESTIONAR_PERSONAL')")
 	public ResponseEntity<ApiResponse<Usuario>> guardarUsuario(@Valid @RequestBody UsuarioDTO grupoDTO, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			List<String> errors = bindingResult.getAllErrors().stream()

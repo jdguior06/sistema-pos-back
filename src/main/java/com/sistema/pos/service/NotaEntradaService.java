@@ -1,5 +1,6 @@
 package com.sistema.pos.service;
 
+import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.dto.DetalleNotaDTO;
 import com.sistema.pos.dto.NotaEntradaCompletoDTO;
 import com.sistema.pos.dto.NotaEntradaDTO;
@@ -87,6 +88,7 @@ public class NotaEntradaService {
 /*
 
     */
+   @LoggableAction
    public Nota_Entrada guardarNota(NotaEntradaCompletoDTO notaEntradaCompletaDto) {
        Proveedor proveedor = proveedorService.obtenerProveedorPorId(notaEntradaCompletaDto.getProveedor());
        Almacen almacen = almacenService.obtenerAlmacenId(notaEntradaCompletaDto.getAlmacen());
@@ -131,6 +133,7 @@ public class NotaEntradaService {
 
 
     // Eliminar una nota de entrada por su ID
+   	@LoggableAction
     public void eliminarNota(Long idNota) {
         notaEntradaRepository.deleteById(idNota);
     }
