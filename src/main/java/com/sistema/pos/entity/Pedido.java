@@ -24,8 +24,7 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "id_usuario",nullable = false)
     private  Usuario usuario;
-
-    @OneToOne(mappedBy = "pedido")
-    private Factura factura;
-
+    @OneToOne
+    @JoinColumn(name ="id_cliente",nullable = true)
+    private Cliente cliente;
 }

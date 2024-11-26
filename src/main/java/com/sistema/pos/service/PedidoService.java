@@ -2,10 +2,7 @@ package com.sistema.pos.service;
 
 import com.sistema.pos.dto.PedidoDTO;
 import com.sistema.pos.dto.Pedido_ProductoDTO;
-import com.sistema.pos.entity.Pedido;
-import com.sistema.pos.entity.Pedido_Producto;
-import com.sistema.pos.entity.Producto;
-import com.sistema.pos.entity.Usuario;
+import com.sistema.pos.entity.*;
 import com.sistema.pos.repository.PedidoRepository;
 import com.sistema.pos.repository.Pedido_ProductoRepository;
 import com.sistema.pos.repository.ProductoRepository;
@@ -45,11 +42,14 @@ public class PedidoService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
 
         // Crear pedido
+        Cliente cliente=new Cliente();
+        cliente.setId(pedidoDTO.getId_cliente());
         Pedido pedido = new Pedido();
         pedido.setFecha(new Date());
         pedido.setEstado(true);
         pedido.setDescripcion(pedidoDTO.getDescripcion());
         pedido.setUsuario(usuario);
+        pedido.setCliente(cliente);
 
         // Obtener todos los productos en una sola consulta
         List<Long> productIds = pedidoDTO.getDetalle().stream()

@@ -9,6 +9,7 @@ import java.util.List;
 public class PedidoDTO {
     private String email;
     private String descripcion;
+    private Long id_cliente;
     private List<Pedido_ProductoDTO> detalle;
 
 
