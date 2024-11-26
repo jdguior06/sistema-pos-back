@@ -1,9 +1,13 @@
 package com.sistema.pos.service;
 
 import com.sistema.pos.config.LoggableAction;
+import com.sistema.pos.dto.ProductoAlmacenDTO;
 import com.sistema.pos.dto.ProductoDTO;
+import com.sistema.pos.entity.Almacen;
 import com.sistema.pos.entity.Categoria;
 import com.sistema.pos.entity.Producto;
+import com.sistema.pos.entity.ProductoAlmacen;
+import com.sistema.pos.repository.AlmacenRepository;
 import com.sistema.pos.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductoService {
@@ -68,5 +73,42 @@ public class ProductoService {
 		Producto producto = obtenerProducto(id);
 		producto.setActivo(false);
 		return productoRepository.save(producto);
+	}
+
+
+
+
+	@Autowired
+	private AlmacenRepository almacenRepository;
+
+	/**
+	 * Obtiene todos los productos de una sucursal dada
+	 * @param idSucursal El ID de la sucursal
+	 * @return Lista de productos en la sucursal
+	 */
+	public List<ProductoAlmacenDTO> obtenerProductosPorSucursal(Long idSucursal) {
+		// Buscar almacenes de la sucursal
+		List<Almacen> almacenes = almacenRepository.findBySucursalId(idSucursal);
+
+		if (almacenes.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se encontraron almacenes para la sucursal dada");
+		}
+
+		// Extraer productos de cada almacén
+		List<ProductoAlmacenDTO> productos = almacenes.stream()
+				.flatMap(almacen -> almacen.getProductosAlmacen().stream())
+				.filter(ProductoAlmacen::isActivo)
+				.map(pa -> new ProductoAlmacenDTO(
+						pa.getProducto().getNombre(),
+						pa.getProducto().getDescripcion(),
+						pa.getProducto().getId(),
+						pa.getStock()
+				))
+				.collect(Collectors.toList());
+
+		if (productos.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se encontraron productos en la sucursal dada");
+		}
+		return productos;
 	}
 }

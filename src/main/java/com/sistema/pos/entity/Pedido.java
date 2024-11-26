@@ -24,5 +24,7 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "id_usuario",nullable = false)
     private  Usuario usuario;
-
+    @OneToOne
+    @JoinColumn(name ="id_cliente",nullable = true)
+    private Cliente cliente;
 }
