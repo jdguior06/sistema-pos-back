@@ -21,5 +21,5 @@ public interface ProveedorRespository extends JpaRepository<Proveedor,Long> {
 	List<Proveedor> buscarProveedores(@Param("searchTerm") String searchTerm);
 
 
-	Optional<Proveedor> findById(Long aLong);
+	Optional<Proveedor> findById(Long proveedorId);
 }

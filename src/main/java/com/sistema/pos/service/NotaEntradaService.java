@@ -6,10 +6,16 @@ import com.sistema.pos.dto.NotaEntradaCompletoDTO;
 import com.sistema.pos.dto.NotaEntradaDTO;
 import com.sistema.pos.entity.*;
 import com.sistema.pos.repository.NotaEntradaRepository;
+import com.sistema.pos.repository.ProductoRepository;
+import com.sistema.pos.repository.ProveedorRespository;
+import com.sistema.pos.repository.SucursalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NotaEntradaService {
@@ -31,6 +37,13 @@ public class NotaEntradaService {
 
     @Autowired
     private AlmacenService almacenService;
+    @Autowired
+    private ProductoRepository productoRepository;
+
+    @Autowired
+    private SucursalRepository sucursalRepository;
+    @Autowired
+    private ProveedorRespository proveedorRespository;
 
     // Obtener todas las notas de entrada
     public List<Nota_Entrada> obtenerTodasLasNotas() {
@@ -40,9 +53,29 @@ public class NotaEntradaService {
     // Obtener una nota de entrada por su ID
     public Nota_Entrada obtenerNotaPorId(Long idNota) {
         return notaEntradaRepository.findById(idNota)
-                .orElseThrow(() -> new IllegalArgumentException("Nota de entrada no encontrada"));
+                .orElseThrow(() -> new IllegalArgumentException("Nota de entrada no encontrada con el ID: " + idNota));
     }
 
+    public List<Nota_Entrada> obtenerNotasPorProveedor(Long idProveedor) {
+        Proveedor proveedor = proveedorRespository.findById(idProveedor)
+                .orElseThrow(() -> new IllegalArgumentException("Proveedor no encontrado con el ID: " + idProveedor));
+        return notaEntradaRepository.findByProveedorId(proveedor.getId());
+    }
+
+
+
+    public List<Nota_Entrada> obtenerNotasPorFecha(LocalDateTime fecha) {
+        return notaEntradaRepository.findByFecha(fecha);
+    }
+
+
+
+    public List<Nota_Entrada> obtenerNotasPorSucursalYAlmacen(Long idAlmacen, Long idSucursal) {
+        Sucursal sucursal = sucursalRepository.findById(idSucursal)
+                .orElseThrow(() -> new IllegalArgumentException("Sucursal no encontrada con el ID: " + idSucursal));
+
+        return notaEntradaRepository.findByAlmacen_SucursalIdAndAlmacenId(sucursal.getId(), idAlmacen);
+    }
 
    /* public Nota_Entrada guardarNota(NotaEntradaDTO notaEntradaDto) {
         Proveedor proveedor = proveedorService.obtenerProveedorPorId(notaEntradaDto.getProveedor());
