@@ -9,10 +9,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
 	
-	@Override
+	/*@Override
     public void configurePathMatch(@NonNull PathMatchConfigurer configurer) {
         configurer.addPathPrefix("/pos", c -> true);
+    }*/
+    @Override
+    public void configurePathMatch(@NonNull PathMatchConfigurer configurer) {
+        configurer.addPathPrefix("/pos", c -> !c.getPackageName().startsWith("org.springdoc"));
     }
+
 
     @Override
     public void addCorsMappings(@NonNull CorsRegistry registry){

@@ -98,12 +98,15 @@ public class ProductoService {
 		List<ProductoAlmacenDTO> productos = almacenes.stream()
 				.flatMap(almacen -> almacen.getProductosAlmacen().stream())
 				.filter(ProductoAlmacen::isActivo)
-				.map(pa -> new ProductoAlmacenDTO(
-						pa.getProducto().getNombre(),
-						pa.getProducto().getDescripcion(),
-						pa.getProducto().getId(),
-						pa.getStock()
-				))
+				.map(pa -> {
+					ProductoAlmacenDTO dto = new ProductoAlmacenDTO();
+					dto.setNombre(pa.getProducto().getNombre());
+					dto.setDescripcion(pa.getProducto().getDescripcion());
+					dto.setId_producto(pa.getProducto().getId());
+					dto.setStock(pa.getStock());
+					return dto;
+				})
+
 				.collect(Collectors.toList());
 
 		if (productos.isEmpty()) {
