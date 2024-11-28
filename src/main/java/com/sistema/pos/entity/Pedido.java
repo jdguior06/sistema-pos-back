@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.time.DateTimeException;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,7 +18,7 @@ public class Pedido {
     private Long id;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    private Float toal;
+    private Float total;
     private Boolean estado;
     private String descripcion;
     @JsonIgnore
@@ -30,4 +31,8 @@ public class Pedido {
 
     @OneToOne(mappedBy = "pedido")
     private Factura factura;
+
+    @OneToMany(mappedBy = "pedido",cascade= CascadeType.ALL, orphanRemoval = true)
+    private List<Pedido_Producto> detalle;
+
 }

@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -17,7 +18,7 @@ public class Nota_Entrada  {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private Date fecha;
+    private LocalDateTime fecha;
     private float total;
     private float descuento;
 

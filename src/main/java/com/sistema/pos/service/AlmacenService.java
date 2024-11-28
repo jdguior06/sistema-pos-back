@@ -27,10 +27,12 @@ public class AlmacenService {
     @Autowired
     private ProveedorRespository proveedorRespository;
 
+    //lista todos los almacenes
     public List<Almacen> findAll() {
 		return almacenRepository.findAll();
 	}
 
+//lista todos los lamacenes d euna sucursal
 	public List<Almacen> findAllBySucursalId(Long idSucursal) {
         Sucursal sucursal = sucursalService.findById(idSucursal);
         return almacenRepository.findAllBySucursal(sucursal);
@@ -90,9 +92,6 @@ public class AlmacenService {
         almacenRepository.save(almacen);
     }
 
-	public boolean existsById(Long id) {
-		return almacenRepository.existsById(id);
-	}
 
 
 }

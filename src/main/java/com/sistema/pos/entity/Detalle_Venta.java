@@ -1,5 +1,6 @@
 package com.sistema.pos.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,11 +14,13 @@ public class Detalle_Venta {
     private int cantidad;
     private float costoUnitario;
     private float subTotal;
-private float descuento;
+    private boolean activo;
+    private float descuento;
     @ManyToOne
     @JoinColumn(name = "id_producto",nullable = false)
     private Producto producto;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_Factura",nullable = false)
     private Factura factura;

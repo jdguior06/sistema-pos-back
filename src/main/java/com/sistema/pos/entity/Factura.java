@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,4 +27,13 @@ public class Factura {
     @OneToOne
     @JoinColumn(name = "pedido_id", referencedColumnName = "id", nullable = true)
     private Pedido pedido;
+
+    @ManyToOne
+    @JoinColumn(name="idCliente",nullable = true)
+    private Cliente cliente;
+
+    // Relación con Detalle_Venta
+    @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Detalle_Venta> detalles;
+
 }

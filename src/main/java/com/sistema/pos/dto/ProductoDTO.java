@@ -15,9 +15,9 @@ public class ProductoDTO {
     
     private String descripcion;
     
-    private double precioCompra;
+    private float precioCompra;
     
-    private double precioVenta;
+    private float precioVenta;
     
     private String foto;
     

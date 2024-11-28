@@ -77,50 +77,7 @@ public class NotaEntradaService {
         return notaEntradaRepository.findByAlmacen_SucursalIdAndAlmacenId(sucursal.getId(), idAlmacen);
     }
 
-   /* public Nota_Entrada guardarNota(NotaEntradaDTO notaEntradaDto) {
-        Proveedor proveedor = proveedorService.obtenerProveedorPorId(notaEntradaDto.getProveedor());
-        Almacen almacen = almacenService.obtenerAlmacenId(notaEntradaDto.getAlmacen());
 
-        Nota_Entrada notaEntrada = new Nota_Entrada();
-        notaEntrada.setFecha(notaEntradaDto.getFecha());
-        notaEntrada.setProveedor(proveedor);
-        notaEntrada.setAlmacen(almacen);
-
-        // Guardar la nota para obtener su ID
-        notaEntrada = notaEntradaRepository.save(notaEntrada);
-
-        // Guardar los detalles de la nota y actualizar el stock
-        float total = 0f;
-        for (DetalleNotaDTO detalle : notaEntradaDto.getDetalles()) {
-            Producto producto = productoService.obtenerProducto(detalle.getProductoId());
-
-            DetalleNotaE detalleNota = new DetalleNotaE();
-            detalleNota.setCantidad(detalle.getCantidad());
-            detalleNota.setCostoUnitario(detalle.getCostoUnitario());
-            detalleNota.setProducto(producto);
-
-            // Guardar el detalle de la nota
-            detalleNotaEService.guardarDetalle(detalleNota, notaEntrada);
-
-            // Calcular el subtotal y agregarlo al total
-            float subTotal = detalle.getCantidad() * detalle.getCostoUnitario();
-            total += subTotal;
-
-            // Actualizar el stock del producto en ese almacén
-            ProductoAlmacen productoAlmacen = new ProductoAlmacen();
-            productoAlmacen.setProducto(detalleNota.getProducto());
-            productoAlmacen.setAlmacen(almacen);
-            productoAlmacenService.save(productoAlmacen, detalle); // Actualizar el stock
-        }
-
-        total -= notaEntradaDto.getDescuento(); // Aplicar descuento
-        notaEntrada.setTotal(total);
-
-        return notaEntradaRepository.save(notaEntrada); // Guardar la nota con el total final
-    }
-/*
-
-    */
    @LoggableAction
    public Nota_Entrada guardarNota(NotaEntradaCompletoDTO notaEntradaCompletaDto) {
        Proveedor proveedor = proveedorService.obtenerProveedorPorId(notaEntradaCompletaDto.getProveedor());
