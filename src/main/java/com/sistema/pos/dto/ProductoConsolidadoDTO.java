@@ -7,12 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class ProductoConsolidadoDTO {
 	
 	private Producto producto;
-    
-    private Integer totalStock;
+	
+	private int totalStock;
 
 }
