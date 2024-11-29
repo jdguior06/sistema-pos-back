@@ -2,6 +2,7 @@ package com.sistema.pos.controller;
 
 import com.sistema.pos.dto.ProductoAlmacenDTO;
 import com.sistema.pos.dto.ProductoDTO;
+import com.sistema.pos.dto.ProductoVentaDTO;
 import com.sistema.pos.entity.Producto;
 import com.sistema.pos.response.ApiResponse;
 import com.sistema.pos.service.ProductoService;
@@ -100,10 +101,11 @@ public class ProductoController {
 		}
 	}
 	@GetMapping("/por-sucursal")
-	public ResponseEntity<List<ProductoAlmacenDTO>> obtenerProductosPorSucursal(@RequestParam Long idSucursal) {
-		List<ProductoAlmacenDTO> productos = productoService.obtenerProductosPorSucursal(idSucursal);
+	public ResponseEntity<List<ProductoVentaDTO>> obtenerProductosPorSucursal(@RequestParam Long idSucursal) {
+		List<ProductoVentaDTO> productos = productoService.obtenerProductosPorSucursal(idSucursal);
 		return ResponseEntity.ok(productos);
 	}
+
 
     // Obtener productos para la vista Ecommerce
 //    @GetMapping("/ecommerce")
