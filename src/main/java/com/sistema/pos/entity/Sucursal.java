@@ -29,9 +29,6 @@ public class Sucursal {
     private String direccion;
     
     private boolean activo;
-    
-    @ManyToOne
-    @JoinColumn(name = "tenant_id")
-    private Tenant tenant;
-    
+
+
 }
