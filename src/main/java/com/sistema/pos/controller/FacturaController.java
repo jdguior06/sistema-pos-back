@@ -2,6 +2,7 @@ package com.sistema.pos.controller;
 
 import com.sistema.pos.dto.FacturaDTO;
 import com.sistema.pos.entity.Factura;
+import com.sistema.pos.repository.FacturaRepository;
 import com.sistema.pos.service.FacturaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,12 +16,13 @@ public class FacturaController {
 
     @Autowired
     private FacturaService facturaService;
-
+    @Autowired
+    private FacturaRepository facturaRepository;
     // Obtener todas las facturas
     @GetMapping
     public ResponseEntity<List<Factura>> obtenerTodasFacturas() {
         try {
-            List<Factura> facturas = facturaService.findAll();
+            List<Factura> facturas = facturaRepository.findAll();
             return ResponseEntity.ok(facturas);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

@@ -1,12 +1,10 @@
 package com.sistema.pos.service;
 
-import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.dto.FacturaDTO;
-import com.sistema.pos.dto.Pedido_ProductoDTO;
 import com.sistema.pos.entity.*;
 import com.sistema.pos.repository.DetalleVentaRepository;
 import com.sistema.pos.repository.FacturaRepository;
-import com.sistema.pos.repository.ProductoRepository;
+import com.sistema.pos.repository.PedidoRepository;
 import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class FacturaService {
+
 
     @Autowired
     private FacturaRepository facturaRepository;
@@ -38,12 +37,23 @@ public class FacturaService {
     private DetalleVentaRepository detalleVentaRepository;
     @Autowired
     private ProductoAlmacenService productoAlmacenService;
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
 
 
+    public List<Pedido> listar(){
+        List<Pedido> pedido=pedidoRepository.findAll();
+        return pedido;
+    }
 
-    public List<Factura> findAll() {
-        return facturaRepository.findAll();
+    public Pedido obtenerpedidoId(Long id){
+        Optional<Pedido> pedido=pedidoRepository.findById(id);
+        if(!pedido.isPresent()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el pedidoon el id" + id);
+
+        }
+        return pedido.get();
     }
 
     public Factura findById(Long id) {
@@ -123,7 +133,5 @@ public class FacturaService {
 
         return facturaGuardada;
     }
-
-
 
 }

@@ -7,6 +7,7 @@ import com.sistema.pos.entity.Almacen;
 import com.sistema.pos.entity.Categoria;
 import com.sistema.pos.entity.Producto;
 import com.sistema.pos.entity.ProductoAlmacen;
+import com.sistema.pos.dto.ProductoVentaDTO;
 import com.sistema.pos.repository.AlmacenRepository;
 import com.sistema.pos.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,11 +82,7 @@ public class ProductoService {
 	@Autowired
 	private AlmacenRepository almacenRepository;
 
-	/**
-	 * Obtiene todos los productos de una sucursal dada
-	 * @param idSucursal El ID de la sucursal
-	 * @return Lista de productos en la sucursal
-	 */
+
 		public List<ProductoVentaDTO> obtenerProductosPorSucursal(Long idSucursal) {
 		// Buscar almacenes de la sucursal
 		List<Almacen> almacenes = almacenRepository.findBySucursalId(idSucursal);

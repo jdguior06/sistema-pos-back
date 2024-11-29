@@ -234,6 +234,14 @@ public class PedidoService {
         return pedido;
     }
 
+    public Pedido obtenerpedidoId(Long id){
+        Optional<Pedido> pedido=pedidoRepository.findById(id);
+        if(!pedido.isPresent()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el pedidoon el id" + id);
+
+        }
+        return pedido.get();
+    }
 
 
     }
