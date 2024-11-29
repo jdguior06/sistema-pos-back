@@ -20,7 +20,6 @@ public class DetalleNotaE {
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
-    @JsonIgnore
     private Producto producto;
 
 

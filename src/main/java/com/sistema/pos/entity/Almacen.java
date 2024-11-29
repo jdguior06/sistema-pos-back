@@ -31,5 +31,9 @@ public class Almacen {
     @JsonIgnore
     @OneToMany(mappedBy = "almacen", cascade = CascadeType.ALL)
     private List<ProductoAlmacen> productosAlmacen;
-    
+
+
+    @OneToMany(mappedBy = "almacen", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Nota_Entrada> notasEntrada;
+
 }
