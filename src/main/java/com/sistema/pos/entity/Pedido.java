@@ -18,21 +18,20 @@ public class Pedido {
     private Long id;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    private Float total;
+    private Float toal;
     private Boolean estado;
     private String descripcion;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_usuario",nullable = false)
     private  Usuario usuario;
-    @OneToOne
-    @JoinColumn(name ="id_cliente",nullable = true)
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name ="id_cliente")
     private Cliente cliente;
 
     @OneToOne(mappedBy = "pedido")
     private Factura factura;
-
     @OneToMany(mappedBy = "pedido",cascade= CascadeType.ALL, orphanRemoval = true)
     private List<Pedido_Producto> detalle;
-
 }
