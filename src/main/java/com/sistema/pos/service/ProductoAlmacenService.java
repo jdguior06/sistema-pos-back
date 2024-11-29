@@ -1,6 +1,8 @@
 package com.sistema.pos.service;
 
 import com.sistema.pos.config.LoggableAction;
+import com.sistema.pos.dto.DetalleNotaDTO;
+import com.sistema.pos.dto.ProductoAlmacenDTO;
 import com.sistema.pos.dto.ProductoConsolidadoDTO;
 import com.sistema.pos.entity.Almacen;
 import com.sistema.pos.entity.Producto;
@@ -37,11 +39,29 @@ public class ProductoAlmacenService {
         return productoAlmacenRepository.findAll();
     }
 
-    public List<ProductoAlmacen> findAllByAlmacenId(Long idAlmacen) {
-        List<ProductoAlmacen> productosAlmacen = productoAlmacenRepository.findByAlmacen_Id(idAlmacen);
-        return productosAlmacen;
-    }
+    public List<ProductoAlmacenDTO> findAllByAlmacenId(Long idAlmacen) {
+        List<ProductoAlmacenDTO> productosAlmacenDTOList = new ArrayList<>();
 
+        // Obtener productos almacenados en el almacén dado
+        List<ProductoAlmacen> productosAlmacen = productoAlmacenRepository.findByAlmacen_Id(idAlmacen);
+
+        for (ProductoAlmacen productoAlmacen : productosAlmacen) {
+            Producto producto = productoAlmacen.getProducto();
+
+            // Crear un nuevo DTO combinando los datos de Producto y ProductoAlmacen
+            ProductoAlmacenDTO productoAlmacenDTO = new ProductoAlmacenDTO(
+                    producto.getNombre(),
+                    producto.getDescripcion(),
+                    producto.getId(),
+                    productoAlmacen.getStock(),
+                    productoAlmacen.getAlmacen().getId()
+            );
+
+            productosAlmacenDTOList.add(productoAlmacenDTO);
+        }
+
+        return productosAlmacenDTOList;
+    }
 
     public boolean existe(Long id_almacen, Long id_producto){
         Long cantidad = productoAlmacenRepository.verificarProducto(id_almacen,id_producto);
@@ -79,6 +99,34 @@ public class ProductoAlmacenService {
             nuevoProductoAlmacen.setStock(cantidad);
             nuevoProductoAlmacen.setActivo(true);
             return productoAlmacenRepository.save(nuevoProductoAlmacen);
+        }
+    }
+    
+    @LoggableAction
+    public ProductoAlmacen save(ProductoAlmacen productoAlmacen, DetalleNotaDTO detalleNotaDTO) {
+        // Obtener el almacén y el producto
+        Almacen almacen = almacenService.obtenerAlmacenId(productoAlmacen.getAlmacen().getId());
+        Producto producto = productoService.obtenerProducto(productoAlmacen.getProducto().getId());
+
+
+        Optional<ProductoAlmacen> existente = productoAlmacenRepository.findByAlmacen_IdAndProducto_Id(
+                productoAlmacen.getAlmacen().getId(),
+                productoAlmacen.getProducto().getId()
+        );
+
+        // Si ya existe el producto en ese almacén, sumamos la cantidad al stock actual
+        if (existente.isPresent()) {
+            ProductoAlmacen productoExistente = existente.get();
+            int nuevoStock = productoExistente.getStock() + detalleNotaDTO.getCantidad();
+            productoExistente.setStock(nuevoStock); // Actualiza el stock sumando la nueva cantidad
+            return productoAlmacenRepository.save(productoExistente);
+        } else {
+            // Si no existe, creamos un nuevo registro con la cantidad del DetalleNotaDTO
+            productoAlmacen.setStock(detalleNotaDTO.getCantidad());
+            productoAlmacen.setAlmacen(almacen);
+            productoAlmacen.setProducto(producto);
+            productoAlmacen.setActivo(true);
+            return productoAlmacenRepository.save(productoAlmacen);
         }
     }
 

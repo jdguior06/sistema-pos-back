@@ -1,7 +1,9 @@
 package com.sistema.pos.controller;
 
 import com.sistema.pos.dto.ProductoConsolidadoDTO;
+
 import com.sistema.pos.dto.ProductoDTO;
+import com.sistema.pos.dto.ProductoVentaDTO;
 import com.sistema.pos.entity.Producto;
 import com.sistema.pos.response.ApiResponse;
 import com.sistema.pos.service.ProductoAlmacenService;
@@ -114,6 +116,12 @@ public class ProductoController {
                 .build()
         );
     }
+
+	@GetMapping("/por-sucursal")
+	public ResponseEntity<List<ProductoVentaDTO>> obtenerProductosPorSucursal(@RequestParam Long idSucursal) {
+		List<ProductoVentaDTO> productos = productoService.obtenerProductosPorSucursal(idSucursal);
+		return ResponseEntity.ok(productos);
+	}
 
     @PatchMapping("/{id}")
     @PreAuthorize("hasAuthority('PERMISO_ADMINISTRAR_PRODUCTOS')")

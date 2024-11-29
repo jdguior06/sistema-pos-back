@@ -5,14 +5,16 @@ import com.sistema.pos.dto.DetalleNotaDTO;
 import com.sistema.pos.dto.NotaEntradaCompletoDTO;
 import com.sistema.pos.entity.*;
 import com.sistema.pos.repository.NotaEntradaRepository;
-
-import jakarta.transaction.Transactional;
-
+import com.sistema.pos.repository.ProductoRepository;
+import com.sistema.pos.repository.ProveedorRespository;
+import com.sistema.pos.repository.SucursalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NotaEntradaService {
@@ -24,6 +26,9 @@ public class NotaEntradaService {
     private ProductoAlmacenService productoAlmacenService;
 
     @Autowired
+    private DetalleNotaService detalleNotaEService;
+
+    @Autowired
     private ProveedorService proveedorService;
 
     @Autowired
@@ -31,64 +36,89 @@ public class NotaEntradaService {
 
     @Autowired
     private AlmacenService almacenService;
-    
     @Autowired
-    private UsuarioService usuarioService;
+    private ProductoRepository productoRepository;
 
+    @Autowired
+    private SucursalRepository sucursalRepository;
+    @Autowired
+    private ProveedorRespository proveedorRespository;
+
+    // Obtener todas las notas de entrada
     public List<Nota_Entrada> obtenerTodasLasNotas() {
         return notaEntradaRepository.findAll();
     }
 
+    // Obtener una nota de entrada por su ID
     public Nota_Entrada obtenerNotaPorId(Long idNota) {
         return notaEntradaRepository.findById(idNota)
-                .orElseThrow(() -> new IllegalArgumentException("Nota de entrada no encontrada"));
+                .orElseThrow(() -> new IllegalArgumentException("Nota de entrada no encontrada con el ID: " + idNota));
+    }
+
+    public List<Nota_Entrada> obtenerNotasPorProveedor(Long idProveedor) {
+        Proveedor proveedor = proveedorRespository.findById(idProveedor)
+                .orElseThrow(() -> new IllegalArgumentException("Proveedor no encontrado con el ID: " + idProveedor));
+        return notaEntradaRepository.findByProveedorId(proveedor.getId());
+    }
+
+
+
+    public List<Nota_Entrada> obtenerNotasPorFecha(LocalDateTime fecha) {
+        return notaEntradaRepository.findByFecha(fecha);
+    }
+
+
+
+    public List<Nota_Entrada> obtenerNotasPorSucursalYAlmacen(Long idAlmacen, Long idSucursal) {
+        Sucursal sucursal = sucursalRepository.findById(idSucursal)
+                .orElseThrow(() -> new IllegalArgumentException("Sucursal no encontrada con el ID: " + idSucursal));
+
+        return notaEntradaRepository.findByAlmacen_SucursalIdAndAlmacenId(sucursal.getId(), idAlmacen);
     }
 
 
    @LoggableAction
-   @Transactional
    public Nota_Entrada guardarNota(NotaEntradaCompletoDTO notaEntradaCompletaDto) {
-	   
        Proveedor proveedor = proveedorService.obtenerProveedorPorId(notaEntradaCompletaDto.getProveedor());
-       
        Almacen almacen = almacenService.obtenerAlmacenId(notaEntradaCompletaDto.getAlmacen());
-       
-       Usuario usuario = usuarioService.obtenerUsuarioAuthenticado();
 
        Nota_Entrada notaEntrada = new Nota_Entrada();
+       notaEntrada.setFecha(notaEntradaCompletaDto.getFecha());
+       notaEntrada.setDescuento(notaEntradaCompletaDto.getDescuento());
        notaEntrada.setProveedor(proveedor);
        notaEntrada.setAlmacen(almacen);
-       notaEntrada.setUsuario(usuario);
-       
-       Double total = 0.00;
-       
-       List<DetalleNotaE> detalles = new ArrayList<>();
-       
+
+
+       notaEntrada = notaEntradaRepository.save(notaEntrada);
+
+       float total = 0f;
        for (DetalleNotaDTO detalle : notaEntradaCompletaDto.getDetalles()) {
-    	   
            Producto producto = productoService.obtenerProducto(detalle.getProductoId());
 
            DetalleNotaE detalleNota = new DetalleNotaE();
-           detalleNota.setProducto(producto);
            detalleNota.setCantidad(detalle.getCantidad());
-           detalleNota.setCostoUnitario(producto.getPrecioCompra());
-           detalleNota.setSubTotal(detalle.getCantidad() * producto.getPrecioCompra());
-           detalleNota.setNotaEntrada(notaEntrada);
-           
-           detalles.add(detalleNota);
+           detalleNota.setCostoUnitario(detalle.getCostoUnitario());
+           detalleNota.setProducto(producto);
 
-           total = total + detalleNota.getSubTotal();
+           detalleNotaEService.guardarDetalle(detalleNota, notaEntrada);
 
-           productoAlmacenService.actualizarOGuardarStock(almacen.getId(), 
-        		   producto.getId(), detalle.getCantidad());
-           
+           float subTotal = detalle.getCantidad() * detalle.getCostoUnitario();
+           total += subTotal;
+
+           ProductoAlmacen productoAlmacen = new ProductoAlmacen();
+           productoAlmacen.setProducto(detalleNota.getProducto());
+           productoAlmacen.setAlmacen(almacen);
+           productoAlmacenService.save(productoAlmacen, detalle); 
        }
-       
-       notaEntrada.setDetalleNotaEntrada(detalles);
-       
+
+       total = total - (total* notaEntradaCompletaDto.getDescuento()/100); 
        notaEntrada.setTotal(total);
 
        return notaEntradaRepository.save(notaEntrada); 
    }
 
+   	@LoggableAction
+    public void eliminarNota(Long idNota) {
+        notaEntradaRepository.deleteById(idNota);
+    }
 }

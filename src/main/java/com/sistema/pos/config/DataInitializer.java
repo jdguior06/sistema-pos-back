@@ -18,22 +18,21 @@ import jakarta.transaction.Transactional;
 
 @Configuration
 public class DataInitializer {
-	
+
 	@Bean
 	public CommandLineRunner initData(UsuarioRepository usuarioRepository, RolRepository rolRepository, PermisoRepository permisoRepository, PasswordEncoder passwordEncoder) {
 		return args -> {
 			initRolesAndPermisos(usuarioRepository, rolRepository, permisoRepository, passwordEncoder);
 		};
 	}
-	
+
 	private Permiso obtenerOPersistirPermiso(PermisoRepository permisoRepository, String nombrePermiso) {
-	    return permisoRepository.findByNombre(nombrePermiso)
-	            .orElseGet(() -> permisoRepository.save(new Permiso(nombrePermiso)));
+		return permisoRepository.findByNombre(nombrePermiso)
+				.orElseGet(() -> permisoRepository.save(new Permiso(nombrePermiso)));
 	}
 
 	@Transactional
 	public void initRolesAndPermisos(UsuarioRepository usuarioRepository, RolRepository rolRepository, PermisoRepository permisoRepository, PasswordEncoder passwordEncoder) {
-
 	    Set<Permiso> permisos = new HashSet<>();
 	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_GESTIONAR_PERMISOS"));
 	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_GESTIONAR_ROLES"));
@@ -58,7 +57,7 @@ public class DataInitializer {
 	    Rol adminRole = rolRepository.findByNombre("ADMIN").orElseGet(() -> new Rol("ADMIN"));
 	    adminRole.setPermiso(permisos);
 	    rolRepository.save(adminRole); 
-	            
+	       
 	}
 
 }

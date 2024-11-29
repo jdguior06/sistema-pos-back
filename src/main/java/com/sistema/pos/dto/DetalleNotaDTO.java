@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DetalleNotaDTO {
-	
     private int cantidad;
-    
+    private float costoUnitario;
     private Long productoId;
-    
 }

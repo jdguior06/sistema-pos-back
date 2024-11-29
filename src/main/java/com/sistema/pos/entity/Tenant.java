@@ -32,7 +32,4 @@ public class Tenant {
     @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL)
     private Set<Usuario> usuarios = new HashSet<>();
 
-    @OneToMany(mappedBy = "tenant", cascade = CascadeType.ALL)
-    private Set<Sucursal> sucursales = new HashSet<>();
-
 }

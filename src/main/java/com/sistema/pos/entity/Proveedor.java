@@ -1,5 +1,9 @@
 package com.sistema.pos.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -29,4 +33,16 @@ public class Proveedor {
     
     private boolean activo;
 
+    @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Nota_Entrada> notasEntrada;
+
+    @ManyToOne
+    @JoinColumn(name = "id_almacen")
+    @JsonIgnore
+    private Almacen almacen;
+
+    public Long getAlmacenId() {
+        return almacen != null ? almacen.getId() : null; // Retorna el ID del almacén o null si no hay relación
+    }
 }

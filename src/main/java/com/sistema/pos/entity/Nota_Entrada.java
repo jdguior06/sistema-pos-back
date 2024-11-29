@@ -6,8 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
+
+
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
@@ -21,27 +24,20 @@ public class Nota_Entrada  {
     private Long id;
 
     private LocalDateTime fecha;
-    
-    private Double total;
+    private float total;
+    private float descuento;
 
     @ManyToOne
     @JoinColumn(name = "id_almacen")
+    @JsonIgnore
     private  Almacen almacen;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_proveedor")
+
     private Proveedor proveedor;
-    
-    @ManyToOne
-    @JoinColumn(name = "id_personal")
-    private Usuario usuario;
-    
-    @OneToMany(mappedBy = "notaEntrada", cascade = CascadeType.ALL)
-    private List<DetalleNotaE> detalleNotaEntrada;
-    
-    @PrePersist
-    public void prePersist() {
-    	fecha = LocalDateTime.now(ZoneId.of("America/La_Paz"));
-    }
+
+    @OneToMany(mappedBy = "notaId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DetalleNotaE> detalles;
 
 }

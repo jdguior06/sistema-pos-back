@@ -33,8 +33,8 @@ public class DetalleVenta {
 
 	private Integer cantidad;
 
-	private Double precio;
+	private float precio;
 
-	private Double monto;
+	private float monto;
 
 }

@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,5 +30,9 @@ public class Almacen {
     @JsonIgnore
     @OneToMany(mappedBy = "almacen", cascade = CascadeType.ALL)
     private List<ProductoAlmacen> productosAlmacen;
-    
+
+
+    @OneToMany(mappedBy = "almacen", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Nota_Entrada> notasEntrada;
+
 }

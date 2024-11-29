@@ -8,9 +8,6 @@ import java.util.List;
 
 @Repository
 public interface DetalleNotaRepository extends JpaRepository <DetalleNotaE, Long> {
-	
-    List<DetalleNotaE> findByProducto_Id(Long productoId);
-    
-    List<DetalleNotaE> findByNotaEntrada_Id(Long notaEntradaId);
-    
+    List<DetalleNotaE> findByProducto_Id(Long productoId);  
+    List<DetalleNotaE> findByNotaId_Id(Long notaEntradaId);
 }
