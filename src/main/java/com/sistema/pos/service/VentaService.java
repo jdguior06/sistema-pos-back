@@ -25,6 +25,8 @@ import com.sistema.pos.entity.Venta;
 import com.sistema.pos.repository.AlmacenRepository;
 import com.sistema.pos.repository.ProductoAlmacenRepository;
 import com.sistema.pos.repository.VentaRepository;
+import com.sistema.pos.util.EmailService;
+import com.sistema.pos.util.VentaPDFService;
 
 import jakarta.transaction.Transactional;
 
@@ -50,6 +52,12 @@ public class VentaService {
 	
 	@Autowired
 	private ProductoAlmacenService productoAlmacenService;
+	
+	@Autowired
+	private EmailService emailService;
+	
+	@Autowired
+	private VentaPDFService ventaPDFService;
 
 	@Transactional
 	public List<Venta> listarVentas() {
@@ -159,6 +167,16 @@ public class VentaService {
 	    venta.setMetodosPago(metodosPago);
 		
 		Venta ventaGuardada = ventaRepository.save(venta);
+		
+		if (venta.getCliente() != null && venta.getCliente().getEmail() != null) {
+	        try {
+	            byte[] pdf = ventaPDFService.generarFacturaPDF(venta);
+	            emailService.enviarFacturaPorCorreo(venta.getCliente().getEmail(), pdf, "Factura_" + venta.getId() + ".pdf");
+	        } catch (Exception e) {
+	            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al enviar el correo", e);
+	        }
+	    }
+		
 		return ventaGuardada;
 	}
 
