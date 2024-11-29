@@ -85,6 +85,7 @@ public class NotaEntradaService {
 
        Nota_Entrada notaEntrada = new Nota_Entrada();
        notaEntrada.setFecha(notaEntradaCompletaDto.getFecha());
+       notaEntrada.setDescuento(notaEntradaCompletaDto.getDescuento());
        notaEntrada.setProveedor(proveedor);
        notaEntrada.setAlmacen(almacen);
 
@@ -115,7 +116,7 @@ public class NotaEntradaService {
           productoAlmacenService.save(productoAlmacen, detalle); // Actualizar el stock
        }
 
-       total -= notaEntradaCompletaDto.getDescuento(); // Aplicar descuento
+       total = total - (total* notaEntradaCompletaDto.getDescuento()/100); // Aplicar descuento
        notaEntrada.setTotal(total);
 
        return notaEntradaRepository.save(notaEntrada); // Guardar la nota con el total final
