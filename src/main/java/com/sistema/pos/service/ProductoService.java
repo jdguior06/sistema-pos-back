@@ -86,7 +86,7 @@ public class ProductoService {
 	 * @param idSucursal El ID de la sucursal
 	 * @return Lista de productos en la sucursal
 	 */
-	public List<ProductoAlmacenDTO> obtenerProductosPorSucursal(Long idSucursal) {
+		public List<ProductoVentaDTO> obtenerProductosPorSucursal(Long idSucursal) {
 		// Buscar almacenes de la sucursal
 		List<Almacen> almacenes = almacenRepository.findBySucursalId(idSucursal);
 
@@ -95,18 +95,16 @@ public class ProductoService {
 		}
 
 		// Extraer productos de cada almacén
-		List<ProductoAlmacenDTO> productos = almacenes.stream()
+		List<ProductoVentaDTO> productos = almacenes.stream()
 				.flatMap(almacen -> almacen.getProductosAlmacen().stream())
 				.filter(ProductoAlmacen::isActivo)
-				.map(pa -> {
-					ProductoAlmacenDTO dto = new ProductoAlmacenDTO();
-					dto.setNombre(pa.getProducto().getNombre());
-					dto.setDescripcion(pa.getProducto().getDescripcion());
-					dto.setId_producto(pa.getProducto().getId());
-					dto.setStock(pa.getStock());
-					return dto;
-				})
-
+				.map(pa -> new ProductoVentaDTO(
+						pa.getProducto().getNombre(),
+						pa.getProducto().getDescripcion(),
+						pa.getProducto().getId(),
+						pa.getStock(),
+						pa.getProducto().getPrecioVenta() // Incluye el precio de venta
+				))
 				.collect(Collectors.toList());
 
 		if (productos.isEmpty()) {
