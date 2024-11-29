@@ -11,7 +11,4 @@ public class PedidoDTO {
     private String descripcion;
     private Long id_cliente;
     private List<Pedido_ProductoDTO> detalle;
-
-
-
 }

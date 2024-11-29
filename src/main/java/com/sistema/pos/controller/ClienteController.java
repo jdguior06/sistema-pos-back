@@ -3,6 +3,7 @@ package com.sistema.pos.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.sistema.pos.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,8 @@ public class ClienteController {
 	
 	@Autowired
     private ClienteService service;
-
+	@Autowired
+	private ClienteRepository clienteRepository;
 	@GetMapping
 //	@PreAuthorize("hasAuthority('GESTIONAR_CLIENTE')")
 	public ResponseEntity<ApiResponse<List<Cliente>>> listarClientes(@RequestParam(value = "search", required = false) String searchTerm) {
@@ -170,5 +172,10 @@ public class ClienteController {
 			);
 		}
 	}
-
+	@GetMapping("/buscar-por-nit")
+	public ResponseEntity<Cliente> buscarPorNit(@RequestParam String nit) {
+		return clienteRepository.findByNit(nit)
+				.map(ResponseEntity::ok)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente no encontrado con el NIT: " + nit));
+	}
 }

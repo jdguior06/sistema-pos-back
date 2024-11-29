@@ -3,6 +3,7 @@ package com.sistema.pos.service;
 import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.dto.ProductoAlmacenDTO;
 import com.sistema.pos.dto.ProductoDTO;
+import com.sistema.pos.dto.ProductoVentaDTO;
 import com.sistema.pos.entity.Almacen;
 import com.sistema.pos.entity.Categoria;
 import com.sistema.pos.entity.Producto;
@@ -86,7 +87,7 @@ public class ProductoService {
 	 * @param idSucursal El ID de la sucursal
 	 * @return Lista de productos en la sucursal
 	 */
-	public List<ProductoAlmacenDTO> obtenerProductosPorSucursal(Long idSucursal) {
+	public List<ProductoVentaDTO> obtenerProductosPorSucursal(Long idSucursal) {
 		// Buscar almacenes de la sucursal
 		List<Almacen> almacenes = almacenRepository.findBySucursalId(idSucursal);
 
@@ -95,14 +96,15 @@ public class ProductoService {
 		}
 
 		// Extraer productos de cada almacén
-		List<ProductoAlmacenDTO> productos = almacenes.stream()
+		List<ProductoVentaDTO> productos = almacenes.stream()
 				.flatMap(almacen -> almacen.getProductosAlmacen().stream())
 				.filter(ProductoAlmacen::isActivo)
-				.map(pa -> new ProductoAlmacenDTO(
+				.map(pa -> new ProductoVentaDTO(
 						pa.getProducto().getNombre(),
 						pa.getProducto().getDescripcion(),
 						pa.getProducto().getId(),
-						pa.getStock()
+						pa.getStock(),
+						pa.getProducto().getPrecioVenta() // Incluye el precio de venta
 				))
 				.collect(Collectors.toList());
 
@@ -111,4 +113,5 @@ public class ProductoService {
 		}
 		return productos;
 	}
+
 }

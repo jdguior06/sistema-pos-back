@@ -25,7 +25,6 @@ public class Cliente {
     private String nombre;
     
     private String apellido;
-    
     @Email(message = "El email debe ser válido")
     private String email;
     private String nit;

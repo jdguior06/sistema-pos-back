@@ -14,7 +14,9 @@ import com.sistema.pos.entity.Cliente;
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	
 	public Optional<Cliente> findByEmail(String email);
-	
+	public Optional<Cliente> findByNit(String nit);
+	public Optional<Cliente>findById(Long id);
+
 	@Query("SELECT c FROM Cliente c WHERE " +
 	           "LOWER(c.nombre) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
 	           "LOWER(c.apellido) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +

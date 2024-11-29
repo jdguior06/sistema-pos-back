@@ -1,6 +1,7 @@
 package com.sistema.pos.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,9 +16,11 @@ public class Pedido_Producto {
 
     private Integer cantidad;
     private Float subtotal;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_pedido",nullable = false)
     private Pedido pedido;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_producto",nullable = false)
     private Producto producto;

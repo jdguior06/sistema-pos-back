@@ -4,12 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.entity.Cliente;
 import com.sistema.pos.repository.ClienteRepository;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class ClienteService {
@@ -56,5 +59,6 @@ public class ClienteService {
 	public List<Cliente> buscarClientes(String searchTerm) {
         return clienteRepository.buscarClientes(searchTerm);
     }
+
 
 }
