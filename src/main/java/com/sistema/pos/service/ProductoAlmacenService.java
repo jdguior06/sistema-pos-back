@@ -51,7 +51,8 @@ public class ProductoAlmacenService {
                     producto.getNombre(),
                     producto.getDescripcion(),
                     producto.getId(),
-                    productoAlmacen.getStock()
+                    productoAlmacen.getStock(),
+                    productoAlmacen.getAlmacen().getId()
             );
 
             productosAlmacenDTOList.add(productoAlmacenDTO);

@@ -27,16 +27,16 @@ public class PlanInitializationService  {
     public void initializeData() {
         Float mes=(float) 12.0;
         Float descuento=(float) 0.9;
-        crearPlanSiNoExiste(new PlanDTO("Free mes", "mes", (float) 0.0,"Una sola sucursal,Dos usuarios",1,2));
-        crearPlanSiNoExiste(new PlanDTO("Free año", "año", (float) 0.0,"Una sola sucursal,Dos usuarios",1,2));
-        crearPlanSiNoExiste(new PlanDTO("Estandar mes", "mes", (float) 9.99,"3 sucursales,20 usuario",20,3));
-        crearPlanSiNoExiste(new PlanDTO("Estandar año", "año", (float) ((9.99*mes)*descuento),"3 sucursales, 20 usuarios",20,3));
-        crearPlanSiNoExiste(new PlanDTO("Pro mes", "mes", (float) (24.99),"6 sucursales, 50 usuarios",50,6));
-        crearPlanSiNoExiste(new PlanDTO("Pro año", "año", (float) ((24.99*mes)*descuento),"6 sucursales, 50 usuarios",50,6));
-        crearPlanSiNoExiste(new PlanDTO("Pro Plus mes", "mes", (float) (49.99),"10 sucursales, 100 usuarios",100,10));
-        crearPlanSiNoExiste(new PlanDTO("Pro Plus año", "año", (float) ((49.99*mes)*descuento),"10 sucursales, 100 usuarios",100,10));
-        crearPlanSiNoExiste(new PlanDTO("Pro Plus Ultra mes", "mes", (float) (149.99),"20 sucursales, 200 usuarios",200,20));
-        crearPlanSiNoExiste(new PlanDTO("Pro Plus Ultra año", "año", (float) ((149.99*mes)*descuento),"20 sucursales, 200 usuarios",200,20));
+        crearPlanSiNoExiste(new PlanDTO("Free mes", "mes", (float) 0.0,"Una sola sucursal,Dos usuarios",1,1));
+        crearPlanSiNoExiste(new PlanDTO("Free año", "año", (float) 0.0,"Una sola sucursal,Dos usuarios",1,1));
+        crearPlanSiNoExiste(new PlanDTO("Estandar mes", "mes", (float) 20.99,"3 sucursales,20 usuario",20,3));
+        crearPlanSiNoExiste(new PlanDTO("Estandar año", "año", (float) ((20.99*mes)*descuento),"3 sucursales, 20 usuarios",20,3));
+        crearPlanSiNoExiste(new PlanDTO("Pro mes", "mes", (float) (99.99),"6 sucursales, 50 usuarios",50,6));
+        crearPlanSiNoExiste(new PlanDTO("Pro año", "año", (float) ((99.99*mes)*descuento),"6 sucursales, 50 usuarios",50,6));
+        crearPlanSiNoExiste(new PlanDTO("Pro Plus mes", "mes", (float) (499.99),"10 sucursales, 100 usuarios",100,10));
+        crearPlanSiNoExiste(new PlanDTO("Pro Plus año", "año", (float) ((499.99*mes)*descuento),"10 sucursales, 100 usuarios",100,10));
+        crearPlanSiNoExiste(new PlanDTO("Pro Plus Ultra mes", "mes", (float) (1999.99),"20 sucursales, 200 usuarios",200,20));
+        crearPlanSiNoExiste(new PlanDTO("Pro Plus Ultra año", "año", (float) ((1999.99*mes)*descuento),"20 sucursales, 200 usuarios",200,20));
     }
     private void crearPlanSiNoExiste(PlanDTO planDTO) {
         Optional<Plan> planExistente = planRepository.findByNombre(planDTO.getNombre());

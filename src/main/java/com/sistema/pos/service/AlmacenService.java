@@ -27,7 +27,7 @@ public class AlmacenService {
     @Autowired
     private ProveedorRespository proveedorRespository;
 
-	public List<Almacen> findAll() {
+    public List<Almacen> findAll() {
 		return almacenRepository.findAll();
 	}
 
