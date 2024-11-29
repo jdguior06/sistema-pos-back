@@ -46,6 +46,7 @@ public class ProductoService {
     	producto.setFoto(productoDTO.getFoto());
     	producto.setCategoria(categoria);
     	producto.setActivo(true);
+        
         return productoRepository.save(producto);
     }
     
@@ -60,6 +61,7 @@ public class ProductoService {
     	producto.setPrecioVenta(productoDTO.getPrecioVenta());
     	producto.setFoto(productoDTO.getFoto());
     	producto.setCategoria(categoria);
+        
     	return productoRepository.save(producto);
     }
     
@@ -69,4 +71,5 @@ public class ProductoService {
 		producto.setActivo(false);
 		return productoRepository.save(producto);
 	}
+    
 }

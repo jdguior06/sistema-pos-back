@@ -3,10 +3,8 @@ package com.sistema.pos.service;
 import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.dto.AlmacenDTO;
 import com.sistema.pos.entity.Almacen;
-import com.sistema.pos.entity.Proveedor;
 import com.sistema.pos.entity.Sucursal;
 import com.sistema.pos.repository.AlmacenRepository;
-import com.sistema.pos.repository.ProveedorRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -24,9 +22,6 @@ public class AlmacenService {
     @Autowired
     private SucursalService sucursalService;
 
-    @Autowired
-    private ProveedorRespository proveedorRespository;
-
 	public List<Almacen> findAll() {
 		return almacenRepository.findAll();
 	}
@@ -43,15 +38,6 @@ public class AlmacenService {
 		}
 		return almacen.get();
 	}
-
-	public Almacen obtenerAlmacenPorProv(Long proveedorId) {
-        Proveedor proveedor = proveedorRespository.findById(proveedorId)
-                .orElseThrow(() -> new RuntimeException("Proveedor no encontrado con ID: " + proveedorId));
-
-        return almacenRepository.findById(proveedor.getAlmacenId())
-                .orElseThrow(() -> new RuntimeException("Almacén no encontrado para el proveedor con ID: " + proveedorId));
-
-    }
 
     public Almacen obtenerAlmacenDeSucursal(Long idSucursal, Long idAlmacen) {
         Sucursal sucursal = sucursalService.findById(idSucursal);

@@ -10,15 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VentaDTO {
-	
-	private Double total;
-	
-	private Long id_almacen;
-	
+		
 	private Long id_cliente;
 	
 	private Long id_caja_sesion;
 
     private List<DetalleVentaDTO> detalleVentaDTOS;
+    
+    private List<MetodoPagoDTO> metodosPago;
 
 }

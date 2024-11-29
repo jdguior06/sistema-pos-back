@@ -1,6 +1,7 @@
 package com.sistema.pos.controller;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,44 @@ public class CajaSesionController {
             );
         }
     }
+    
+    @GetMapping("/verificar-sesion/{idCaja}")
+    public ResponseEntity<ApiResponse<CajaSesion>> verificarSesionAbierta(@PathVariable Long idCaja) {
+        
+        Optional<CajaSesion> sesionAbierta = cajaSesionService.obtenerSesionAbiertaPorCajaYUsuario(idCaja);
+
+        if (sesionAbierta.isPresent()) {
+            return new ResponseEntity<>(
+                ApiResponse.<CajaSesion>builder()
+                    .statusCode(HttpStatus.OK.value())
+                    .message("Sesión abierta encontrada y pertenece al usuario actual.")
+                    .data(sesionAbierta.get())
+                    .build(),
+                HttpStatus.OK
+            );
+        } else {
+            Optional<CajaSesion> sesionPorCaja = cajaSesionService.obtenerSesionAbiertaPorCaja(idCaja);
+
+            if (sesionPorCaja.isPresent()) {
+                return new ResponseEntity<>(
+                    ApiResponse.<CajaSesion>builder()
+                        .statusCode(HttpStatus.FORBIDDEN.value())
+                        .message("Hay una sesión abierta, pero pertenece a otro usuario.")
+                        .build(),
+                    HttpStatus.FORBIDDEN
+                );
+            } else {
+                return new ResponseEntity<>(
+                    ApiResponse.<CajaSesion>builder()
+                        .statusCode(HttpStatus.NO_CONTENT.value())
+                        .message("No hay sesión abierta para esta caja.")
+                        .build(),
+                    HttpStatus.NO_CONTENT
+                );
+            }
+        }
+    }
+
 
     @PostMapping("/apertura")
     public ResponseEntity<ApiResponse<CajaSesion>> aperturaDeCaja(@Valid @RequestBody CajaSesionDTO cajaSesionDTO, BindingResult bindingResult) {
@@ -92,6 +131,17 @@ public class CajaSesionController {
                     HttpStatus.CREATED
             );
         } catch (ResponseStatusException e) {
+            if (e.getStatusCode() == HttpStatus.CONFLICT) {
+                CajaSesion sesionAbierta = cajaSesionService.obtenerSesionAbierta(cajaSesionDTO.getId_caja());
+                return new ResponseEntity<>(
+                        ApiResponse.<CajaSesion>builder()
+                                .statusCode(HttpStatus.CONFLICT.value())
+                                .message("La caja ya tiene una sesión abierta.")
+                                .data(sesionAbierta)
+                                .build(),
+                        HttpStatus.CONFLICT
+                );
+            }
             return new ResponseEntity<>(
                     ApiResponse.<CajaSesion>builder()
                             .statusCode(e.getStatusCode().value())

@@ -1,5 +1,8 @@
 package com.sistema.pos.entity;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,7 +31,15 @@ public class ProductoAlmacen {
 
     @ManyToOne
     @JoinColumn(name = "producto_id")
-    @JsonIgnore
     private Producto producto;
+    
+    @Column(name = "ultima_modificacion")
+    private LocalDateTime ultimaModificacion;
+
+    @PrePersist
+    @PreUpdate
+    public void updateTimestamp() {
+    	ultimaModificacion = LocalDateTime.now(ZoneId.of("America/La_Paz"));
+    }
 
 }

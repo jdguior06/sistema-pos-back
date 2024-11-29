@@ -25,9 +25,9 @@ public class Producto {
     @Column(length = 1000)
     private String descripcion;
     
-    private double precioCompra;
+    private Double precioCompra;
     
-    private double precioVenta;
+    private Double precioVenta;
     
     private String foto;
 
@@ -35,6 +35,6 @@ public class Producto {
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
     
-    private boolean activo;
+    private boolean activo; 
     
 }

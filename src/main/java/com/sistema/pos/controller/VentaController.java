@@ -68,7 +68,7 @@ public class VentaController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<Venta>> guardarVenta(@Valid @RequestBody VentaDTO ventaDTO, BindingResult bindingResult) {
+    public ResponseEntity<ApiResponse<Venta>> realizarVenta(@Valid @RequestBody VentaDTO ventaDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult.getAllErrors().stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)

@@ -10,5 +10,7 @@ import lombok.NoArgsConstructor;
 public class CajaSesionDTO {
 	
 	private Double Monto;
+	
+	private Long id_caja;
 
 }

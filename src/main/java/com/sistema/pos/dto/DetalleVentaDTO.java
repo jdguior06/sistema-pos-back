@@ -13,8 +13,4 @@ public class DetalleVentaDTO {
 
     private Integer cantidad;
 
-    private Double precio;
-
-    private Double monto;
-
 }

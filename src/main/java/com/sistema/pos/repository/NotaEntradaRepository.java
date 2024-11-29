@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface NotaEntradaRepository extends JpaRepository<Nota_Entrada,Long> {
+	
     Optional<Nota_Entrada> findById(Long id);
 
     // Filtra por proveedor y fechas opcionalmente
@@ -21,6 +22,7 @@ public interface NotaEntradaRepository extends JpaRepository<Nota_Entrada,Long> 
             "(:fechaFin IS NULL OR n.fecha <= :fechaFin) AND " +
             "(:totalMin IS NULL OR n.total >= :totalMin) AND " +
             "(:totalMax IS NULL OR n.total <= :totalMax)")
+    
     List<Nota_Entrada> findByProveedorAndFechaAndTotal(
             @Param("proveedor") Long proveedor,
             @Param("fechaInicio") Date fechaInicio,
@@ -28,9 +30,5 @@ public interface NotaEntradaRepository extends JpaRepository<Nota_Entrada,Long> 
             @Param("totalMin") Double totalMin,
             @Param("totalMax") Double totalMax
     );
-
-
-
-
 
 }

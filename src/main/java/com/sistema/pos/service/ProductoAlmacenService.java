@@ -1,12 +1,11 @@
 package com.sistema.pos.service;
 
 import com.sistema.pos.config.LoggableAction;
-import com.sistema.pos.dto.DetalleNotaDTO;
-import com.sistema.pos.dto.ProductoAlmacenDTO;
+import com.sistema.pos.dto.ProductoConsolidadoDTO;
 import com.sistema.pos.entity.Almacen;
 import com.sistema.pos.entity.Producto;
 import com.sistema.pos.entity.ProductoAlmacen;
-import com.sistema.pos.entity.Sucursal;
+import com.sistema.pos.repository.AlmacenRepository;
 import com.sistema.pos.repository.ProductoAlmacenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -25,10 +25,10 @@ public class ProductoAlmacenService {
     ProductoAlmacenRepository productoAlmacenRepository;
     
     @Autowired
-    private SucursalService sucursalService;
+    private AlmacenService almacenService;
     
     @Autowired
-    private AlmacenService almacenService;
+    private AlmacenRepository almacenRepository;
     
     @Autowired
     private ProductoService productoService;
@@ -37,33 +37,15 @@ public class ProductoAlmacenService {
         return productoAlmacenRepository.findAll();
     }
 
-    public List<ProductoAlmacenDTO> findAllByAlmacenId(Long idAlmacen) {
-        List<ProductoAlmacenDTO> productosAlmacenDTOList = new ArrayList<>();
-
-        // Obtener productos almacenados en el almacén dado
+    public List<ProductoAlmacen> findAllByAlmacenId(Long idAlmacen) {
         List<ProductoAlmacen> productosAlmacen = productoAlmacenRepository.findByAlmacen_Id(idAlmacen);
-
-        for (ProductoAlmacen productoAlmacen : productosAlmacen) {
-            Producto producto = productoAlmacen.getProducto();
-
-            // Crear un nuevo DTO combinando los datos de Producto y ProductoAlmacen
-            ProductoAlmacenDTO productoAlmacenDTO = new ProductoAlmacenDTO(
-                    producto.getNombre(),
-                    producto.getDescripcion(),
-                    producto.getId(),
-                    productoAlmacen.getStock()
-            );
-
-            productosAlmacenDTOList.add(productoAlmacenDTO);
-        }
-
-        return productosAlmacenDTOList;
+        return productosAlmacen;
     }
 
 
     public boolean existe(Long id_almacen, Long id_producto){
         Long cantidad = productoAlmacenRepository.verificarProducto(id_almacen,id_producto);
-        return cantidad != null && cantidad > 0; // Devuelve true si hay al menos un producto
+        return cantidad != null && cantidad > 0; 
     }
 
     public ProductoAlmacen obtener(Long id){
@@ -81,33 +63,24 @@ public class ProductoAlmacenService {
     }
 
     @LoggableAction
-    public ProductoAlmacen save(ProductoAlmacen productoAlmacen, DetalleNotaDTO detalleNotaDTO) {
-        // Obtener el almacén y el producto
-        Almacen almacen = almacenService.obtenerAlmacenId(productoAlmacen.getAlmacen().getId());
-        Producto producto = productoService.obtenerProducto(productoAlmacen.getProducto().getId());
+    public ProductoAlmacen actualizarOGuardarStock(Long almacenId, Long productoId, int cantidad) {
+        Optional<ProductoAlmacen> existente = productoAlmacenRepository.findByAlmacen_IdAndProducto_Id(almacenId, productoId);
 
-
-        Optional<ProductoAlmacen> existente = productoAlmacenRepository.findByAlmacen_IdAndProducto_Id(
-                productoAlmacen.getAlmacen().getId(),
-                productoAlmacen.getProducto().getId()
-        );
-
-        // Si ya existe el producto en ese almacén, sumamos la cantidad al stock actual
         if (existente.isPresent()) {
             ProductoAlmacen productoExistente = existente.get();
-            int nuevoStock = productoExistente.getStock() + detalleNotaDTO.getCantidad();
-            productoExistente.setStock(nuevoStock); // Actualiza el stock sumando la nueva cantidad
+            productoExistente.setStock(productoExistente.getStock() + cantidad);
             return productoAlmacenRepository.save(productoExistente);
         } else {
-            // Si no existe, creamos un nuevo registro con la cantidad del DetalleNotaDTO
-            productoAlmacen.setStock(detalleNotaDTO.getCantidad());
-            productoAlmacen.setAlmacen(almacen);
-            productoAlmacen.setProducto(producto);
-            productoAlmacen.setActivo(true);
-            return productoAlmacenRepository.save(productoAlmacen);
+            Producto producto = productoService.obtenerProducto(productoId);
+            Almacen almacen = almacenService.obtenerAlmacenId(almacenId);
+            ProductoAlmacen nuevoProductoAlmacen = new ProductoAlmacen();
+            nuevoProductoAlmacen.setProducto(producto);
+            nuevoProductoAlmacen.setAlmacen(almacen);
+            nuevoProductoAlmacen.setStock(cantidad);
+            nuevoProductoAlmacen.setActivo(true);
+            return productoAlmacenRepository.save(nuevoProductoAlmacen);
         }
     }
-
 
     @LoggableAction
     public ProductoAlmacen eliminar(Long id) {
@@ -116,8 +89,33 @@ public class ProductoAlmacenService {
         return productoAlmacenRepository.save(productoAlmacen);
     }
     
+    public Optional<ProductoAlmacen> buscarAlmacenConStock(Long idProducto, Integer cantidad) {
+        return productoAlmacenRepository.findByProductoIdAndStockGreaterThanEqualOrderByStockDesc(idProducto, cantidad);
+    }
+    
     public void actualizarStock(ProductoAlmacen productoAlmacen) {
     	productoAlmacenRepository.save(productoAlmacen);
+    }
+    
+    public List<ProductoConsolidadoDTO> listarProductosConsolidadoPorSucursal(Long idSucursal) {
+    	
+        List<Almacen> almacenes = almacenRepository.findBySucursalId(idSucursal);
+
+        List<ProductoAlmacen> productosAlmacen = productoAlmacenRepository.findByAlmacenIn(almacenes);
+
+        Map<Long, ProductoConsolidadoDTO> productoMap = new HashMap<>();
+        for (ProductoAlmacen pa : productosAlmacen) {
+            Long idProducto = pa.getProducto().getId();
+            ProductoConsolidadoDTO dto = productoMap.getOrDefault(
+                idProducto,
+                new ProductoConsolidadoDTO(pa.getProducto(), 0) 
+            );
+
+            dto.setTotalStock(dto.getTotalStock() + pa.getStock());
+            productoMap.put(idProducto, dto);
+        }
+
+        return new ArrayList<>(productoMap.values());
     }
     
 }

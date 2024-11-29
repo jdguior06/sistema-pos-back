@@ -1,6 +1,5 @@
 package com.sistema.pos.service;
 
-import com.sistema.pos.config.LoggableAction;
 import com.sistema.pos.dto.PlanDTO;
 import com.sistema.pos.entity.Plan;
 import com.sistema.pos.repository.PlanRepository;
@@ -26,7 +25,6 @@ public class PlanService {
     }
 
     @Transactional
-    @LoggableAction
     public Plan modificarPlan(PlanDTO planDTO) {
         // Busca el plan por nombre en la base de datos
         Optional<Plan> optionalPlan = planRepository.findByNombre(planDTO.getNombre());

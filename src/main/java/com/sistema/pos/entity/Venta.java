@@ -41,6 +41,9 @@ public class Venta {
     @ManyToOne
     @JoinColumn(name = "id_caja_sesion")
     private CajaSesion cajaSesion;
+    
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
+    private List<MetodoPago> metodosPago;
 
     @PrePersist
     public void prePersist() {

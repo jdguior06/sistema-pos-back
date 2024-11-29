@@ -1,8 +1,10 @@
 package com.sistema.pos.controller;
 
+import com.sistema.pos.dto.ProductoConsolidadoDTO;
 import com.sistema.pos.dto.ProductoDTO;
 import com.sistema.pos.entity.Producto;
 import com.sistema.pos.response.ApiResponse;
+import com.sistema.pos.service.ProductoAlmacenService;
 import com.sistema.pos.service.ProductoService;
 import com.sistema.pos.util.HttpStatusMessage;
 
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -25,8 +28,10 @@ public class ProductoController {
 
     @Autowired
     private ProductoService productoService;
+    
+    @Autowired
+    private ProductoAlmacenService productoAlmacenService;
 
-    // Listar productos
     @GetMapping
     public ResponseEntity<ApiResponse<List<Producto>>> getAllCategorias() {
 		List<Producto> productos = productoService.findAll();
@@ -40,8 +45,8 @@ public class ProductoController {
 		);
 	}
 
-    // Crear producto con DTO
     @PostMapping
+    @PreAuthorize("hasAuthority('PERMISO_ADMINISTRAR_PRODUCTOS')")
     public ResponseEntity<ApiResponse<Producto>> guardarProducto(@Valid @RequestBody ProductoDTO productoDTO, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			List<String> errors = bindingResult.getAllErrors().stream()
@@ -75,7 +80,6 @@ public class ProductoController {
 		}
 	}
 
-    // Obtener un producto por ID
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<Producto>> getProducto(@PathVariable Long id) {
 		try {
@@ -98,9 +102,21 @@ public class ProductoController {
 			);
 		}
 	}
+    
+    @GetMapping("/consolidado/{idSucursal}")
+    public ResponseEntity<ApiResponse<List<ProductoConsolidadoDTO>>> listarProductosConsolidadoPorSucursal(@PathVariable Long idSucursal) {
+        List<ProductoConsolidadoDTO> productosConsolidados = productoAlmacenService.listarProductosConsolidadoPorSucursal(idSucursal);
+        return ResponseEntity.ok(
+            ApiResponse.<List<ProductoConsolidadoDTO>>builder()
+                .statusCode(HttpStatus.OK.value())
+                .data(productosConsolidados)
+                .message("Productos consolidados obtenidos correctamente.")
+                .build()
+        );
+    }
 
-    // Actualizar producto
     @PatchMapping("/{id}")
+    @PreAuthorize("hasAuthority('PERMISO_ADMINISTRAR_PRODUCTOS')")
     public ResponseEntity<ApiResponse<Producto>> actualizarProducto(@PathVariable Long id, @Valid @RequestBody ProductoDTO productoDTO, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			List<String> errors = bindingResult.getAllErrors().stream()
@@ -134,8 +150,8 @@ public class ProductoController {
 		}
 	}
 
-    // Eliminar producto
     @PatchMapping("/{id}/desactivar")
+    @PreAuthorize("hasAuthority('PERMISO_ADMINISTRAR_PRODUCTOS')")
     public ResponseEntity<ApiResponse<Void>> desactivarProducto(@PathVariable Long id) {
 		try {
 			productoService.eliminarProducto(id);

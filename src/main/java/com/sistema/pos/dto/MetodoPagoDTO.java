@@ -1,5 +1,7 @@
 package com.sistema.pos.dto;
 
+import com.sistema.pos.entity.TipoPago;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DetalleNotaDTO {
+public class MetodoPagoDTO {
 	
-    private int cantidad;
-    
-    private Long productoId;
-    
+	private TipoPago tipoPago;
+    private Double monto;
+    private String detalles;
+
 }

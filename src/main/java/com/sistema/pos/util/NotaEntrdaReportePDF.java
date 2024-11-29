@@ -50,7 +50,7 @@ public class NotaEntrdaReportePDF {
             table.addCell(String.valueOf((notaEntrada).getId()));
             table.addCell(String.valueOf(notaEntrada.getAlmacen()));
             table.addCell(String.valueOf(notaEntrada.getFecha()));
-            table.addCell(String.valueOf(notaEntrada.getDescuento()));
+//            table.addCell(String.valueOf(notaEntrada.getDescuento()));
             table.addCell(String.valueOf(notaEntrada.getProveedor()));
             table.addCell(String.valueOf(notaEntrada.getTotal()));
 
