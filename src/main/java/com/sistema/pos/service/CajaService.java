@@ -33,12 +33,10 @@ public class CajaService {
     }
 
     public Caja findById(Long id) {
-        Optional<Caja> caja = cajaRepository.findById(id);
-        if(!caja.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe la caja con el id" + id
-            );
-        }
-        return caja.get();
+    	Caja caja = cajaRepository.findById(id)
+    	        .orElseThrow(() -> new IllegalArgumentException("Caja no encontrada"));
+
+        return caja;
     }
     
     public Caja obtenerCajaDeSucursal(Long idSucursal, Long idCaja) {

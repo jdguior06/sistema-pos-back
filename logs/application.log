@@ -478,3 +478,8 @@
         plan p1_0 
     where
         p1_0.nombre=?
+2024-11-29 14:42:47 - Application shutdown requested.
+2024-11-29 14:42:47 - Stopping ProtocolHandler ["http-nio-8080"]
+2024-11-29 14:42:47 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-11-29 14:42:47 - HikariPool-1 - Shutdown initiated...
+2024-11-29 14:42:47 - HikariPool-1 - Shutdown completed.

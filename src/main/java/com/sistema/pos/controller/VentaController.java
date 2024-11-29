@@ -1,62 +1,64 @@
 package com.sistema.pos.controller;
 
-import com.sistema.pos.dto.DetalleNotaDTO;
-import com.sistema.pos.dto.ProductoAlmacenDTO;
-import com.sistema.pos.entity.ProductoAlmacen;
-import com.sistema.pos.response.ApiResponse;
-import com.sistema.pos.service.ProductoAlmacenService;
-import com.sistema.pos.util.HttpStatusMessage;
-
-import jakarta.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.sistema.pos.dto.VentaDTO;
+import com.sistema.pos.entity.Venta;
+import com.sistema.pos.response.ApiResponse;
+import com.sistema.pos.service.VentaService;
+import com.sistema.pos.util.HttpStatusMessage;
+
+import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/almacen/{idAlmacen}/productos-almacen")
-public class ProductoAlmacenController {
+@RequestMapping("/venta")
+public class VentaController {
 	
-    @Autowired
-    private ProductoAlmacenService productoAlmacenService;
+	@Autowired
+    private VentaService ventaService;
 
-    // Obtener todos los productos en almacenes
     @GetMapping
-    public ResponseEntity<ApiResponse<List<ProductoAlmacenDTO>>> getAllProductoAlmacen(@PathVariable Long idAlmacen) {
-        List<ProductoAlmacenDTO> productoAlmacens = productoAlmacenService.findAllByAlmacenId(idAlmacen);
+    public ResponseEntity<ApiResponse<List<Venta>>> listarVentas() {
+        List<Venta> ventas = ventaService.listarVentas();
         return new ResponseEntity<>(
-                ApiResponse.<List<ProductoAlmacenDTO>>builder()
+                ApiResponse.<List<Venta>>builder()
                         .statusCode(HttpStatus.OK.value())
                         .message(HttpStatusMessage.getMessage(HttpStatus.OK))
-                        .data(productoAlmacens)
+                        .data(ventas)
                         .build(),
                 HttpStatus.OK
         );
     }
 
-   // Obtener un producto en el almacén por ID
-   @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<ProductoAlmacen>> getProductoAlmace(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<Venta>> obtenerVenta(@PathVariable Long id) {
         try {
-            ProductoAlmacen productoAlmacen = productoAlmacenService.obtener(id);
+            Venta venta = ventaService.obtenerVenta(id);
             return new ResponseEntity<>(
-                    ApiResponse.<ProductoAlmacen>builder()
+                    ApiResponse.<Venta>builder()
                             .statusCode(HttpStatus.OK.value())
                             .message(HttpStatusMessage.getMessage(HttpStatus.OK))
-                            .data(productoAlmacen)
+                            .data(venta)
                             .build(),
                     HttpStatus.OK
             );
         } catch (ResponseStatusException e) {
             return new ResponseEntity<>(
-                    ApiResponse.<ProductoAlmacen>builder()
+                    ApiResponse.<Venta>builder()
                             .statusCode(e.getStatusCode().value())
                             .message(e.getReason())
                             .build(),
@@ -65,40 +67,32 @@ public class ProductoAlmacenController {
         }
     }
 
-    // Guardar o actualizar el stock de un producto en el almacén usando DetalleNotaDTO
     @PostMapping
-    public ResponseEntity<ApiResponse<ProductoAlmacen>> guardarProductoAlmacen(
-            @Valid @RequestBody ProductoAlmacen productoAlmacen,
-            @RequestBody DetalleNotaDTO detalleNotaDTO,
-            BindingResult bindingResult) {
-
-        // Validación de errores
+    public ResponseEntity<ApiResponse<Venta>> realizarVenta(@Valid @RequestBody VentaDTO ventaDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult.getAllErrors().stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
                     .collect(Collectors.toList());
             return new ResponseEntity<>(
-                    ApiResponse.<ProductoAlmacen>builder()
+                    ApiResponse.<Venta>builder()
                             .errors(errors)
                             .build(),
                     HttpStatus.BAD_REQUEST
             );
         }
-
         try {
-            // Guardar o actualizar el stock de un producto en el almacén
-            ProductoAlmacen producto = productoAlmacenService.save(productoAlmacen, detalleNotaDTO);
+            Venta venta = ventaService.guardarVenta(ventaDTO);
             return new ResponseEntity<>(
-                    ApiResponse.<ProductoAlmacen>builder()
+                    ApiResponse.<Venta>builder()
                             .statusCode(HttpStatus.CREATED.value())
                             .message(HttpStatusMessage.getMessage(HttpStatus.CREATED))
-                            .data(producto)
+                            .data(venta)
                             .build(),
                     HttpStatus.CREATED
             );
         } catch (ResponseStatusException e) {
             return new ResponseEntity<>(
-                    ApiResponse.<ProductoAlmacen>builder()
+                    ApiResponse.<Venta>builder()
                             .statusCode(e.getStatusCode().value())
                             .message(e.getReason())
                             .build(),

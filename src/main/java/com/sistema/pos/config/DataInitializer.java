@@ -33,49 +33,31 @@ public class DataInitializer {
 
 	@Transactional
 	public void initRolesAndPermisos(UsuarioRepository usuarioRepository, RolRepository rolRepository, PermisoRepository permisoRepository, PasswordEncoder passwordEncoder) {
-
-		Set<Permiso> permisos = new HashSet<>();
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_GESTIONAR_PERMISOS"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_GESTIONAR_ROLES"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_GESTIONAR_PERSONAL"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_VER_ALMACENES"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_ADMINISTRAR_ALMACENES"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_VER_SUCURSALES"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_ADMINISTRAR_SUCURSALES"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_VER_CLIENTES"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_CREAR_CLIENTES"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_EDITAR_CLIENTES"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_ELIMINAR_CLIENTES"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_GESTIONAR_PROVEEDORES"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_VER_CAJAS"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_ADMINISTRAR_CAJAS"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_VER_PRODUCTOS"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_ADMINISTRAR_PRODUCTOS"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_GENERAR_VENTAS"));
-		permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_VER_REPORTE_VENTAS"));
-
-		Rol adminRole = rolRepository.findByNombre("ADMIN")
-				.orElseGet(() -> {
-					Rol newRole = new Rol("ADMIN");
-					newRole.setPermiso(permisos);
-					return rolRepository.save(newRole);
-				});
-
-//	    if (!usuarioRepository.existsByEmail("admin@gmail.com")) {
-//	        Usuario adminUser = new Usuario();
-//	        adminUser.setNombre("Admin");
-//	        adminUser.setApellido("User");
-//	        adminUser.setEmail("admin@gmail.com");
-//	        adminUser.setPassword(passwordEncoder.encode("123456"));
-//	        adminUser.setRol(Set.of(adminRole)); // Asigna el rol al usuario
-//	        adminUser.setActivo(true);
-//	        adminUser.setCuentaNoExpirada(true);
-//	        adminUser.setCuentaNoBloqueada(true);
-//	        adminUser.setCredencialesNoExpiradas(true);
-//
-//	        usuarioRepository.save(adminUser);
-//	    }
-
+	    Set<Permiso> permisos = new HashSet<>();
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_GESTIONAR_PERMISOS"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_GESTIONAR_ROLES"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_GESTIONAR_PERSONAL"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_VER_ALMACENES"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_ADMINISTRAR_ALMACENES"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_VER_SUCURSALES"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_ADMINISTRAR_SUCURSALES"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_VER_CLIENTES"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_CREAR_CLIENTES"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_EDITAR_CLIENTES"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_ELIMINAR_CLIENTES"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_GESTIONAR_PROVEEDORES"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_VER_CAJAS"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_ADMINISTRAR_CAJAS"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_VER_PRODUCTOS"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_ADMINISTRAR_PRODUCTOS"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_GENERAR_VENTAS"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_VER_REPORTE_VENTAS"));
+	    permisos.add(obtenerOPersistirPermiso(permisoRepository, "PERMISO_GESTIONAR_STOCK_PLATOS"));
+	    
+	    Rol adminRole = rolRepository.findByNombre("ADMIN").orElseGet(() -> new Rol("ADMIN"));
+	    adminRole.setPermiso(permisos);
+	    rolRepository.save(adminRole); 
+	       
 	}
 
 }

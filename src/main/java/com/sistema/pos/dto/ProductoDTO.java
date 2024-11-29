@@ -23,5 +23,4 @@ public class ProductoDTO {
     
     private Long id_categoria;
 
-
 }

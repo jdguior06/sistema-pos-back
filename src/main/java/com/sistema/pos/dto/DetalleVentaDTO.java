@@ -1,13 +1,17 @@
 package com.sistema.pos.dto;
 
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor 
+@AllArgsConstructor 
 public class DetalleVentaDTO {
-    private int cantidad;
-    private float costoUnitario;
-    private float subTotal;
-    private float descuento;
-    private Long id_producto;
-    private Long id_factura;
+	
+	private Long id_producto;
+
+    private Integer cantidad;
+
 }

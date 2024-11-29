@@ -7,6 +7,13 @@
         </encoder>
     </appender>
 
+    <!-- Define el appender para la consola -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <!-- Define el appender para el archivo específico de bitacora.log -->
     <appender name="BITACORA_FILE" class="ch.qos.logback.core.FileAppender">
         <file>logs/bitacora.log</file>
@@ -23,6 +30,6 @@
     <!-- Configura el root logger para el resto de los logs del sistema -->
     <root level="INFO">
         <appender-ref ref="APP_FILE"/>
+        <appender-ref ref="CONSOLE"/>
     </root>
 </configuration>
-

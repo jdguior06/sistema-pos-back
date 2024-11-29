@@ -1,9 +1,11 @@
 package com.sistema.pos.repository;
 
-import com.sistema.pos.entity.Factura;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.sistema.pos.entity.Venta;
+
 @Repository
-public interface FacturaRepository extends JpaRepository<Factura, Long> {
+public interface VentaRepository extends JpaRepository<Venta, Long>{
+
 }

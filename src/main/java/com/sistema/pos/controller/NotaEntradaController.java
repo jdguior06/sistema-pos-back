@@ -8,11 +8,14 @@ import com.sistema.pos.util.HttpStatusMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/notaEntrada")
@@ -69,6 +72,7 @@ public class NotaEntradaController {
             );
         }
     }
+
 
     @GetMapping("/proveedor/{idProveedor}")
     public ResponseEntity<ApiResponse<List<Nota_Entrada>>> obtenerNotasPorProveedor(@PathVariable Long idProveedor) {
@@ -170,30 +174,4 @@ public class NotaEntradaController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<Void>> eliminarNota(@PathVariable Long id) {
-        try {
-            notaEntradaService.eliminarNota(id);
-            return ResponseEntity.ok(
-                    ApiResponse.<Void>builder()
-                            .statusCode(HttpStatus.NO_CONTENT.value())
-                            .message(HttpStatusMessage.getMessage(HttpStatus.NO_CONTENT))
-                            .build()
-            );
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(
-                    ApiResponse.<Void>builder()
-                            .statusCode(HttpStatus.BAD_REQUEST.value())
-                            .message(e.getMessage())
-                            .build()
-            );
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-                    ApiResponse.<Void>builder()
-                            .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                            .message(e.getMessage())
-                            .build()
-            );
-        }
-    }
 }

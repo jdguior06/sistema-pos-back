@@ -1,5 +1,7 @@
 package com.sistema.pos.dto;
 
+import com.sistema.pos.entity.Producto;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,8 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DetalleNotaDTO {
-    private int cantidad;
-    private float costoUnitario;
-    private Long productoId;
+public class ProductoConsolidadoDTO {
+	
+	private Producto producto;
+    
+    private Integer totalStock;
+
 }

@@ -1,12 +1,14 @@
 package com.sistema.pos.repository;
 
-import com.sistema.pos.entity.Detalle_Venta;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.sistema.pos.entity.DetalleVenta;
+
 
 @Repository
-public interface DetalleVentaRepository extends JpaRepository<Detalle_Venta, Long> {
-    List<Detalle_Venta> findByFacturaId(Long id_factura);
+public interface DetalleVentaRepository extends JpaRepository<DetalleVenta, Long> {
+
 }

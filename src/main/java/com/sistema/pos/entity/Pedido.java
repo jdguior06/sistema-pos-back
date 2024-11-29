@@ -30,8 +30,6 @@ public class Pedido {
     @JoinColumn(name ="id_cliente")
     private Cliente cliente;
 
-    @OneToOne(mappedBy = "pedido")
-    private Factura factura;
     @OneToMany(mappedBy = "pedido",cascade= CascadeType.ALL, orphanRemoval = true)
     private List<Pedido_Producto> detalle;
 }
