@@ -14,4 +14,5 @@ public class Moneda {
     private Long id;
     private String moneda;
 private float cambio;
+private boolean activo;
 }

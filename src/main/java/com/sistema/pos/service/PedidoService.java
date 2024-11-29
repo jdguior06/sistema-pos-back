@@ -35,6 +35,15 @@ public class PedidoService {
         List<Pedido> pedido=pedidoRepository.findAll();
         return pedido;
     }
+    public Pedido obtenerpedidoId(Long id){
+        Optional<Pedido> pedido=pedidoRepository.findById(id);
+        if(!pedido.isPresent()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No existe el pedidoon el id" + id);
+
+        }
+        return pedido.get();
+    }
+
     @Transactional
     public Pedido crearPedido(PedidoDTO pedidoDTO) {
         // Buscar el usuario
@@ -85,7 +94,7 @@ public class PedidoService {
         }
 
         // Setear total al pedido
-        pedido.setToal(total);
+        pedido.setTotal(total);
 
         // Guardar pedido y relaciones
         Pedido pedidoGuardado = pedidoRepository.save(pedido);

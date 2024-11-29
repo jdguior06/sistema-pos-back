@@ -25,9 +25,9 @@ public class Producto {
     @Column(length = 1000)
     private String descripcion;
     
-    private double precioCompra;
+    private float precioCompra;
     
-    private double precioVenta;
+    private float precioVenta;
     
     private String foto;
 

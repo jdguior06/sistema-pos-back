@@ -60,6 +60,19 @@ public class AlmacenController {
         );
     }
 
+    // Nuevo endpoint para obtener almacén por proveedor
+    @GetMapping("/proveedor/{proveedorId}")
+    public ResponseEntity<ApiResponse<Almacen>> getAlmacenPorProveedor(@PathVariable Long proveedorId) {
+        Almacen almacen = almacenService.obtenerAlmacenPorProv(proveedorId);
+        return ResponseEntity.ok(
+                ApiResponse.<Almacen>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .message("Almacén asociado al proveedor")
+                        .data(almacen)
+                        .build()
+        );
+    }
+
     @PostMapping
     @PreAuthorize("hasAuthority('PERMISO_ADMINISTRAR_ALMACENES')")
     public ResponseEntity<ApiResponse<Almacen>> guardarAlmacen(

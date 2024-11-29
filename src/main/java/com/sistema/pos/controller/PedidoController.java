@@ -24,4 +24,6 @@ public class PedidoController {
         List<Pedido> pedidos = pedidoService.obtenerPedidosActivosPorUsuario(email);
         return ResponseEntity.ok(pedidos);
     }
+
+
 }

@@ -15,6 +15,7 @@ public class Pedido_Producto {
 
     private Integer cantidad;
     private Float subtotal;
+
     @ManyToOne
     @JoinColumn(name = "id_pedido",nullable = false)
     private Pedido pedido;
