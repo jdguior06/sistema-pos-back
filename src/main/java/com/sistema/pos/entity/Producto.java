@@ -1,9 +1,12 @@
 package com.sistema.pos.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -37,5 +40,7 @@ public class Producto {
     
     private boolean activo;
 
-    
+   @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+   @JsonIgnore
+   private List<DetalleNotaE> detalles;
 }

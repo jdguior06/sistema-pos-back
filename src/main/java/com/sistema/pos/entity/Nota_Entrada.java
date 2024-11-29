@@ -8,6 +8,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,7 +30,10 @@ public class Nota_Entrada  {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_proveedor")
-    @JsonIgnore
+
     private Proveedor proveedor;
+
+    @OneToMany(mappedBy = "notaId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DetalleNotaE> detalles;
 
 }
